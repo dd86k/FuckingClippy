@@ -15,12 +15,16 @@ namespace FuckingClippy
             picCharacter.MouseDown += Clippy_MouseDown;
             picCharacter.MouseUp += Clippy_MouseUp;
             picCharacter.MouseMove += Clippy_MouseMove;
-            
+
+            Dialog.ParentForm = this;
+
             ClientSize = picCharacter.Size;
             
             // Grab the current Screen info and locate the character at the bottom right.
             Screen CurrentScreen = Screen.FromControl(this);
-            Location = new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
+            LastLocation =
+                Location =
+                new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
                 CurrentScreen.WorkingArea.Height - (Height + 30));
 
             // Make the form transparent
@@ -28,9 +32,11 @@ namespace FuckingClippy
             TransparencyKey = Color.Purple;
             BackColor = Color.Purple;
             
-            picCharacter.Image = Animation.GetIdle(); // Ready to go!
+            picCharacter.Image = Animation.GetIdle();
 
-            TopMost = true;
+            TopMost = true; // Only hell now. :-)
+
+
         }
 
         bool FormDown;
@@ -50,7 +56,10 @@ namespace FuckingClippy
 
         private void Clippy_MouseUp(object sender, MouseEventArgs e)
         {
-            FormDown = false;
+            if (e.Location.X == LastLocation.X)
+                FormDown = false;
+            else
+                Dialog.Show();
         }
 
         private void Clippy_MouseDown(object sender, MouseEventArgs e)

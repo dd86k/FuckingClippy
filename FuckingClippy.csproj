@@ -44,7 +44,7 @@
     <Compile Include="Animation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialog.cs">
+    <Compile Include="DialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.cs">
