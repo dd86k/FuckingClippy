@@ -26,13 +26,13 @@ namespace FuckingClippy
                 Location =
                 new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
                 CurrentScreen.WorkingArea.Height - (Height + 30));
-
+            
             picCharacter.Image = Animation.GetIdle();
 
             TopMost = true; // Only hell now. :-)
 
             //Dialog.Prompt();
-            Dialog.Say("Hello it's me the long text that will haunt you for ever.");
+            Dialog.Say("You appear to have eczema on your dick.");
         }
 
         bool FormDown;

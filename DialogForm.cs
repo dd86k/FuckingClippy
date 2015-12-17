@@ -145,8 +145,6 @@ namespace FuckingClippy
 
     class DialogForm : TransparentForm
     {
-        internal DialogForm()
-        {
-        }
+
     }
 }
