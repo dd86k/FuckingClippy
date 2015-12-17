@@ -88,8 +88,6 @@ namespace FuckingClippy
             form.ShowInTaskbar = false;
             form.FormBorderStyle = FormBorderStyle.None;
             form.StartPosition = FormStartPosition.Manual;
-            form.TransparencyKey = Color.Purple;
-            form.BackColor = Color.Purple;
             form.ClientSize =
                 new Size(pClientSize.Width, pClientSize.Height + 15);
             form.Location =
@@ -141,7 +139,7 @@ namespace FuckingClippy
         }
     }
 
-    class DialogForm : Form
+    class DialogForm : TransparentForm
     {
         internal DialogForm()
         {
