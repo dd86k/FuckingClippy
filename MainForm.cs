@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace FuckingClippy
 {
-    public partial class MainForm : Form
+    public partial class MainForm : TransparentForm
     {
         public MainForm()
         {
@@ -27,11 +27,6 @@ namespace FuckingClippy
                 new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
                 CurrentScreen.WorkingArea.Height - (Height + 30));
 
-            // Make the form transparent
-            // NOTE: BackColor = Color.Transparent; will not work.
-            TransparencyKey = Color.Purple;
-            BackColor = Color.Purple;
-            
             picCharacter.Image = Animation.GetIdle();
 
             TopMost = true; // Only hell now. :-)
