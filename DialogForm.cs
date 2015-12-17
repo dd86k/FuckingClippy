@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
+//TODO: Add support for:
+// - Images
+// - Choices (radio buttons?)
+
 namespace FuckingClippy
 {
     partial class MainForm
