@@ -12,9 +12,9 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
-            picCharacter.MouseDown += Clippy_MouseDown;
-            picCharacter.MouseUp += Clippy_MouseUp;
-            picCharacter.MouseMove += Clippy_MouseMove;
+            picCharacter.MouseDown += Assistant_MouseDown;
+            picCharacter.MouseUp += Assistant_MouseUp;
+            picCharacter.MouseMove += Assistant_MouseMove;
 
             Dialog.ParentForm = this;
 
@@ -36,13 +36,14 @@ namespace FuckingClippy
 
             TopMost = true; // Only hell now. :-)
 
-
+            //Dialog.Prompt();
+            Dialog.Say("Hello it's me the long text that will haunt you for ever.");
         }
 
         bool FormDown;
         Point LastLocation;
 
-        private void Clippy_MouseMove(object sender, MouseEventArgs e)
+        private void Assistant_MouseMove(object sender, MouseEventArgs e)
         {
             if (FormDown)
             {
@@ -54,15 +55,16 @@ namespace FuckingClippy
             }
         }
 
-        private void Clippy_MouseUp(object sender, MouseEventArgs e)
+        private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
+            //TODO:[H] Fix Character_MouseUp
             if (e.Location.X == LastLocation.X)
                 FormDown = false;
             else
-                Dialog.Show();
+                Dialog.Prompt();
         }
 
-        private void Clippy_MouseDown(object sender, MouseEventArgs e)
+        private void Assistant_MouseDown(object sender, MouseEventArgs e)
         {
             FormDown = true;
             LastLocation = e.Location;
