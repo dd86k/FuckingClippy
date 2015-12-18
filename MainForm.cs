@@ -32,7 +32,7 @@ namespace FuckingClippy
             TopMost = true; // Only hell now. :-)
 
             //Dialog.Prompt();
-            Dialog.Say("You appear to have eczema on your dick.");
+            Dialog.Say("It's me bad time tim.");
         }
 
         bool FormDown;

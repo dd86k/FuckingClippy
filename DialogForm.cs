@@ -73,7 +73,7 @@ namespace FuckingClippy
             List<Control> lst = new List<Control>();
 
             Label l = new Label();
-            l.Location = new Point(4, 8);
+            l.Location = new Point(4, 7);
             l.Size = new Size(192, 1000);
             l.Text = pText;
 

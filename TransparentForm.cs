@@ -21,11 +21,6 @@ namespace FuckingClippy
             }
         }
 
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            // Empty on purpose
-        }
-
         public bool IsRunningOnMono
         {
             get
