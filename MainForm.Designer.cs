@@ -108,14 +108,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox picCharacter;
         private System.Windows.Forms.ContextMenuStrip cmsCharacter;
         private System.Windows.Forms.ToolStripMenuItem cmsiHide;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem csmiOptions;
         private System.Windows.Forms.ToolStripMenuItem cmsiChooseAssistant;
         private System.Windows.Forms.ToolStripMenuItem cmsiAnimate;
+        private System.Windows.Forms.PictureBox picCharacter;
     }
 }
 

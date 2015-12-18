@@ -7,7 +7,6 @@ Desktop.ini
 
 bin
 obj
-*.resx
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

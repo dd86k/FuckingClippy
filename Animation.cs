@@ -16,17 +16,41 @@ namespace FuckingClippy
             Animation.Timer.Elapsed += Animation_OnFrame;
         }
 
+        void Animation_OnFrame(object s, EventArgs e)
+        {
+            if (Animation.CurrentFrame < Animation.MaxFrame)
+            {
+                picCharacter.Image =
+                    Animation.GetFrame(Animation.Name, Animation.CurrentFrame++);
+            }
+            else
+            {
+                Animation.Timer.Stop();
+            }
+        }
+
+        internal static Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
+    }
+
+    public class Animation
+    {
+        const string AnimationFolder = "FuckingClippy.Images.Clippy.Animations";
+        internal static Timer Timer;
+        internal static string Name;
+        internal static int CurrentFrame;
+        internal static int MaxFrame;
+
         /// <summary>
         /// Play an animation on screen.
         /// </summary>
         /// <param name="pName">Name of the animation.</param>
         void PlayAnimation(string pName)
         {
-            Animation.Name = pName;
+            Name = pName;
 
-            switch (Animation.Name)
+            switch (Name)
             {
-                case "Check": Animation.MaxFrame = 18; break;
+                case "Check": MaxFrame = 18; break;
                 /*case "": Animation.MaxFrame = 1; break;
                 case "": Animation.MaxFrame = 1; break;
                 case "": Animation.MaxFrame = 1; break;
@@ -41,37 +65,14 @@ namespace FuckingClippy
                     throw new Exception($"Animation name \"{pName}\" does not exist.");
             }
 
-            Animation.Timer.Start();
+            Timer.Start();
         }
-
-        void Animation_OnFrame(object s, EventArgs e)
-        {
-            if (Animation.CurrentFrame < Animation.MaxFrame)
-            {
-                picCharacter.Image =
-                    Animation.GetFrame(Animation.Name, Animation.CurrentFrame++);
-            }
-            else
-            {
-                Animation.Timer.Stop();
-            }
-        }
-    }
-
-    public class Animation
-    {
-        const string AnimationFolder = "FuckingClippy.Images.Clippy.Animations";
-        static Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
-        internal static Timer Timer;
-        internal static string Name;
-        internal static int CurrentFrame;
-        internal static int MaxFrame;
 
         internal static Image GetFrame(string pAnimation, int pFrame)
         {
             return
                 Image.FromStream(
-                    ExecutingAssembly.GetManifestResourceStream($"{AnimationFolder}.{pAnimation}.{pFrame}.png")
+                    MainForm.ExecutingAssembly.GetManifestResourceStream($"{AnimationFolder}.{pAnimation}.{pFrame}.png")
                     );
         }
 
@@ -79,7 +80,7 @@ namespace FuckingClippy
         {
             return
                 Image.FromStream(
-                    ExecutingAssembly.GetManifestResourceStream("FuckingClippy.Images.Clippy.Idle.png")
+                    MainForm.ExecutingAssembly.GetManifestResourceStream("FuckingClippy.Images.Clippy.Idle.png")
                     );
         }
     }

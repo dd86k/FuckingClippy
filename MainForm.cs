@@ -12,6 +12,9 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
+            //TODO: Uncomment when translation are ready.
+            //ChangeCulture();
+
             picCharacter.MouseDown += Assistant_MouseDown;
             picCharacter.MouseUp += Assistant_MouseUp;
             picCharacter.MouseMove += Assistant_MouseMove;
@@ -19,8 +22,9 @@ namespace FuckingClippy
             Dialog.ParentForm = this;
 
             ClientSize = picCharacter.Size;
-            
-            // Grab the current Screen info and locate the character at the bottom right.
+
+            // Grab the current Screen info and locate the character
+            // at the bottom right with a margin of 30px.
             Screen CurrentScreen = Screen.FromControl(this);
             Location =
                 new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
@@ -34,14 +38,14 @@ namespace FuckingClippy
             ToolStripItem[] DebugItems = new ToolStripItem[2];
             
             DebugItems[0] = new ToolStripMenuItem();
-            DebugItems[0].Text = "Prompt";
+            DebugItems[0].Text = "[Debug] Prompt";
             DebugItems[0].Click += (s, e) =>
             {
                 Dialog.Prompt();
             };
 
             DebugItems[1] = new ToolStripMenuItem();
-            DebugItems[1].Text = "Say something random";
+            DebugItems[1].Text = "[Debug] Say (Random)";
             DebugItems[1].Click += (s, e) =>
             {
                 string[] str =
