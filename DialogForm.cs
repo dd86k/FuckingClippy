@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Diagnostics.Process;
 
 //TODO: Add support for:
 // - Images
@@ -21,6 +22,8 @@ namespace FuckingClippy
     {
         // A reference to the parent form that summons thee.
         internal static Form ParentForm;
+        // The current active bubble text.
+        internal static Form CurrentForm;
         static Color BubbleColor = Color.FromArgb(255, 255, 204);
         static Font DefaultFont = new Font("Segoe UI", 9);
 
@@ -30,9 +33,9 @@ namespace FuckingClippy
         /// </summary>
         internal static void Prompt()
         {
-            DialogForm form = GetBaseForm(GetPrompt(), new Size(206, 98));
+            CurrentForm = GetBaseForm(GetPrompt(), new Size(206, 98));
 
-            form.Show();
+            CurrentForm.Show();
         }
 
         static Control[] GetPrompt()
@@ -48,6 +51,13 @@ namespace FuckingClippy
             t.Multiline = true;
             t.Size = new Size(190, 34);
             t.Location = new Point(4, 32);
+            t.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
+                {
+                    Run(t.Text);
+                }
+            };
 
             lst.Add(l);
             lst.Add(t);
@@ -63,9 +73,9 @@ namespace FuckingClippy
         /// <param name="pText">Text.</param>
         internal static void Say(string pText)
         {
-            DialogForm form = GetBaseForm(GetSay(pText), GetSize(pText));
+            CurrentForm = GetBaseForm(GetSay(pText), GetSize(pText));
 
-            form.Show();
+            CurrentForm.Show();
         }
 
         static Control[] GetSay(string pText)
@@ -73,7 +83,7 @@ namespace FuckingClippy
             List<Control> lst = new List<Control>();
 
             Label l = new Label();
-            l.Location = new Point(4, 7);
+            l.Location = new Point(4, 6);
             l.Size = new Size(192, 1000);
             l.Text = pText;
 
@@ -139,7 +149,10 @@ namespace FuckingClippy
         /// <param name="pUserInput">User input.</param>
         static void Run(string pUserInput)
         {
+            if (pUserInput.Contains("run "))
+                Start(pUserInput.Replace("run ", string.Empty));
 
+            CurrentForm.Close();
         }
     }
 

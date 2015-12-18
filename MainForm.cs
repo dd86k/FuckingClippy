@@ -22,17 +22,39 @@ namespace FuckingClippy
             
             // Grab the current Screen info and locate the character at the bottom right.
             Screen CurrentScreen = Screen.FromControl(this);
-            LastLocation =
-                Location =
+            Location =
                 new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
-                CurrentScreen.WorkingArea.Height - (Height + 30));
+                    CurrentScreen.WorkingArea.Height - (Height + 30));
             
             picCharacter.Image = Animation.GetIdle();
 
             TopMost = true; // Only hell now. :-)
 
-            //Dialog.Prompt();
-            Dialog.Say("It's me bad time tim.");
+#if DEBUG
+            ToolStripItem[] DebugItems = new ToolStripItem[2];
+            
+            DebugItems[0] = new ToolStripMenuItem();
+            DebugItems[0].Text = "Prompt";
+            DebugItems[0].Click += (s, e) =>
+            {
+                Dialog.Prompt();
+            };
+
+            DebugItems[1] = new ToolStripMenuItem();
+            DebugItems[1].Text = "Say something random";
+            DebugItems[1].Click += (s, e) =>
+            {
+                string[] str =
+                {
+                    "I heard you like cock.",
+                    "Would you like help with hugging yourself?"
+                };
+
+                Dialog.Say(str[new Random().Next(0, str.Length)]);
+            };
+
+            cmsCharacter.Items.AddRange(DebugItems);
+#endif
         }
 
         bool FormDown;
