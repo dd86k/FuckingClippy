@@ -12,8 +12,8 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
-            //TODO: Uncomment when translation are ready.
-            //ChangeCulture();
+            //TODO: Uncomment when translations are ready.
+            //InitiateCulture();
 
             picCharacter.MouseDown += Assistant_MouseDown;
             picCharacter.MouseUp += Assistant_MouseUp;
@@ -35,7 +35,7 @@ namespace FuckingClippy
             TopMost = true; // Only hell now. :-)
 
 #if DEBUG
-            ToolStripItem[] DebugItems = new ToolStripItem[2];
+            ToolStripItem[] DebugItems = new ToolStripItem[3];
             
             DebugItems[0] = new ToolStripMenuItem();
             DebugItems[0].Text = "[Debug] Prompt";
@@ -51,16 +51,27 @@ namespace FuckingClippy
                 string[] str =
                 {
                     "I heard you like cock.",
-                    "Would you like help with hugging yourself?"
+                    "Would you like help with hugging yourself?",
+                    "test123 guys can you hear me"
                 };
 
                 Dialog.Say(str[new Random().Next(0, str.Length)]);
             };
 
+            DebugItems[2] = new ToolStripMenuItem();
+            DebugItems[2].Text = "[Debug] Animate (Check)";
+            DebugItems[2].Click += (s, e) =>
+            {
+                Animation.PlayAnimation("Check");
+            };
+
             cmsCharacter.Items.AddRange(DebugItems);
 #endif
+
+            GC.Collect();
         }
 
+        #region Mouse events
         bool FormDown;
         Point LastLocation;
 
@@ -78,11 +89,9 @@ namespace FuckingClippy
 
         private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            //TODO:[H] Fix Character_MouseUp
-            if (e.Location.X == LastLocation.X)
-                FormDown = false;
-            else
-                Dialog.Prompt();
+            //TODO:[High] Find a way to figure out when the cursor
+            // hasn't changed position, if so, prompt.
+            FormDown = false;
         }
 
         private void Assistant_MouseDown(object sender, MouseEventArgs e)
@@ -90,10 +99,13 @@ namespace FuckingClippy
             FormDown = true;
             LastLocation = e.Location;
         }
+        #endregion
 
+        #region Context menu events
         private void cmsiHide_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
     }
 }

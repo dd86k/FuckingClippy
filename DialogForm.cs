@@ -55,7 +55,7 @@ namespace FuckingClippy
             {
                 if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
                 {
-                    Run(t.Text);
+                    ProcessInput(t.Text);
                 }
             };
 
@@ -147,7 +147,7 @@ namespace FuckingClippy
         /// Process user input.
         /// </summary>
         /// <param name="pUserInput">User input.</param>
-        static void Run(string pUserInput)
+        static void ProcessInput(string pUserInput)
         {
             if (pUserInput.Contains("run "))
                 Start(pUserInput.Replace("run ", string.Empty));

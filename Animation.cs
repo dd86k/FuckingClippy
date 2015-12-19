@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using System.Reflection;
 using System.Timers;
+
+//TODO: Duplicate frames (images) or variate framerate for variated support
 
 namespace FuckingClippy
 {
@@ -9,44 +10,55 @@ namespace FuckingClippy
     {
         void InitializeAnimation()
         {
-            Animation.Timer = new Timer();
-
-            Animation.Timer.Interval = 120; //TODO: Check Interval
+            Animation.Timer = new Timer(65);
 
             Animation.Timer.Elapsed += Animation_OnFrame;
         }
 
+        // Remark: Animation_OnFrame is within MainForm to access the
+        // picCharacter PictureBox.
         void Animation_OnFrame(object s, EventArgs e)
         {
             if (Animation.CurrentFrame < Animation.MaxFrame)
             {
                 picCharacter.Image =
                     Animation.GetFrame(Animation.Name, Animation.CurrentFrame++);
+
+                GC.Collect();
             }
             else
             {
+                picCharacter.Image = Animation.GetIdle();
                 Animation.Timer.Stop();
             }
         }
-
-        internal static Assembly ExecutingAssembly = Assembly.GetExecutingAssembly();
     }
 
     public class Animation
     {
         const string AnimationFolder = "FuckingClippy.Images.Clippy.Animations";
         internal static Timer Timer;
-        internal static string Name;
+        internal static string Name
+        {
+            get;
+            private set;
+        }
         internal static int CurrentFrame;
-        internal static int MaxFrame;
+        internal static int MaxFrame
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
-        /// Play an animation on screen.
+        /// Play an animation.
         /// </summary>
         /// <param name="pName">Name of the animation.</param>
-        void PlayAnimation(string pName)
+        public static void PlayAnimation(string pName)
         {
             Name = pName;
+
+            CurrentFrame = 0;
 
             switch (Name)
             {
@@ -62,7 +74,7 @@ namespace FuckingClippy
                 case "": Animation.MaxFrame = 1; break;
                 case "": Animation.MaxFrame = 1; break;*/
                 default:
-                    throw new Exception($"Animation name \"{pName}\" does not exist.");
+                    throw new Exception($"Animation name \"{pName}\" does not exist!");
             }
 
             Timer.Start();
@@ -72,7 +84,7 @@ namespace FuckingClippy
         {
             return
                 Image.FromStream(
-                    MainForm.ExecutingAssembly.GetManifestResourceStream($"{AnimationFolder}.{pAnimation}.{pFrame}.png")
+                    Utils.ExecutingAssembly.GetManifestResourceStream($"{AnimationFolder}.{pAnimation}.{pFrame}.png")
                     );
         }
 
@@ -80,7 +92,7 @@ namespace FuckingClippy
         {
             return
                 Image.FromStream(
-                    MainForm.ExecutingAssembly.GetManifestResourceStream("FuckingClippy.Images.Clippy.Idle.png")
+                    Utils.ExecutingAssembly.GetManifestResourceStream("FuckingClippy.Images.Clippy.Idle.png")
                     );
         }
     }

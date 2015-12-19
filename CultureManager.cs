@@ -11,10 +11,9 @@ namespace FuckingClippy
         /// </summary>
         ResourceManager RM;
 
-        void ChangeCulture()
+        void InitiateCulture()
         {
-            CultureInfo ci = CurrentThread.CurrentCulture;
-            ChangeCulture(ci);
+            ChangeCulture(CurrentThread.CurrentCulture);
         }
 
         void ChangeCulture(CultureInfo pLanguage)
@@ -33,7 +32,7 @@ namespace FuckingClippy
                 case "fr-FR":
                 case "fr-CA":
                     RM = new ResourceManager("FuckingClippy.Culture.fr-FR",
-                             ExecutingAssembly);
+                             Utils.ExecutingAssembly);
                     break;
 
                 case "en":
@@ -41,7 +40,7 @@ namespace FuckingClippy
                 case "en-UK":
                 default:
                     RM = new ResourceManager("FuckingClippy.Culture.en-US",
-                             ExecutingAssembly);
+                             Utils.ExecutingAssembly);
                     break;
             }
 

@@ -58,7 +58,7 @@
             this.cmsiChooseAssistant,
             this.cmsiAnimate});
             this.cmsCharacter.Name = "cmsCharacter";
-            this.cmsCharacter.Size = new System.Drawing.Size(172, 98);
+            this.cmsCharacter.Size = new System.Drawing.Size(172, 120);
             // 
             // cmsiHide
             // 
@@ -88,7 +88,7 @@
             // 
             this.cmsiAnimate.Name = "cmsiAnimate";
             this.cmsiAnimate.Size = new System.Drawing.Size(171, 22);
-            this.cmsiAnimate.Text = "Animate !";
+            this.cmsiAnimate.Text = "Animate!";
             // 
             // MainForm
             // 

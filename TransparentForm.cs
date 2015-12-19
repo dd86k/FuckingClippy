@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace FuckingClippy
@@ -8,7 +7,7 @@ namespace FuckingClippy
     {
         public TransparentForm()
         {
-            if (IsRunningOnMono)
+            if (Utils.IsRunningOnMono)
             {
                 SetStyle(ControlStyles.SupportsTransparentBackColor |
                     ControlStyles.UserPaint, true);
@@ -18,14 +17,6 @@ namespace FuckingClippy
             {
                 TransparencyKey = Color.Purple;
                 BackColor = Color.Purple;
-            }
-        }
-
-        public bool IsRunningOnMono
-        {
-            get
-            {
-                return Type.GetType("Mono.Runtime") != null;
             }
         }
     }

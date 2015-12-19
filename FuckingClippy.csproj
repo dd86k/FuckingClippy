@@ -71,8 +71,29 @@
     <Compile Include="TransparentForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\0.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\1.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\10.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\11.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\12.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\13.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\14.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\15.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\16.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\17.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\18.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\2.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\3.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\4.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\5.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\6.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\7.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\8.png" />
+    <EmbeddedResource Include="Images\Clippy\Animations\Check\9.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Culture\en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,27 +107,6 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-0.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-1.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-2.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-3.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-4.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-5.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-6.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-7.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-8.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-9.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-10.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-11.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-12.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-13.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-14.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-15.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-16.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-17.png" />
-    <EmbeddedResource Include="Images\Clippy\Animations\Check\parts-18.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Bubble\BubbleTail.png" />
