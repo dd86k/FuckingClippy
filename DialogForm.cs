@@ -113,12 +113,14 @@ namespace FuckingClippy
                 Console.WriteLine(" Form closed -- Sadness");
             };
 
+            /* Bubble body */
             Panel p = new Panel();
             p.BackColor = BubbleColor;
             p.BorderStyle = BorderStyle.FixedSingle;
             p.Controls.AddRange(pSubControls);
             p.Size = pClientSize;
 
+            /* Bubble tail */
             PictureBox pb = new PictureBox();
             pb.Size = new Size(10, 15);
             pb.Location = new Point((int)(form.ClientSize.Width / 1.65),
@@ -140,7 +142,7 @@ namespace FuckingClippy
 
         static Size GetSize(string pData)
         {
-            return new Size(200, 20 + (((pData.Length / 25) + 1) * (int)DefaultFont.Size));
+            return new Size(200, 12 + (((pData.Length / 20) + 1) * (int)DefaultFont.Size));
         }
 
         /// <summary>
