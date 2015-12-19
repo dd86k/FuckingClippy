@@ -7,7 +7,7 @@
 
 ---
 
-The Wiki is available [here][wiki] and release can be found [here][releases].
+The Wiki is available [here][wiki] and releases can be found [here][releases].
 
 Using the GNU General Public License, version 3 license (GPL-3.0) which you may read [here][license].
 
