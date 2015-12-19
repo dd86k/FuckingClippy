@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("guitarxhero")]
 [assembly: AssemblyProduct("FuckingClippy")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2000-2003 (For the Clippy character)")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 1997-2003 for Clippy")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

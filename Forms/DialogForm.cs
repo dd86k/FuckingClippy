@@ -26,6 +26,10 @@ namespace FuckingClippy
         internal static Form CurrentForm;
         static Color BubbleColor = Color.FromArgb(255, 255, 204);
         static Font DefaultFont = new Font("Segoe UI", 9);
+        static Image BubbleTail = Image.FromStream(
+            System.Reflection.Assembly.GetExecutingAssembly()
+            .GetManifestResourceStream(
+                "FuckingClippy.Images.Bubble.BubbleTail.png"));
 
         #region Prompt
         /// <summary>
@@ -125,13 +129,7 @@ namespace FuckingClippy
             pb.Size = new Size(10, 15);
             pb.Location = new Point((int)(form.ClientSize.Width / 1.65),
                 form.ClientSize.Height - 15);
-            pb.Image =
-                Image.FromStream(
-                    System.Reflection.Assembly.GetExecutingAssembly()
-                    .GetManifestResourceStream(
-                        "FuckingClippy.Images.Bubble.BubbleTail.png"
-                        )
-                    );
+            pb.Image = BubbleTail;
 
             form.Controls.Add(p);
             form.Controls.Add(pb);

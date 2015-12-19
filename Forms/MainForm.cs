@@ -102,6 +102,16 @@ namespace FuckingClippy
         #endregion
 
         #region Context menu events
+        private void cmsiChooseAssistant_Click(object sender, EventArgs e)
+        { // Settings -> Assistant tab
+
+        }
+
+        private void csmiOptions_Click(object sender, EventArgs e)
+        { // Settings -> Options tab
+
+        }
+
         private void cmsiHide_Click(object sender, EventArgs e)
         {
             Close();
