@@ -54,7 +54,7 @@
             this.cmsCharacter.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.cmsCharacter.ShowImageMargin = false;
             this.cmsCharacter.ShowItemToolTips = false;
-            this.cmsCharacter.Size = new System.Drawing.Size(147, 120);
+            this.cmsCharacter.Size = new System.Drawing.Size(147, 98);
             // 
             // cmsiHide
             // 

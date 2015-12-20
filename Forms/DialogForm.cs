@@ -102,10 +102,6 @@ namespace FuckingClippy
         {
             DialogForm form = new DialogForm();
             form.Font = DefaultFont;
-            form.TopMost = true;
-            form.ShowInTaskbar = false;
-            form.FormBorderStyle = FormBorderStyle.None;
-            form.StartPosition = FormStartPosition.Manual;
             form.ClientSize =
                 new Size(pClientSize.Width, pClientSize.Height + 15);
             form.Location =
@@ -113,8 +109,7 @@ namespace FuckingClippy
                 ParentForm.Location.Y - (form.Size.Height - 4));
             form.Deactivate += (s, e) =>
             {
-                //Close();
-                Console.WriteLine(" Form closed -- Sadness");
+                form.Close();
             };
 
             /* Bubble body */
@@ -149,8 +144,17 @@ namespace FuckingClippy
         /// <param name="pUserInput">User input.</param>
         static void ProcessInput(string pUserInput)
         {
+            Console.WriteLine($"User input: {pUserInput}");
+
             if (pUserInput.Contains("run "))
-                Start(pUserInput.Replace("run ", string.Empty));
+            {
+                string run = pUserInput.Replace("run ", string.Empty);
+
+                Start(run);
+
+                Console.WriteLine($"User action: RUN");
+                Console.WriteLine($"User action parameter: {run}­");
+            }
 
             CurrentForm.Close();
         }
@@ -158,6 +162,12 @@ namespace FuckingClippy
 
     class DialogForm : TransparentForm
     {
-
+        public DialogForm() : base()
+        {
+            TopMost = true;
+            ShowInTaskbar = false;
+            FormBorderStyle = FormBorderStyle.None;
+            StartPosition = FormStartPosition.Manual;
+        }
     }
 }

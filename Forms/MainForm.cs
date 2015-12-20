@@ -6,11 +6,13 @@ namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
     {
-        public MainForm()
+        public MainForm() : base()
         {
             InitializeComponent();
 
             InitializeAnimation();
+
+            Console.WriteLine(Utils.IsRunningOnMono ? "Running on: Mono" : "Running on: .NET/CLR");
 
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
