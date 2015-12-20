@@ -5,7 +5,7 @@ namespace FuckingClippy
 {
     static class Utils
     {
-        internal static Assembly ExecutingAssembly =
+        internal static readonly Assembly ExecutingAssembly =
             Assembly.GetExecutingAssembly();
 
         public static readonly bool IsRunningOnMono =

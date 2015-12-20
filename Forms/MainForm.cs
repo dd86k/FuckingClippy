@@ -11,7 +11,7 @@ namespace FuckingClippy
             InitializeComponent();
 
             InitializeAnimation();
-
+            
             Console.WriteLine(Utils.IsRunningOnMono ? "Running on: Mono" : "Running on: .NET/CLR");
 
             //TODO: Uncomment when translations are ready.
@@ -54,7 +54,8 @@ namespace FuckingClippy
                 {
                     "I heard you like cock.",
                     "Would you like help with hugging yourself?",
-                    "test123 guys can you hear me"
+                    "I got you a gift for christmas. It's called a kernel panic! Let me show you...",
+                    "test123 guys can you hear me",
                 };
 
                 Dialog.Say(str[new Random().Next(0, str.Length)]);

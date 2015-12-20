@@ -77,7 +77,7 @@ namespace FuckingClippy
         /// <param name="pText">Text.</param>
         internal static void Say(string pText)
         {
-            CurrentForm = GetBaseForm(GetSay(pText), GetSize(pText));
+            CurrentForm = GetBaseForm(GetSay(pText), GetSizeWithText(pText));
 
             CurrentForm.Show();
         }
@@ -94,6 +94,13 @@ namespace FuckingClippy
             lst.Add(l);
 
             return lst.ToArray();
+        }
+
+        static Size GetSizeWithText(string pData)
+        {
+            // TODO: Find the perfect Height sizing algorithm
+            return new Size(200,
+                12 + (((pData.Length / 25) + 1) * ((int)DefaultFont.Size * 2)));
         }
         #endregion
 
@@ -122,7 +129,7 @@ namespace FuckingClippy
             /* Bubble tail */
             PictureBox pb = new PictureBox();
             pb.Size = new Size(10, 15);
-            pb.Location = new Point((int)(form.ClientSize.Width / 1.65),
+            pb.Location = new Point((int)(form.ClientSize.Width / 1.62),
                 form.ClientSize.Height - 15);
             pb.Image = BubbleTail;
 
@@ -132,11 +139,6 @@ namespace FuckingClippy
             return form;
         }
         #endregion
-
-        static Size GetSize(string pData)
-        {
-            return new Size(200, 12 + (((pData.Length / 20) + 1) * (int)DefaultFont.Size));
-        }
 
         /// <summary>
         /// Process user input.
@@ -148,12 +150,20 @@ namespace FuckingClippy
 
             if (pUserInput.Contains("run "))
             {
-                string run = pUserInput.Replace("run ", string.Empty);
+                string run = pUserInput.Substring(4);
+                
+                Console.WriteLine($"User action: RUN - Parameter: {run}");
 
                 Start(run);
+            }
 
-                Console.WriteLine($"User action: RUN");
-                Console.WriteLine($"User action parameter: {run}­");
+            if (pUserInput.Contains("search "))
+            {
+                string run = pUserInput.Substring(7);
+
+                Console.WriteLine($"User action: SEARCH - Parameter: {run}");
+
+                Start($"https://www.google.ca/?q={run}");
             }
 
             CurrentForm.Close();
