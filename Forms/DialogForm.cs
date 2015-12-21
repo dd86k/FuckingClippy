@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Diagnostics.Process;
 
 //TODO: Add support for:
 // - Images
@@ -59,7 +57,7 @@ namespace FuckingClippy
             {
                 if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
                 {
-                    ProcessInput(t.Text);
+                    Utils.ProcessInput(t.Text);
                 }
             };
 
@@ -139,35 +137,6 @@ namespace FuckingClippy
             return form;
         }
         #endregion
-
-        /// <summary>
-        /// Process user input.
-        /// </summary>
-        /// <param name="pUserInput">User input.</param>
-        static void ProcessInput(string pUserInput)
-        {
-            Console.WriteLine($"User input: {pUserInput}");
-
-            if (pUserInput.StartsWith("run "))
-            {
-                string run = pUserInput.Substring(4);
-                
-                Console.WriteLine($"User action: RUN - Parameter: {run}");
-
-                Start(run);
-            }
-
-            if (pUserInput.StartsWith("search "))
-            {
-                string run = pUserInput.Substring(7);
-
-                Console.WriteLine($"User action: SEARCH - Parameter: {run}");
-
-                Start($"https://www.google.ca/?q={run}");
-            }
-
-            CurrentForm.Close();
-        }
     }
 
     class DialogForm : TransparentForm
