@@ -87,6 +87,7 @@
             this.cmsiAnimate.Name = "cmsiAnimate";
             this.cmsiAnimate.Size = new System.Drawing.Size(146, 22);
             this.cmsiAnimate.Text = "&Animate!";
+            this.cmsiAnimate.Click += new System.EventHandler(this.cmsiAnimate_Click);
             // 
             // picCharacter
             // 

@@ -148,7 +148,7 @@ namespace FuckingClippy
         {
             Console.WriteLine($"User input: {pUserInput}");
 
-            if (pUserInput.Contains("run "))
+            if (pUserInput.StartsWith("run "))
             {
                 string run = pUserInput.Substring(4);
                 
@@ -157,7 +157,7 @@ namespace FuckingClippy
                 Start(run);
             }
 
-            if (pUserInput.Contains("search "))
+            if (pUserInput.StartsWith("search "))
             {
                 string run = pUserInput.Substring(7);
 

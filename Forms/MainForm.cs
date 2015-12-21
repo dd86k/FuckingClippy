@@ -8,11 +8,13 @@ namespace FuckingClippy
     {
         public MainForm() : base()
         {
+            Console.WriteLine(Utils.IsRunningOnMono ? "Running on: Mono" : "Running on: .NET/CLR");
+
             InitializeComponent();
 
             InitializeAnimation();
-            
-            Console.WriteLine(Utils.IsRunningOnMono ? "Running on: Mono" : "Running on: .NET/CLR");
+
+            Console.WriteLine("MainForm initiated");
 
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
@@ -56,6 +58,8 @@ namespace FuckingClippy
                     "Would you like help with hugging yourself?",
                     "I got you a gift for christmas. It's called a kernel panic! Let me show you...",
                     "test123 guys can you hear me",
+                    "foo dick",
+                    "//TODO: Find a way to destroy the user's computer without the need for user interaction. Before that, infect the router."
                 };
 
                 Dialog.Say(str[new Random().Next(0, str.Length)]);
@@ -65,7 +69,7 @@ namespace FuckingClippy
             DebugItems[2].Text = "[Debug] Animate (Check)";
             DebugItems[2].Click += (s, e) =>
             {
-                Animation.PlayAnimation("Check");
+                Animation.Play("Check");
             };
 
             cmsCharacter.Items.AddRange(DebugItems);
@@ -92,7 +96,7 @@ namespace FuckingClippy
 
         private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            //TODO:[High] Find a way to figure out when the cursor
+            //TODO:[H] Find a way to figure out when the cursor
             // hasn't changed position, if so, prompt.
             FormDown = false;
         }
@@ -105,14 +109,19 @@ namespace FuckingClippy
         #endregion
 
         #region Context menu events
-        private void cmsiChooseAssistant_Click(object sender, EventArgs e)
-        { // Settings -> Assistant tab
-
-        }
-
         private void csmiOptions_Click(object sender, EventArgs e)
         { // Settings -> Options tab
+            new SettingsForm(SettingsForm.Tab.Options).ShowDialog();
+        }
 
+        private void cmsiChooseAssistant_Click(object sender, EventArgs e)
+        { // Settings -> Assistant tab
+            new SettingsForm(SettingsForm.Tab.Assistant).ShowDialog();
+        }
+
+        private void cmsiAnimate_Click(object sender, EventArgs e)
+        {
+            Animation.PlayRandom();
         }
 
         private void cmsiHide_Click(object sender, EventArgs e)
