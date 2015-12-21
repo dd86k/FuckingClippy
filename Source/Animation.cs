@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Timers;
 
-//TODO: Duplicate frames (images) or variate framerate for variated support
-
 namespace FuckingClippy
 {
     public partial class MainForm

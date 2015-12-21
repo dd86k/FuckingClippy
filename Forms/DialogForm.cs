@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -35,6 +36,8 @@ namespace FuckingClippy
         /// </summary>
         internal static void Prompt()
         {
+            Console.WriteLine("Prompt() called");
+
             CurrentForm = GetBaseForm(GetPrompt(), new Size(206, 98));
 
             CurrentForm.Show();
@@ -51,7 +54,7 @@ namespace FuckingClippy
 
             TextBox t = new TextBox();
             t.Multiline = true;
-            t.Size = new Size(190, 34);
+            t.Size = new Size(194, 34);
             t.Location = new Point(4, 32);
             t.KeyDown += (s, e) =>
             {
@@ -75,6 +78,8 @@ namespace FuckingClippy
         /// <param name="pText">Text.</param>
         internal static void Say(string pText)
         {
+            Console.WriteLine($"Say({pText}) called");
+
             CurrentForm = GetBaseForm(GetSay(pText), GetSizeWithText(pText));
 
             CurrentForm.Show();

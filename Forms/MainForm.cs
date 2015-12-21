@@ -8,8 +8,6 @@ namespace FuckingClippy
     {
         public MainForm() : base()
         {
-            Console.WriteLine(Utils.IsRunningOnMono ? "Running on: Mono" : "Running on: .NET/CLR");
-
             InitializeComponent();
 
             InitializeAnimation();
@@ -39,7 +37,7 @@ namespace FuckingClippy
             TopMost = true; // Only hell now. :-)
 
 #if DEBUG
-            ToolStripItem[] DebugItems = new ToolStripItem[3];
+            ToolStripItem[] DebugItems = new ToolStripItem[2];
             
             DebugItems[0] = new ToolStripMenuItem();
             DebugItems[0].Text = "[Debug] Prompt";
@@ -63,13 +61,6 @@ namespace FuckingClippy
                 };
 
                 Dialog.Say(str[new Random().Next(0, str.Length)]);
-            };
-
-            DebugItems[2] = new ToolStripMenuItem();
-            DebugItems[2].Text = "[Debug] Animate (Check)";
-            DebugItems[2].Click += (s, e) =>
-            {
-                Animation.Play("Check");
             };
 
             cmsCharacter.Items.AddRange(DebugItems);

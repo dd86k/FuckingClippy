@@ -20,25 +20,43 @@ namespace FuckingClippy
         {
             Console.WriteLine($"User input: {pUserInput}");
 
-            if (pUserInput.StartsWith("run "))
-            {
-                string run = pUserInput.Substring(4);
-                
-                Console.WriteLine($"User action: RUN - Parameter: {run}");
+            bool succcessful = false;
 
-                Start(run);
+            if (pUserInput.IsLink())
+            {
+                Start(pUserInput);
+                succcessful = true;
+            }
+            else if (pUserInput.StartsWith("run "))
+            {
+                try
+                {
+                    Start(pUserInput.Substring(4));
+                    succcessful = true;
+                }
+                catch
+                {
+                    Dialog.Say($"Hey, \"{pUserInput}\" returned a Win32 error.");
+                }
+            }
+            else
+            {
+                //TODO:[H] Fix Google Searches
+                Start($"https://google.com/?q={Uri.EscapeDataString(pUserInput)}#");
+                succcessful = true;
             }
 
-            if (pUserInput.StartsWith("search "))
-            {
-                string run = pUserInput.Substring(7);
+            if (succcessful)
+                Dialog.CurrentForm.Close();
+        }
+    }
 
-                Console.WriteLine($"User action: SEARCH - Parameter: {run}");
-
-                Start($"https://www.google.ca/?q={run}");
-            }
-
-            Dialog.CurrentForm.Close();
+    static class TypeExtensions
+    {
+        public static bool IsLink(this string pString)
+        {
+            Uri u;
+            return Uri.TryCreate(pString, UriKind.RelativeOrAbsolute, out u);
         }
     }
 }
