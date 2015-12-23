@@ -11,7 +11,8 @@ namespace FuckingClippy
         [STAThread]
         static void Main()
         {
-            Console.WriteLine(Utils.IsRunningOnMono ? "Running on: Mono" : "Running on: .NET/CLR");
+            Console.WriteLine(Utils.IsRunningOnMono ?
+                "CLR: Running on: Mono" : "CLR: Running on: .NET");
             Application.EnableVisualStyles();
             Application.Run(new MainForm());
         }

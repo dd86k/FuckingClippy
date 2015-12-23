@@ -10,14 +10,13 @@ namespace FuckingClippy
             if (Utils.IsRunningOnMono)
             {
                 //TODO*: Fix Mono transparency
-                System.Console.WriteLine("TransparentForm called: Mono");
-                SetStyle(ControlStyles.SupportsTransparentBackColor |
-                    ControlStyles.UserPaint, true);
+                System.Console.WriteLine("CLR: TransparentForm called: Mono");
+                SetStyle(ControlStyles.SupportsTransparentBackColor, true);
                 BackColor = Color.Transparent;
             }
             else
             {
-                System.Console.WriteLine("TransparentForm called: .NET");
+                System.Console.WriteLine("CLR: TransparentForm called: .NET");
                 TransparencyKey = Color.Purple;
                 BackColor = Color.Purple;
             }

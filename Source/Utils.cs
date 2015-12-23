@@ -18,7 +18,7 @@ namespace FuckingClippy
         /// <param name="pUserInput">User input.</param>
         static internal void ProcessInput(string pUserInput)
         {
-            Console.WriteLine($"User input: {pUserInput}");
+            Console.WriteLine($"CLR: User input: {pUserInput}");
 
             bool succcessful = false;
 

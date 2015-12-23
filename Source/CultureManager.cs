@@ -24,7 +24,7 @@ namespace FuckingClippy
 
         void ChangeCulture(string pLanguage)
         {
-            Console.WriteLine($"ChangeCulture({pLanguage})");
+            Console.WriteLine($"CLR: ChangeCulture({pLanguage})");
 
             switch (pLanguage)
             {

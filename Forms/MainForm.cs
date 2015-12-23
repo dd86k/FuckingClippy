@@ -24,7 +24,7 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
-            Console.WriteLine("MainForm initiated");
+            Console.WriteLine("CLR: MainForm initiated");
 
             //TODO*: Uncomment when translations are ready.
             //InitiateCulture();
@@ -36,6 +36,7 @@ namespace FuckingClippy
             Dialog.ParentForm = this;
 
             ClientSize = picCharacter.Size;
+            picCharacter.Dock = DockStyle.Fill;
 
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30px.

@@ -98,7 +98,7 @@ namespace FuckingClippy
             if (IsPlaying)
                 return;
 
-            Console.WriteLine($"Playing animation: {pName}");
+            Console.WriteLine($"CLR: Playing animation: {pName}");
 
             Name = pName;
 

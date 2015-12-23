@@ -37,7 +37,7 @@ namespace FuckingClippy
         internal static void Prompt()
         {
             //TODO: Make Prompt() return a string
-            Console.WriteLine($"Prompt() called -- {DefaultFont.Name}");
+            Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
 
             CurrentForm = GetBaseForm(GetPrompt(), new Size(206, /*98*/ 72));
 
@@ -81,7 +81,7 @@ namespace FuckingClippy
         /// <param name="pText">Text.</param>
         internal static void Say(string pText)
         {
-            Console.WriteLine($"Say({pText}) called -- {DefaultFont.Name}");
+            Console.WriteLine($"CLR: Say({pText}) called -- {DefaultFont.Name}");
 
             CurrentForm = GetBaseForm(GetSay(pText), GetSizeWithText(pText));
 
