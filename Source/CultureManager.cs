@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Resources;
 using static System.Threading.Thread;
 
@@ -23,6 +24,8 @@ namespace FuckingClippy
 
         void ChangeCulture(string pLanguage)
         {
+            Console.WriteLine($"ChangeCulture({pLanguage})");
+
             switch (pLanguage)
             {
                 case "en-EdgyMemer":
@@ -34,19 +37,13 @@ namespace FuckingClippy
                     RM = new ResourceManager("FuckingClippy.Culture.fr-FR",
                              Utils.ExecutingAssembly);
                     break;
-
-                case "en":
-                case "en-US":
-                case "en-UK":
+                    
+                // English
                 default:
                     RM = new ResourceManager("FuckingClippy.Culture.en-US",
                              Utils.ExecutingAssembly);
                     break;
             }
-
-            /* This is where our translations goes into controls */
-            // ===== Context Menu =====
-            
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FuckingClippy
         {
             if (Utils.IsRunningOnMono)
             {
-                //TODO: Fix Mono transparency
+                //TODO*: Fix Mono transparency
                 System.Console.WriteLine("TransparentForm called: Mono");
                 SetStyle(ControlStyles.SupportsTransparentBackColor |
                     ControlStyles.UserPaint, true);

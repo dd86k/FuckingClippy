@@ -41,8 +41,7 @@ namespace FuckingClippy
             }
             else
             {
-                //TODO:[H] Fix Google Searches
-                Start($"https://google.com/?q={Uri.EscapeDataString(pUserInput)}#");
+                Start($"https://www.google.ca/search?q={Uri.EscapeDataString(pUserInput)}");
                 succcessful = true;
             }
 
@@ -56,6 +55,16 @@ namespace FuckingClippy
         public static bool IsLink(this string pString)
         {
             Uri u;
+
+            try
+            {
+                u = new Uri(pString);
+            }
+            catch
+            {
+                return false;
+            }
+
             return Uri.TryCreate(pString, UriKind.RelativeOrAbsolute, out u);
         }
     }

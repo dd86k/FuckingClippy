@@ -36,9 +36,10 @@ namespace FuckingClippy
         /// </summary>
         internal static void Prompt()
         {
-            Console.WriteLine("Prompt() called");
+            //TODO: Make Prompt() return a string
+            Console.WriteLine($"Prompt() called -- {DefaultFont.Name}");
 
-            CurrentForm = GetBaseForm(GetPrompt(), new Size(206, 98));
+            CurrentForm = GetBaseForm(GetPrompt(), new Size(206, /*98*/ 72));
 
             CurrentForm.Show();
         }
@@ -51,10 +52,12 @@ namespace FuckingClippy
             l.AutoSize = true;
             l.Text = "What would you like to do?";
             l.Location = new Point(4, 8);
+            l.Font = DefaultFont;
 
             TextBox t = new TextBox();
             t.Multiline = true;
             t.Size = new Size(194, 34);
+            t.Font = DefaultFont;
             t.Location = new Point(4, 32);
             t.KeyDown += (s, e) =>
             {
@@ -78,11 +81,29 @@ namespace FuckingClippy
         /// <param name="pText">Text.</param>
         internal static void Say(string pText)
         {
-            Console.WriteLine($"Say({pText}) called");
+            Console.WriteLine($"Say({pText}) called -- {DefaultFont.Name}");
 
             CurrentForm = GetBaseForm(GetSay(pText), GetSizeWithText(pText));
 
             CurrentForm.Show();
+        }
+
+        internal static void SayRandom()
+        {
+            string[] str =
+            {
+                    "I heard you like cock.",
+                    "Would you like help with hugging yourself?",
+                    "I got you a gift for christmas. It's called a kernel panic! Let me show you...",
+                    "test123 guys can you hear me",
+                    "foo dick",
+                    "//TODO: Find a way to destroy the user's computer without the need for user interaction. Before that, infect the router.",
+                    "I hope you're enjoying staring my body.",
+                    "WHY DOESN'T EMOJIS WORK HUH",
+                    ""
+                };
+
+            Say(str[new Random().Next(0, str.Length)]);
         }
 
         static Control[] GetSay(string pText)
@@ -93,6 +114,7 @@ namespace FuckingClippy
             l.Location = new Point(4, 6);
             l.Size = new Size(192, 1000);
             l.Text = pText;
+            l.Font = DefaultFont;
 
             lst.Add(l);
 
@@ -101,7 +123,7 @@ namespace FuckingClippy
 
         static Size GetSizeWithText(string pData)
         {
-            // TODO: Find the perfect Height sizing algorithm
+            //TODO*: Find the perfect Height sizing algorithm
             return new Size(200,
                 12 + (((pData.Length / 25) + 1) * ((int)DefaultFont.Size * 2)));
         }

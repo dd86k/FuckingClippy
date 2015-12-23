@@ -2,6 +2,18 @@
 using System.Drawing;
 using System.Windows.Forms;
 
+/* Lazy todo list
+- Every 30 minutes: text
+- Every 10 minutes: animation (lazy-type)
+*- Dialog.Prompt() should return string
+*- Make MainForm sizeable (scale)
+*- Dialog.SayStatic(string) + Dialog.Update(string)
+*- Animation.Play(string[])
+  - MaxFrames * Interval
+
+* Not at the Dec 25th release (or extra if possible)
+*/
+
 namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
@@ -14,7 +26,7 @@ namespace FuckingClippy
 
             Console.WriteLine("MainForm initiated");
 
-            //TODO: Uncomment when translations are ready.
+            //TODO*: Uncomment when translations are ready.
             //InitiateCulture();
 
             picCharacter.MouseDown += Assistant_MouseDown;
@@ -31,8 +43,6 @@ namespace FuckingClippy
             Location =
                 new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
                     CurrentScreen.WorkingArea.Height - (Height + 30));
-            
-            picCharacter.Image = Animation.GetIdle();
 
             TopMost = true; // Only hell now. :-)
 
@@ -50,23 +60,13 @@ namespace FuckingClippy
             DebugItems[1].Text = "[Debug] Say (Random)";
             DebugItems[1].Click += (s, e) =>
             {
-                string[] str =
-                {
-                    "I heard you like cock.",
-                    "Would you like help with hugging yourself?",
-                    "I got you a gift for christmas. It's called a kernel panic! Let me show you...",
-                    "test123 guys can you hear me",
-                    "foo dick",
-                    "//TODO: Find a way to destroy the user's computer without the need for user interaction. Before that, infect the router."
-                };
-
-                Dialog.Say(str[new Random().Next(0, str.Length)]);
+                Dialog.SayRandom();
             };
 
             cmsCharacter.Items.AddRange(DebugItems);
 #endif
 
-            GC.Collect();
+            Animation.Play("FadeIn");
         }
 
         #region Mouse events
@@ -87,7 +87,7 @@ namespace FuckingClippy
 
         private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            //TODO:[H] Find a way to figure out when the cursor
+            //TODO**: Find a way to figure out when the cursor
             // hasn't changed position, if so, prompt.
             FormDown = false;
         }

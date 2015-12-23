@@ -22,6 +22,7 @@ namespace FuckingClippy
                 picCharacter.Image =
                     Animation.GetFrame(Animation.Name, Animation.CurrentFrame++);
 
+                // This is important!
                 GC.Collect();
             }
             else
@@ -31,6 +32,9 @@ namespace FuckingClippy
             }
         }
     }
+
+    //TODO: Make Animation a proper object instead.
+    //TODO: Make an enumeration for animation names instead of using a string
 
     public class Animation
     {
