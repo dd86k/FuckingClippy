@@ -18,25 +18,39 @@ namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
     {
+        System.Timers.Timer tmrIdleSay =
+            new System.Timers.Timer(1800000); // 30 Minutes
+        System.Timers.Timer tmrIdleAni =
+            new System.Timers.Timer(300000);  //  5 Minutes
+
+        /// <summary>
+        /// Main form where our assistant is.
+        /// </summary>
+        /// <remarks>
+        /// base() ensures that the constructor from <see cref="TransparentForm"/>
+        /// gets called (inheritance).
+        /// </remarks>
         public MainForm() : base()
         {
             InitializeComponent();
 
             InitializeAnimation();
 
+            SuspendLayout();
+
             Console.WriteLine("CLR: MainForm initiated");
 
             //TODO*: Uncomment when translations are ready.
             //InitiateCulture();
 
-            picCharacter.MouseDown += Assistant_MouseDown;
-            picCharacter.MouseUp += Assistant_MouseUp;
-            picCharacter.MouseMove += Assistant_MouseMove;
+            picAssistant.MouseDown += Assistant_MouseDown;
+            picAssistant.MouseUp += Assistant_MouseUp;
+            picAssistant.MouseMove += Assistant_MouseMove;
 
             Dialog.ParentForm = this;
 
-            ClientSize = picCharacter.Size;
-            picCharacter.Dock = DockStyle.Fill;
+            ClientSize = picAssistant.Size;
+            picAssistant.Dock = DockStyle.Fill;
 
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30px.
@@ -67,7 +81,24 @@ namespace FuckingClippy
             cmsCharacter.Items.AddRange(DebugItems);
 #endif
 
+            ResumeLayout();
+
+            tmrIdleAni.Elapsed += TmrIdleAni_Elapsed;
+            tmrIdleSay.Elapsed += TmrIdleSay_Elapsed;
+            tmrIdleAni.Start();
+            tmrIdleSay.Start();
+
             Animation.Play("FadeIn");
+        }
+
+        private void TmrIdleSay_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Dialog.SayRandom();
+        }
+
+        private void TmrIdleAni_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Animation.PlayRandom();
         }
 
         #region Mouse events

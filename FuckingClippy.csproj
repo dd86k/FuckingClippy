@@ -42,6 +42,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Settings.cs" />
     <Compile Include="Source\Animation.cs">
       <SubType>Form</SubType>
     </Compile>

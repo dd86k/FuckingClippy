@@ -19,7 +19,7 @@ namespace FuckingClippy
         {
             if (Animation.CurrentFrame < Animation.MaxFrame)
             {
-                picCharacter.Image =
+                picAssistant.Image =
                     Animation.GetFrame(Animation.Name, Animation.CurrentFrame++);
 
                 // This is important!
@@ -27,7 +27,7 @@ namespace FuckingClippy
             }
             else
             {
-                picCharacter.Image = Animation.GetIdle();
+                picAssistant.Image = Animation.GetIdle();
                 Animation.Timer.Stop();
             }
         }

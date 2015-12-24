@@ -35,9 +35,9 @@
             this.csmiOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsiChooseAssistant = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsiAnimate = new System.Windows.Forms.ToolStripMenuItem();
-            this.picCharacter = new System.Windows.Forms.PictureBox();
+            this.picAssistant = new System.Windows.Forms.PictureBox();
             this.cmsCharacter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picCharacter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAssistant)).BeginInit();
             this.SuspendLayout();
             // 
             // cmsCharacter
@@ -89,28 +89,28 @@
             this.cmsiAnimate.Text = "&Animate!";
             this.cmsiAnimate.Click += new System.EventHandler(this.cmsiAnimate_Click);
             // 
-            // picCharacter
+            // picAssistant
             // 
-            this.picCharacter.ContextMenuStrip = this.cmsCharacter;
-            this.picCharacter.Location = new System.Drawing.Point(0, 0);
-            this.picCharacter.Name = "picCharacter";
-            this.picCharacter.Size = new System.Drawing.Size(124, 93);
-            this.picCharacter.TabIndex = 1;
-            this.picCharacter.TabStop = false;
+            this.picAssistant.ContextMenuStrip = this.cmsCharacter;
+            this.picAssistant.Location = new System.Drawing.Point(0, 0);
+            this.picAssistant.Name = "picAssistant";
+            this.picAssistant.Size = new System.Drawing.Size(124, 93);
+            this.picAssistant.TabIndex = 1;
+            this.picAssistant.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(186, 167);
-            this.Controls.Add(this.picCharacter);
+            this.ClientSize = new System.Drawing.Size(138, 110);
+            this.Controls.Add(this.picAssistant);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.cmsCharacter.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picCharacter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAssistant)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -122,7 +122,7 @@
         private System.Windows.Forms.ToolStripMenuItem csmiOptions;
         private System.Windows.Forms.ToolStripMenuItem cmsiChooseAssistant;
         private System.Windows.Forms.ToolStripMenuItem cmsiAnimate;
-        private System.Windows.Forms.PictureBox picCharacter;
+        private System.Windows.Forms.PictureBox picAssistant;
     }
 }
 
