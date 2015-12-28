@@ -3,15 +3,12 @@ using System.Drawing;
 using System.Windows.Forms;
 
 /* Lazy todo list
-- Every 30 minutes: text
-- Every 10 minutes: animation (lazy-type)
-*- Dialog.Prompt() should return string
-*- Make MainForm sizeable (scale)
-*- Dialog.SayStatic(string) + Dialog.Update(string)
-*- Animation.Play(string[])
+- Dialog.Prompt() should return string
+- Make MainForm sizeable (scale)
+- Dialog.SayStatic(string) + Dialog.Update(string)
+- Animation.Play(string[])
   - MaxFrames * Interval
-
-* Not at the Dec 25th release (or extra if possible)
+- idle animation 5 -> 2.5 minutes
 */
 
 namespace FuckingClippy
@@ -19,9 +16,9 @@ namespace FuckingClippy
     public partial class MainForm : TransparentForm
     {
         System.Timers.Timer tmrIdleSay =
-            new System.Timers.Timer(900000); // 15 Minutes
+            new System.Timers.Timer(900000); // 15  Minutes
         System.Timers.Timer tmrIdleAni =
-            new System.Timers.Timer(300000); //  5 Minutes
+            new System.Timers.Timer(150000); // 2.5 Minutes
 
         /// <summary>
         /// Main form where our assistant is.

@@ -39,7 +39,7 @@ namespace FuckingClippy
             //TODO: Make Prompt() return a string
             Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
 
-            CurrentForm = GetBaseForm(GetPrompt(), new Size(206, /*98*/ 72));
+            CurrentForm = GetBaseForm(GetPrompt()/*, new Size(206,72)*/);
 
             CurrentForm.Show();
         }
@@ -53,6 +53,7 @@ namespace FuckingClippy
             l.Text = "What would you like to do?";
             l.Location = new Point(4, 8);
             l.Font = DefaultFont;
+            l.Margin = new Padding(4);
 
             TextBox t = new TextBox();
             t.Multiline = true;
@@ -83,7 +84,7 @@ namespace FuckingClippy
         {
             Console.WriteLine($"CLR: Say({pText}) called -- {DefaultFont.Name}");
 
-            CurrentForm = GetBaseForm(GetSay(pText), GetSizeWithText(pText));
+            CurrentForm = GetBaseForm(GetSay(pText)/*, GetSizeWithText(pText)*/);
 
             CurrentForm.Show();
         }
@@ -114,7 +115,9 @@ namespace FuckingClippy
 
             Label l = new Label();
             l.Location = new Point(4, 6);
-            l.Size = new Size(192, 1000);
+            //l.Size = new Size(192, 1000);
+            l.MaximumSize = new Size(192, 0);
+            l.AutoSize = true;
             l.Text = pText;
             l.Font = DefaultFont;
 
@@ -132,18 +135,15 @@ namespace FuckingClippy
         #endregion
 
         #region Bases
-        static DialogForm GetBaseForm(Control[] pSubControls, Size pClientSize)
+        static DialogForm GetBaseForm(Control[] pSubControls/*, Size pClientSize*/)
         {
-            DialogForm form = new DialogForm();
-            form.Font = DefaultFont;
-            form.ClientSize =
-                new Size(pClientSize.Width, pClientSize.Height + 15);
-            form.Location =
-                new Point(ParentForm.Location.X - (form.Size.Width / 2),
-                ParentForm.Location.Y - (form.Size.Height - 4));
-            form.Deactivate += (s, e) =>
+            CurrentForm.Close();
+
+            DialogForm f = new DialogForm();
+            f.Font = DefaultFont;
+            f.Deactivate += (s, e) =>
             {
-                form.Close();
+                f.Close();
             };
 
             /* Bubble body */
@@ -151,19 +151,29 @@ namespace FuckingClippy
             p.BackColor = BubbleColor;
             p.BorderStyle = BorderStyle.FixedSingle;
             p.Controls.AddRange(pSubControls);
-            p.Size = pClientSize;
+            p.AutoSize = true;
+            p.MaximumSize = new Size(200, 0);
+            p.Location = new Point(0, 0);
+            //p.Size = pClientSize;
 
             /* Bubble tail */
             PictureBox pb = new PictureBox();
             pb.Size = new Size(10, 15);
-            pb.Location = new Point((int)(form.ClientSize.Width / 1.62),
-                form.ClientSize.Height - 15);
+            pb.Location = new Point((int)(f.ClientSize.Width / 1.62),
+                f.ClientSize.Height - 15);
             pb.Image = BubbleTail;
 
-            form.Controls.Add(p);
-            form.Controls.Add(pb);
+            f.Controls.Add(p);
+            f.Controls.Add(pb);
 
-            return form;
+            f.AutoSize = false;
+            f.ClientSize =
+                new Size(f.Width, f.Height + 15);
+            f.Location =
+                new Point(ParentForm.Location.X - (f.Size.Width / 2),
+                ParentForm.Location.Y - (f.Size.Height - 4) - 30);
+
+            return f;
         }
         #endregion
     }
@@ -176,6 +186,10 @@ namespace FuckingClippy
             ShowInTaskbar = false;
             FormBorderStyle = FormBorderStyle.None;
             StartPosition = FormStartPosition.Manual;
+
+            AutoSize = true;
+            MaximumSize = new Size(200, 0);
+            AutoSizeMode = AutoSizeMode.GrowOnly;
         }
     }
 }
