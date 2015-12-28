@@ -92,18 +92,18 @@ namespace FuckingClippy
         {
             string[] str =
             {
-                    "I heard you like pies.",
-                    "Would you like help with hugging yourself?",
-                    "I got you a gift for christmas. It's called a kernel panic! Let me show you!",
-                    "test123 guys can you hear me",
-                    "foo dick",
-                    "Looks like you're trying to focus, need some help?",
-                    "I hope you're enjoying staring my body.",
-                    "WHY DOESN'T EMOJIS WORK HUH",
-                    "I'm bored.",
-                    "DUDE WHERE'S MY GAC? >:-(",
-                    "Meow."
-                };
+                "I heard you like pies.",
+                "Would you like help with hugging yourself?",
+                "I got you a gift for christmas. It's called a kernel panic! Let me show you!",
+                "test123 guys can you hear me",
+                "foo dick",
+                "Looks like you're trying to focus, need some help?",
+                "I hope you're enjoying staring at my body.",
+                "WHY DOESN'T EMOJIS WORK HUH",
+                "I'm bored.",
+                "DUDE WHERE'S MY GAC? >:-(",
+                "Meow."
+            };
 
             Say(str[new Random().Next(0, str.Length)]);
         }

@@ -19,9 +19,9 @@ namespace FuckingClippy
     public partial class MainForm : TransparentForm
     {
         System.Timers.Timer tmrIdleSay =
-            new System.Timers.Timer(1800000); // 30 Minutes
+            new System.Timers.Timer(900000); // 15 Minutes
         System.Timers.Timer tmrIdleAni =
-            new System.Timers.Timer(300000);  //  5 Minutes
+            new System.Timers.Timer(300000); //  5 Minutes
 
         /// <summary>
         /// Main form where our assistant is.
@@ -36,20 +36,17 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
-            SuspendLayout();
-
-            Console.WriteLine("CLR: MainForm initiated");
-
             //TODO*: Uncomment when translations are ready.
             //InitiateCulture();
+
+            Console.WriteLine("CLR: MainForm initiated");
 
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
             Dialog.ParentForm = this;
-
-            ClientSize = picAssistant.Size;
+            
             picAssistant.Dock = DockStyle.Fill;
 
             // Grab the current Screen info and locate the character
@@ -81,7 +78,8 @@ namespace FuckingClippy
             cmsCharacter.Items.AddRange(DebugItems);
 #endif
 
-            ResumeLayout();
+            cmsCharacter.ResumeLayout(false);
+            ResumeLayout(true);
 
             tmrIdleAni.Elapsed += TmrIdleAni_Elapsed;
             tmrIdleSay.Elapsed += TmrIdleSay_Elapsed;

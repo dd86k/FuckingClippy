@@ -65,8 +65,8 @@
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Design.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Source\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,9 +82,6 @@
     <Compile Include="Source\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,11 +115,7 @@
       <LastGenOutput>fr-FR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\Clippy\Idle.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Images\Bubble\BubbleTail.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\0.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\10.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\11.png" />
@@ -865,8 +858,6 @@
     <EmbeddedResource Include="Images\Clippy\Animations\Toy\7.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Toy\8.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Toy\9.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\0.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\1.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\10.png" />
