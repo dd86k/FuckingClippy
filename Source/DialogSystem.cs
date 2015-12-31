@@ -9,15 +9,10 @@ using System.Windows.Forms;
 
 namespace FuckingClippy
 {
-    partial class MainForm
-    {
-
-    }
-
     /// <summary>
     /// Dialog system.
     /// </summary>
-    static class Dialog
+    static class Character
     {
         // A reference to the parent form that summons thee.
         internal static Form ParentForm;
@@ -34,7 +29,7 @@ namespace FuckingClippy
         /// <summary>
         /// Prompt the user and ask him what he wants for christmas.
         /// </summary>
-        internal static void Prompt()
+        internal static string Prompt()
         {
             //TODO: Make Prompt() return a string
             Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
@@ -42,6 +37,9 @@ namespace FuckingClippy
             CurrentForm = GetBaseForm(GetPrompt()/*, new Size(206,72)*/);
 
             CurrentForm.Show();
+
+#warning: return "test";
+            return "test";
         }
 
         static Control[] GetPrompt()
@@ -135,11 +133,11 @@ namespace FuckingClippy
         #endregion
 
         #region Bases
-        static DialogForm GetBaseForm(Control[] pSubControls/*, Size pClientSize*/)
+        static BubbleForm GetBaseForm(Control[] pSubControls/*, Size pClientSize*/)
         {
             CurrentForm.Close();
 
-            DialogForm f = new DialogForm();
+            BubbleForm f = new BubbleForm();
             f.Font = DefaultFont;
             f.Deactivate += (s, e) =>
             {
@@ -178,9 +176,9 @@ namespace FuckingClippy
         #endregion
     }
 
-    class DialogForm : TransparentForm
+    class BubbleForm : TransparentForm
     {
-        public DialogForm() : base()
+        public BubbleForm() : base()
         {
             TopMost = true;
             ShowInTaskbar = false;

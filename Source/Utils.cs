@@ -36,7 +36,7 @@ namespace FuckingClippy
                 }
                 catch
                 {
-                    Dialog.Say($"Hey, \"{pUserInput}\" returned a Win32 error.");
+                    Character.Say($"Hey, \"{pUserInput}\" returned a Win32 error.");
                 }
             }
             else
@@ -46,7 +46,7 @@ namespace FuckingClippy
             }
 
             if (succcessful)
-                Dialog.CurrentForm.Close();
+                Character.CurrentForm.Close();
         }
     }
 

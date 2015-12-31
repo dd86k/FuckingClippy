@@ -42,7 +42,7 @@ namespace FuckingClippy
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
-            Dialog.ParentForm = this;
+            Character.ParentForm = this;
             
             picAssistant.Dock = DockStyle.Fill;
 
@@ -56,20 +56,28 @@ namespace FuckingClippy
             TopMost = true; // Only hell now. :-)
 
 #if DEBUG
-            ToolStripItem[] DebugItems = new ToolStripItem[2];
+            ToolStripItem[] DebugItems = new ToolStripItem[3];
             
             DebugItems[0] = new ToolStripMenuItem();
             DebugItems[0].Text = "[Debug] Prompt";
             DebugItems[0].Click += (s, e) =>
             {
-                Dialog.Prompt();
+                Character.Prompt();
             };
 
             DebugItems[1] = new ToolStripMenuItem();
             DebugItems[1].Text = "[Debug] Say (Random)";
             DebugItems[1].Click += (s, e) =>
             {
-                Dialog.SayRandom();
+                Character.SayRandom();
+            };
+
+            DebugItems[2] = new ToolStripMenuItem();
+            DebugItems[2].Text = "[Debug] Say (User defined)";
+            DebugItems[2].Click += (s, e) =>
+            {
+
+                Character.Say();
             };
 
             cmsCharacter.Items.AddRange(DebugItems);
@@ -88,7 +96,7 @@ namespace FuckingClippy
 
         private void TmrIdleSay_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Dialog.SayRandom();
+            Character.SayRandom();
         }
 
         private void TmrIdleAni_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
