@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -56,7 +57,7 @@ namespace FuckingClippy
             TopMost = true; // Only hell now. :-)
 
 #if DEBUG
-            ToolStripItem[] DebugItems = new ToolStripItem[3];
+            ToolStripItem[] DebugItems = new ToolStripItem[2];
             
             DebugItems[0] = new ToolStripMenuItem();
             DebugItems[0].Text = "[Debug] Prompt";
@@ -72,13 +73,7 @@ namespace FuckingClippy
                 Character.SayRandom();
             };
 
-            DebugItems[2] = new ToolStripMenuItem();
-            DebugItems[2].Text = "[Debug] Say (User defined)";
-            DebugItems[2].Click += (s, e) =>
-            {
 
-                Character.Say();
-            };
 
             cmsCharacter.Items.AddRange(DebugItems);
 #endif

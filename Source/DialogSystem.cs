@@ -29,7 +29,7 @@ namespace FuckingClippy
         /// <summary>
         /// Prompt the user and ask him what he wants for christmas.
         /// </summary>
-        internal static string Prompt()
+        internal static void Prompt()
         {
             //TODO: Make Prompt() return a string
             Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
@@ -37,9 +37,6 @@ namespace FuckingClippy
             CurrentForm = GetBaseForm(GetPrompt()/*, new Size(206,72)*/);
 
             CurrentForm.Show();
-
-#warning: return "test";
-            return "test";
         }
 
         static Control[] GetPrompt()
@@ -55,21 +52,24 @@ namespace FuckingClippy
 
             TextBox t = new TextBox();
             t.Multiline = true;
-            t.Size = new Size(194, 34);
+            t.Size = new Size(190, 34);
             t.Font = DefaultFont;
             t.Location = new Point(4, 32);
-            t.KeyDown += (s, e) =>
-            {
-                if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
-                {
-                    Utils.ProcessInput(t.Text);
-                }
-            };
+            t.KeyDown += t_UserInput;
 
             lst.Add(l);
             lst.Add(t);
 
             return lst.ToArray();
+        }
+
+        private static void t_UserInput(object s, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
+            {
+                TextBox t = s as TextBox;
+                Utils.ProcessInput(t.Text);
+            }
         }
         #endregion
 
@@ -114,8 +114,8 @@ namespace FuckingClippy
             Label l = new Label();
             l.Location = new Point(4, 6);
             //l.Size = new Size(192, 1000);
-            l.MaximumSize = new Size(192, 0);
             l.AutoSize = true;
+            l.MaximumSize = new Size(192, 0);
             l.Text = pText;
             l.Font = DefaultFont;
 
@@ -135,7 +135,8 @@ namespace FuckingClippy
         #region Bases
         static BubbleForm GetBaseForm(Control[] pSubControls/*, Size pClientSize*/)
         {
-            CurrentForm.Close();
+            if (CurrentForm != null)
+                CurrentForm.Close();
 
             BubbleForm f = new BubbleForm();
             f.Font = DefaultFont;
@@ -143,33 +144,36 @@ namespace FuckingClippy
             {
                 f.Close();
             };
+            f.MaximumSize = new Size(200, 0);
+            f.AutoSize = true;
 
             /* Bubble body */
             Panel p = new Panel();
             p.BackColor = BubbleColor;
             p.BorderStyle = BorderStyle.FixedSingle;
             p.Controls.AddRange(pSubControls);
-            p.AutoSize = true;
             p.MaximumSize = new Size(200, 0);
+            p.AutoSize = true;
             p.Location = new Point(0, 0);
             //p.Size = pClientSize;
 
             /* Bubble tail */
             PictureBox pb = new PictureBox();
-            pb.Size = new Size(10, 15);
-            pb.Location = new Point((int)(f.ClientSize.Width / 1.62),
-                f.ClientSize.Height - 15);
+            pb.Size = new Size(BubbleTail.Width, BubbleTail.Height);
             pb.Image = BubbleTail;
+
+            p.ClientSizeChanged += (s, e) =>
+            {
+                pb.Location = new Point((int)(f.ClientSize.Width / 1.62),
+                    p.Height);
+            };
 
             f.Controls.Add(p);
             f.Controls.Add(pb);
-
-            f.AutoSize = false;
-            f.ClientSize =
-                new Size(f.Width, f.Height + 15);
+            
             f.Location =
                 new Point(ParentForm.Location.X - (f.Size.Width / 2),
-                ParentForm.Location.Y - (f.Size.Height - 4) - 30);
+                ParentForm.Location.Y - (f.Size.Height - 4));
 
             return f;
         }
