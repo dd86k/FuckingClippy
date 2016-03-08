@@ -14,7 +14,7 @@ namespace FuckingClippy
         }
 
         // Remark: Animation_OnFrame is within MainForm to access the
-        // picCharacter PictureBox.
+        // picCharacter PictureBox (which is private).
         void Animation_OnFrame(object s, EventArgs e)
         {
             if (Animation.CurrentFrame < Animation.MaxFrame)

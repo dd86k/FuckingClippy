@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -72,9 +71,7 @@ namespace FuckingClippy
             {
                 Character.SayRandom();
             };
-
-
-
+            
             cmsCharacter.Items.AddRange(DebugItems);
 #endif
 

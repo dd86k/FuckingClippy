@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Reflection.Assembly;
 
 //TODO: Add support for:
 // - Images
@@ -21,8 +22,7 @@ namespace FuckingClippy
         static Color BubbleColor = Color.FromArgb(255, 255, 204);
         static Font DefaultFont = new Font("Segoe UI", 9);
         static Image BubbleTail = Image.FromStream(
-            System.Reflection.Assembly.GetExecutingAssembly()
-            .GetManifestResourceStream(
+            GetExecutingAssembly().GetManifestResourceStream(
                 "FuckingClippy.Images.Bubble.BubbleTail.png"));
 
         #region Prompt
@@ -35,7 +35,7 @@ namespace FuckingClippy
             Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
 
             CurrentForm = GetBaseForm(GetPrompt()/*, new Size(206,72)*/);
-
+            
             CurrentForm.Show();
         }
 
@@ -116,8 +116,8 @@ namespace FuckingClippy
             //l.Size = new Size(192, 1000);
             l.AutoSize = true;
             l.MaximumSize = new Size(192, 0);
-            l.Text = pText;
             l.Font = DefaultFont;
+            l.Text = pText;
 
             lst.Add(l);
 
@@ -146,14 +146,15 @@ namespace FuckingClippy
             };
             f.MaximumSize = new Size(200, 0);
             f.AutoSize = true;
+            f.Refresh();
 
             /* Bubble body */
             Panel p = new Panel();
+            p.AutoSize = true;
+            p.MaximumSize = new Size(200, 0);
             p.BackColor = BubbleColor;
             p.BorderStyle = BorderStyle.FixedSingle;
             p.Controls.AddRange(pSubControls);
-            p.MaximumSize = new Size(200, 0);
-            p.AutoSize = true;
             p.Location = new Point(0, 0);
             //p.Size = pClientSize;
 
