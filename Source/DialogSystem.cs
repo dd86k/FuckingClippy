@@ -144,9 +144,9 @@ namespace FuckingClippy
             {
                 f.Close();
             };
-            f.MaximumSize = new Size(200, 0);
+            //f.MaximumSize = new Size(200, 0);
             f.AutoSize = true;
-            f.Refresh();
+            f.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
             /* Bubble body */
             Panel p = new Panel();
