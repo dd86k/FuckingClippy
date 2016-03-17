@@ -115,8 +115,6 @@ namespace FuckingClippy
 
         private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            //TODO: Prompt on single click (medium-hard, short, v0.2)
-
             Form c = sender as Form;
 
             FormDown = false;
@@ -160,8 +158,11 @@ namespace FuckingClippy
         {
             Animation.Play("FadeOut");
 
-            //TODO: Find a way to delay this (medium, short, v0.2)
-            Close();
+            // The "I'm lazy" solution
+            Timer a = new Timer();
+            a.Interval = Animation.MaxFrame * Animation.DefaultInterval;
+            a.Tick += (s, g) => { Close(); };
+            a.Start();
         }
         #endregion
     }
