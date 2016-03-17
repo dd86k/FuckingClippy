@@ -33,7 +33,10 @@ namespace FuckingClippy
         {
             Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
 
+            if (CurrentBubbleForm != null)
+                CurrentBubbleForm.SuspendLayout();
             CurrentBubbleForm = GetBaseForm(GetPrompt());
+            CurrentBubbleForm.ResumeLayout();
             
             CurrentBubbleForm.Show();
         }
@@ -80,7 +83,10 @@ namespace FuckingClippy
         {
             Console.WriteLine($"CLR: Say({pText}) called -- {DefaultFont.Name}");
 
+            if (CurrentBubbleForm != null)
+                CurrentBubbleForm.SuspendLayout();
             CurrentBubbleForm = GetBaseForm(GetSay(pText));
+            CurrentBubbleForm.ResumeLayout();
 
             CurrentBubbleForm.Show();
         }
@@ -123,7 +129,7 @@ namespace FuckingClippy
         }
         #endregion
 
-        #region Bases
+        #region Base
         static BubbleForm GetBaseForm(Control[] pSubControls)
         {
             if (CurrentBubbleForm != null)

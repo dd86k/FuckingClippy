@@ -9,6 +9,14 @@ namespace FuckingClippy
         internal static readonly Assembly ExecutingAssembly =
             Assembly.GetExecutingAssembly();
 
+        public static string Version
+        {
+            get
+            {
+                return ExecutingAssembly.GetName().Version.ToString();
+            }
+        }
+
         public static readonly bool IsRunningOnMono =
             Type.GetType("Mono.Runtime") != null;
 

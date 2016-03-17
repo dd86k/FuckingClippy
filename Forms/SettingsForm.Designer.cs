@@ -33,7 +33,9 @@
             this.tabOptions = new System.Windows.Forms.TabPage();
             this.tabSettings = new System.Windows.Forms.TabPage();
             this.tabAbout = new System.Windows.Forms.TabPage();
+            this.txtAbout = new System.Windows.Forms.RichTextBox();
             this.MainTabControl.SuspendLayout();
+            this.tabAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -81,6 +83,7 @@
             // 
             // tabAbout
             // 
+            this.tabAbout.Controls.Add(this.txtAbout);
             this.tabAbout.Location = new System.Drawing.Point(4, 24);
             this.tabAbout.Name = "tabAbout";
             this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
@@ -88,6 +91,19 @@
             this.tabAbout.TabIndex = 3;
             this.tabAbout.Text = "About";
             this.tabAbout.UseVisualStyleBackColor = true;
+            this.tabAbout.Enter += new System.EventHandler(this.tabAbout_Enter);
+            // 
+            // txtAbout
+            // 
+            this.txtAbout.BackColor = System.Drawing.Color.White;
+            this.txtAbout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtAbout.Location = new System.Drawing.Point(3, 3);
+            this.txtAbout.Name = "txtAbout";
+            this.txtAbout.ReadOnly = true;
+            this.txtAbout.Size = new System.Drawing.Size(433, 267);
+            this.txtAbout.TabIndex = 0;
+            this.txtAbout.Text = "";
+            this.txtAbout.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.txtAbout_LinkClicked);
             // 
             // SettingsForm
             // 
@@ -100,6 +116,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Office assistant";
             this.MainTabControl.ResumeLayout(false);
+            this.tabAbout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -111,5 +128,6 @@
         private System.Windows.Forms.TabPage tabOptions;
         private System.Windows.Forms.TabPage tabSettings;
         private System.Windows.Forms.TabPage tabAbout;
+        private System.Windows.Forms.RichTextBox txtAbout;
     }
 }

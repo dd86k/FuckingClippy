@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 - tmrIdleSay.Interval
 - tmrIdleAni.Interval
 
--- Automatic --
+-- Automatic save --
 - Location
 
 */
