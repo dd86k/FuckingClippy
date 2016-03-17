@@ -16,9 +16,9 @@ namespace FuckingClippy
     public partial class MainForm : TransparentForm
     {
         System.Timers.Timer tmrIdleSay =
-            new System.Timers.Timer(900000); // 15  Minutes
+            new System.Timers.Timer(900000); // 15 minutes
         System.Timers.Timer tmrIdleAni =
-            new System.Timers.Timer(150000); // 2.5 Minutes
+            new System.Timers.Timer(120000); // 2 minutes
 
         /// <summary>
         /// Main form where our assistant is.
@@ -33,14 +33,10 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
-            //TODO*: Uncomment when translations are ready.
+            //TODO: Uncomment when translations are ready. (easy, long, v0.5)
             //InitiateCulture();
 
             Console.WriteLine("CLR: MainForm initiated");
-
-            picAssistant.MouseDown += Assistant_MouseDown;
-            picAssistant.MouseUp += Assistant_MouseUp;
-            picAssistant.MouseMove += Assistant_MouseMove;
 
             Character.CharacterForm = this;
             
@@ -54,7 +50,6 @@ namespace FuckingClippy
                     CurrentScreen.WorkingArea.Height - (Height + 30));
 
             TopMost = true; // Only hell now. :-)
-
 #if DEBUG
             ToolStripItem[] DebugItems = new ToolStripItem[2];
             
@@ -78,12 +73,16 @@ namespace FuckingClippy
             cmsCharacter.ResumeLayout(false);
             ResumeLayout(true);
 
+            Animation.Play("FadeIn");
+
+            picAssistant.MouseDown += Assistant_MouseDown;
+            picAssistant.MouseUp += Assistant_MouseUp;
+            picAssistant.MouseMove += Assistant_MouseMove;
+
             tmrIdleAni.Elapsed += TmrIdleAni_Elapsed;
             tmrIdleSay.Elapsed += TmrIdleSay_Elapsed;
             tmrIdleAni.Start();
             tmrIdleSay.Start();
-
-            Animation.Play("FadeIn");
         }
 
         private void TmrIdleSay_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -98,15 +97,17 @@ namespace FuckingClippy
 
         #region Mouse events
         bool FormDown;
-        Point LastLocation;
+        Point LastMouseLocation;
+        Point LastFormLocation;
+        bool IsPrompting;
 
         private void Assistant_MouseMove(object sender, MouseEventArgs e)
         {
             if (FormDown)
             {
                 Location =
-                    new Point((Location.X - LastLocation.X) + e.X,
-                    (Location.Y - LastLocation.Y) + e.Y);
+                    new Point((Location.X - LastMouseLocation.X) + e.X,
+                    (Location.Y - LastMouseLocation.Y) + e.Y);
 
                 Update();
             }
@@ -114,15 +115,28 @@ namespace FuckingClippy
 
         private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            //TODO**: Find a way to figure out when the cursor..
-            // hasn't changed position, if so, prompt.
+            //TODO: Prompt on single click (medium-hard, short, v0.2)
+
+            Form c = sender as Form;
+
             FormDown = false;
+
+            if (e.Button == MouseButtons.Left)
+                if (LastFormLocation.X == Location.X &&
+                    LastFormLocation.Y == Location.Y &&
+                    !IsPrompting)
+                {
+                    IsPrompting = true;
+                    Character.Prompt();
+                }
         }
 
         private void Assistant_MouseDown(object sender, MouseEventArgs e)
         {
             FormDown = true;
-            LastLocation = e.Location;
+            LastMouseLocation = e.Location;
+            LastFormLocation = Location;
+            IsPrompting = false;
         }
         #endregion
 
@@ -144,6 +158,9 @@ namespace FuckingClippy
 
         private void cmsiHide_Click(object sender, EventArgs e)
         {
+            Animation.Play("FadeOut");
+
+            //TODO: Find a way to delay this (medium, short, v0.2)
             Close();
         }
         #endregion

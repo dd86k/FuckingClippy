@@ -9,8 +9,8 @@ namespace FuckingClippy
         void InitializeAnimation()
         {
             Animation.Timer = new Timer(Animation.DefaultInterval);
-
             Animation.Timer.Elapsed += Animation_OnFrame;
+            Animation.Initialize();
         }
 
         // Remark: Animation_OnFrame is within MainForm to access the
@@ -27,25 +27,31 @@ namespace FuckingClippy
             }
             else
             {
-                picAssistant.Image = Animation.GetIdle();
                 Animation.Timer.Stop();
+                picAssistant.Image = Animation.GetIdle();
             }
         }
     }
-
-    //TODO: Make Animation a proper object instead.
-    //TODO: Make an enumeration for animation names instead of using a string
+    
+    //TODO: Enums instead (easy, medium, v0.3)
 
     public class Animation
     {
+        public static void Initialize()
+        {
+            Idle = Image.FromStream(
+                Utils.ExecutingAssembly.GetManifestResourceStream
+                    ("FuckingClippy.Images.Clippy.Idle.png"));
+        }
+
         /// <summary>
         /// Default <see cref="Timer"/>'s Interval value.
         /// </summary>
         internal const int DefaultInterval = 150;
         /// <summary>
-        /// Default animation folder path.
+        /// Default animation assembly path.
         /// </summary>
-        const string AnimationFolder = "FuckingClippy.Images.Clippy.Animations";
+        const string AnimationPath = "FuckingClippy.Images.Clippy.Animations";
         /// <summary>
         /// Animation Timer.
         /// </summary>
@@ -73,10 +79,8 @@ namespace FuckingClippy
         /// <summary>
         /// Default idle image.
         /// </summary>
-        static readonly Image Idle = 
-                Image.FromStream(
-                    Utils.ExecutingAssembly.GetManifestResourceStream("FuckingClippy.Images.Clippy.Idle.png")
-                );
+        static Image Idle;
+
         /// <summary>
         /// Get if there is an animation playing.
         /// </summary>
@@ -105,8 +109,6 @@ namespace FuckingClippy
             CurrentFrame = 0;
 
             Timer.Interval = DefaultInterval;
-
-            //TODO:[S] Change Interval depending on animation (in switch(string))
 
             switch (Name)
             {
@@ -152,8 +154,6 @@ namespace FuckingClippy
         /// </summary>
         public static void PlayRandom()
         {
-            Random r = new Random(DateTime.Now.Millisecond * DateTime.Now.Second);
-
             string[] a =
             {
                 "Atomic",
@@ -188,14 +188,14 @@ namespace FuckingClippy
                 "Writing"
             };
 
-            Play(a[r.Next(0, a.Length)]);
+            Play(a[new Random().Next(0, a.Length)]);
         }
 
         internal static Image GetFrame(string pAnimation, int pFrame)
         {
             return
                 Image.FromStream(
-                    Utils.ExecutingAssembly.GetManifestResourceStream($"{AnimationFolder}.{pAnimation}.{pFrame}.png")
+                    Utils.ExecutingAssembly.GetManifestResourceStream($"{AnimationPath}.{pAnimation}.{pFrame}.png")
                     );
         }
 

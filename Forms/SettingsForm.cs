@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
+
+//TODO: Settings form (medium, long, v0.3)
 
 namespace FuckingClippy
 {
@@ -6,8 +9,7 @@ namespace FuckingClippy
     {
         public enum Tab : byte
         {
-            Assistant,
-            Options
+            Assistant, Options
         }
 
         public SettingsForm(Tab pTab)

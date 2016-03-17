@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using static System.Reflection.Assembly;
 
-//TODO: Add support for:
+//TODO: Add support for... (medium, medium, v0.3)
 // - Images
 // - Choices (radio buttons?)
 

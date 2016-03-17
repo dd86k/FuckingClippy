@@ -31,6 +31,8 @@
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.tabAssistant = new System.Windows.Forms.TabPage();
             this.tabOptions = new System.Windows.Forms.TabPage();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.MainTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,6 +40,8 @@
             // 
             this.MainTabControl.Controls.Add(this.tabAssistant);
             this.MainTabControl.Controls.Add(this.tabOptions);
+            this.MainTabControl.Controls.Add(this.tabPage1);
+            this.MainTabControl.Controls.Add(this.tabPage2);
             this.MainTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTabControl.Location = new System.Drawing.Point(0, 0);
             this.MainTabControl.Name = "MainTabControl";
@@ -50,7 +54,7 @@
             this.tabAssistant.Location = new System.Drawing.Point(4, 24);
             this.tabAssistant.Name = "tabAssistant";
             this.tabAssistant.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAssistant.Size = new System.Drawing.Size(323, 273);
+            this.tabAssistant.Size = new System.Drawing.Size(439, 273);
             this.tabAssistant.TabIndex = 0;
             this.tabAssistant.Text = "Appearance";
             this.tabAssistant.UseVisualStyleBackColor = true;
@@ -64,6 +68,26 @@
             this.tabOptions.TabIndex = 1;
             this.tabOptions.Text = "Options";
             this.tabOptions.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(439, 273);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Settings";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(439, 273);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "About";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -85,5 +109,7 @@
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.TabPage tabAssistant;
         private System.Windows.Forms.TabPage tabOptions;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

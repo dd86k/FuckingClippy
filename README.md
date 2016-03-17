@@ -1,11 +1,9 @@
 # FuckingClippy
-## The standalone assistant.
+## "*That motherfucker again.*"
 
 ![Clippy](http://didi.wcantin.ca/p/clippy2.png)
 
-*"That motherfucker again."*
-
----
+While FuckingClippy is Mono compatible, it still needs work.
 
 The Wiki is available [here][wiki] and releases can be found [here][releases].
 

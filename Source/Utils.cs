@@ -20,9 +20,7 @@ namespace FuckingClippy
         {
             Console.WriteLine($"CLR: User input: {pUserInput}");
 
-            bool f = true;
-
-            if (pUserInput.StartsWith("run "))
+            if (pUserInput.ToLower().StartsWith("run "))
             {
                 try
                 {
@@ -31,20 +29,20 @@ namespace FuckingClippy
                 catch (Exception e)
                 {
                     Character.Say($"Hey, \"{pUserInput}\" returned a {e.GetType()} error.");
-                    f = false;
                 }
             }
-            else if (pUserInput.StartsWith("say "))
+            else if (pUserInput.ToLower().StartsWith("say "))
             {
                 Character.Say(pUserInput.Substring(4));
             }
+            else if (pUserInput.ToLower().StartsWith("search "))
+            {
+                Start($"https://www.google.com/search?q={Uri.EscapeDataString(pUserInput)}");
+            }
             else
             {
-                Start($"https://www.google.ca/search?q={Uri.EscapeDataString(pUserInput)}");
+                Character.Say("I can't figure out what you're saying.");
             }
-
-            if (!f)
-                Character.CurrentBubbleForm.Close();
         }
     }
 }
