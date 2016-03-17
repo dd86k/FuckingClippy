@@ -20,52 +20,31 @@ namespace FuckingClippy
         {
             Console.WriteLine($"CLR: User input: {pUserInput}");
 
-            bool succcessful = false;
+            bool f = true;
 
-            if (pUserInput.IsLink())
-            {
-                Start(pUserInput);
-                succcessful = true;
-            }
-            else if (pUserInput.StartsWith("run "))
+            if (pUserInput.StartsWith("run "))
             {
                 try
                 {
                     Start(pUserInput.Substring(4));
-                    succcessful = true;
                 }
-                catch
+                catch (Exception e)
                 {
-                    Character.Say($"Hey, \"{pUserInput}\" returned a Win32 error.");
+                    Character.Say($"Hey, \"{pUserInput}\" returned a {e.GetType()} error.");
+                    f = false;
                 }
+            }
+            else if (pUserInput.StartsWith("say "))
+            {
+                Character.Say(pUserInput.Substring(4));
             }
             else
             {
                 Start($"https://www.google.ca/search?q={Uri.EscapeDataString(pUserInput)}");
-                succcessful = true;
             }
 
-            if (succcessful)
-                Character.CurrentForm.Close();
-        }
-    }
-
-    static class TypeExtensions
-    {
-        public static bool IsLink(this string pString)
-        {
-            Uri u;
-
-            try
-            {
-                u = new Uri(pString);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return Uri.TryCreate(pString, UriKind.RelativeOrAbsolute, out u);
+            if (!f)
+                Character.CurrentBubbleForm.Close();
         }
     }
 }

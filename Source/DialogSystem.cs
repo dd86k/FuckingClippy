@@ -16,9 +16,9 @@ namespace FuckingClippy
     static class Character
     {
         // A reference to the parent form that summons thee.
-        internal static Form ParentForm;
+        internal static Form CharacterForm;
         // The current active bubble text.
-        internal static Form CurrentForm;
+        internal static Form CurrentBubbleForm;
         static Color BubbleColor = Color.FromArgb(255, 255, 204);
         static Font DefaultFont = new Font("Segoe UI", 9);
         static Image BubbleTail = Image.FromStream(
@@ -31,12 +31,11 @@ namespace FuckingClippy
         /// </summary>
         internal static void Prompt()
         {
-            //TODO: Make Prompt() return a string
             Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
 
-            CurrentForm = GetBaseForm(GetPrompt()/*, new Size(206,72)*/);
+            CurrentBubbleForm = GetBaseForm(GetPrompt());
             
-            CurrentForm.Show();
+            CurrentBubbleForm.Show();
         }
 
         static Control[] GetPrompt()
@@ -48,13 +47,12 @@ namespace FuckingClippy
             l.Text = "What would you like to do?";
             l.Location = new Point(4, 8);
             l.Font = DefaultFont;
-            l.Margin = new Padding(4);
 
             TextBox t = new TextBox();
             t.Multiline = true;
-            t.Size = new Size(190, 34);
+            t.Size = new Size(190, 36);
             t.Font = DefaultFont;
-            t.Location = new Point(4, 32);
+            t.Location = new Point(4, 30);
             t.KeyDown += t_UserInput;
 
             lst.Add(l);
@@ -82,9 +80,9 @@ namespace FuckingClippy
         {
             Console.WriteLine($"CLR: Say({pText}) called -- {DefaultFont.Name}");
 
-            CurrentForm = GetBaseForm(GetSay(pText)/*, GetSizeWithText(pText)*/);
+            CurrentBubbleForm = GetBaseForm(GetSay(pText));
 
-            CurrentForm.Show();
+            CurrentBubbleForm.Show();
         }
 
         internal static void SayRandom()
@@ -123,20 +121,13 @@ namespace FuckingClippy
 
             return lst.ToArray();
         }
-
-        static Size GetSizeWithText(string pData)
-        {
-            //TODO*: Find the perfect Height sizing algorithm
-            return new Size(200,
-                12 + (((pData.Length / 25) + 1) * ((int)DefaultFont.Size * 2)));
-        }
         #endregion
 
         #region Bases
-        static BubbleForm GetBaseForm(Control[] pSubControls/*, Size pClientSize*/)
+        static BubbleForm GetBaseForm(Control[] pSubControls)
         {
-            if (CurrentForm != null)
-                CurrentForm.Close();
+            if (CurrentBubbleForm != null)
+                CurrentBubbleForm.Close();
 
             BubbleForm f = new BubbleForm();
             f.Font = DefaultFont;
@@ -144,17 +135,17 @@ namespace FuckingClippy
             {
                 f.Close();
             };
-            //f.MaximumSize = new Size(200, 0);
+            f.MaximumSize = new Size(9000, 9000);
             f.AutoSize = true;
             f.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
             /* Bubble body */
             Panel p = new Panel();
+            p.Controls.AddRange(pSubControls);
             p.AutoSize = true;
             p.MaximumSize = new Size(200, 0);
             p.BackColor = BubbleColor;
             p.BorderStyle = BorderStyle.FixedSingle;
-            p.Controls.AddRange(pSubControls);
             p.Location = new Point(0, 0);
             //p.Size = pClientSize;
 
@@ -173,8 +164,8 @@ namespace FuckingClippy
             f.Controls.Add(pb);
             
             f.Location =
-                new Point(ParentForm.Location.X - (f.Size.Width / 2),
-                ParentForm.Location.Y - (f.Size.Height - 4));
+                new Point(CharacterForm.Location.X - (f.Size.Width / 2),
+                CharacterForm.Location.Y - (f.Size.Height));
 
             return f;
         }

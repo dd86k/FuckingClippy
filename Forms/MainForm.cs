@@ -42,7 +42,7 @@ namespace FuckingClippy
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
-            Character.ParentForm = this;
+            Character.CharacterForm = this;
             
             picAssistant.Dock = DockStyle.Fill;
 
@@ -114,7 +114,7 @@ namespace FuckingClippy
 
         private void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            //TODO**: Find a way to figure out when the cursor
+            //TODO**: Find a way to figure out when the cursor..
             // hasn't changed position, if so, prompt.
             FormDown = false;
         }
