@@ -84,11 +84,15 @@ namespace FuckingClippy
             Console.WriteLine($"CLR: Say({pText}) called -- {DefaultFont.Name}");
 
             if (CurrentBubbleForm != null)
-                CurrentBubbleForm.SuspendLayout();
+            {
+                CurrentBubbleForm.Close();
+                CurrentBubbleForm = null;
+            }
             CurrentBubbleForm = GetBaseForm(GetSay(pText));
-            CurrentBubbleForm.ResumeLayout();
+
 
             CurrentBubbleForm.Show();
+            CurrentBubbleForm.Update();
         }
 
         internal static void SayRandom()
