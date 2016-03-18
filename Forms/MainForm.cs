@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
-//TODO: Fix app freeze after tmrIdleSay tick
-
 /* Lazy todo list
 - Dialog.Prompt() should return string
 - Make MainForm sizeable (fixed scale)
@@ -74,7 +71,7 @@ namespace FuckingClippy
             cmsCharacter.ResumeLayout(false);
             ResumeLayout(true);
 
-            Animation.Play("FadeIn");
+            Animation.Play(AnimationName.FadeIn);
 
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
@@ -157,7 +154,7 @@ namespace FuckingClippy
 
         private void cmsiHide_Click(object sender, EventArgs e)
         {
-            Animation.Play("FadeOut");
+            Animation.Play(AnimationName.FadeOut);
 
             // The "I'm lazy" solution
             Timer a = new Timer();

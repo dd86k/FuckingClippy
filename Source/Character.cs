@@ -89,8 +89,7 @@ namespace FuckingClippy
                 CurrentBubbleForm = null;
             }
             CurrentBubbleForm = GetBaseForm(GetSay(pText));
-
-
+            
             CurrentBubbleForm.Show();
             CurrentBubbleForm.Update();
         }

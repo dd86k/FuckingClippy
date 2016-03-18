@@ -1,9 +1,45 @@
 ﻿using System;
 using System.Drawing;
 using System.Timers;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace FuckingClippy
 {
+    public enum AnimationName : byte
+    {
+        Atomic,
+        Bicycle,
+        Box,
+        Check,
+        Chill,
+        ExclamationPoint,
+        FadeIn,
+        FadeOut,
+        FeelingDown,
+        Headset,
+        LookingBottomLeft,
+        LookingBottomRight,
+        LookingDown,
+        LookingUpperLeft,
+        LookingUpperRight,
+        LookingLeftAndRight,
+        Plane,
+        PointingDown,
+        PointingLeft,
+        PointingRight,
+        PointingUp,
+        Poke,
+        Reading,
+        RollPaper,
+        ScrachingHead,
+        Shovel,
+        Telescope,
+        Tornado,
+        Toy,
+        Writing
+    }
+
     public partial class MainForm
     {
         void InitializeAnimation()
@@ -42,6 +78,9 @@ namespace FuckingClippy
             Idle = Image.FromStream(
                 Utils.ExecutingAssembly.GetManifestResourceStream
                     ("FuckingClippy.Images.Clippy.Idle.png"));
+
+            AnimationList =
+                Enum.GetValues(typeof(AnimationName)).Cast<AnimationName>().ToList();
         }
 
         /// <summary>
@@ -59,7 +98,7 @@ namespace FuckingClippy
         /// <summary>
         /// Animation name.
         /// </summary>
-        internal static string Name
+        internal static AnimationName Name
         {
             get;
             private set;
@@ -80,6 +119,7 @@ namespace FuckingClippy
         /// Default idle image.
         /// </summary>
         static Image Idle;
+        static List<AnimationName> AnimationList;
 
         /// <summary>
         /// Get if there is an animation playing.
@@ -97,10 +137,9 @@ namespace FuckingClippy
         /// ignore the request.
         /// </summary>
         /// <param name="pName">Name of the animation.</param>
-        public static void Play(string pName)
+        public static void Play(AnimationName pName)
         {
-            if (IsPlaying)
-                return;
+            if (IsPlaying) return;
 
             Console.WriteLine($"CLR: Playing animation: {pName}");
 
@@ -112,36 +151,96 @@ namespace FuckingClippy
 
             switch (Name)
             {
-                case "Atomic": MaxFrame = 34; break;
-                case "Bicycle": MaxFrame = 64; break;
-                case "Box": MaxFrame = 38; break;
-                case "Check": MaxFrame = 18; break;
-                case "Chill": MaxFrame = 84; break;
-                case "ExclamationPoint": MaxFrame = 9; break;
-                case "FadeIn": MaxFrame = 2; break;
-                case "FadeOut": MaxFrame = 2; break;
-                case "FeelingDown": MaxFrame = 45; break;
-                case "Headset": MaxFrame = 31; break;
-                case "LookingBottomLeft": MaxFrame = 4; break;
-                case "LookingBottomRight": MaxFrame = 11; break;
-                case "LookingDown": MaxFrame = 4; break;
-                case "LookingUpperLeft": MaxFrame = 4; break;
-                case "LookingUpperRight": MaxFrame = 9; break;
-                case "LookingLeftAndRight": MaxFrame = 17; break;
-                case "Plane": MaxFrame = 56; break;
-                case "PointingDown": MaxFrame = 12; break;
-                case "PointingLeft": MaxFrame = 8; break;
-                case "PointingRight": MaxFrame = 10; break;
-                case "PointingUp": MaxFrame = 9; break;
-                case "Poke": MaxFrame = 14; break;
-                case "Reading": MaxFrame = 52; break;
-                case "RollPaper": MaxFrame = 48; break;
-                case "ScrachingHead": MaxFrame = 16; break;
-                case "Shovel": MaxFrame = 65; break;
-                case "Telescope": MaxFrame = 54; break;
-                case "Tornado": MaxFrame = 30; break;
-                case "Toy": MaxFrame = 12; break;
-                case "Writing": MaxFrame = 58; break;
+                case AnimationName.Atomic:
+                    MaxFrame = 34;
+                    break;
+                case AnimationName.Bicycle:
+                    MaxFrame = 64;
+                    break;
+                case AnimationName.Box:
+                    MaxFrame = 38;
+                    break;
+                case AnimationName.Check:
+                    MaxFrame = 18;
+                    break;
+                case AnimationName.Chill:
+                    MaxFrame = 84;
+                    break;
+                case AnimationName.ExclamationPoint:
+                    MaxFrame = 9;
+                    break;
+                case AnimationName.FadeIn:
+                    MaxFrame = 2;
+                    break;
+                case AnimationName.FadeOut:
+                    MaxFrame = 2;
+                    break;
+                case AnimationName.FeelingDown:
+                    MaxFrame = 45;
+                    break;
+                case AnimationName.Headset:
+                    MaxFrame = 31;
+                    break;
+                case AnimationName.LookingBottomLeft:
+                    MaxFrame = 4;
+                    break;
+                case AnimationName.LookingBottomRight:
+                    MaxFrame = 11;
+                    break;
+                case AnimationName.LookingDown:
+                    MaxFrame = 4;
+                    break;
+                case AnimationName.LookingUpperLeft:
+                    MaxFrame = 4;
+                    break;
+                case AnimationName.LookingUpperRight:
+                    MaxFrame = 9;
+                    break;
+                case AnimationName.LookingLeftAndRight:
+                    MaxFrame = 17;
+                    break;
+                case AnimationName.Plane:
+                    MaxFrame = 56;
+                    break;
+                case AnimationName.PointingDown:
+                    MaxFrame = 12;
+                    break;
+                case AnimationName.PointingLeft:
+                    MaxFrame = 8;
+                    break;
+                case AnimationName.PointingRight:
+                    MaxFrame = 10;
+                    break;
+                case AnimationName.PointingUp:
+                    MaxFrame = 9;
+                    break;
+                case AnimationName.Poke:
+                    MaxFrame = 14;
+                    break;
+                case AnimationName.Reading:
+                    MaxFrame = 52;
+                    break;
+                case AnimationName.RollPaper:
+                    MaxFrame = 48;
+                    break;
+                case AnimationName.ScrachingHead:
+                    MaxFrame = 16;
+                    break;
+                case AnimationName.Shovel:
+                    MaxFrame = 65;
+                    break;
+                case AnimationName.Telescope:
+                    MaxFrame = 54;
+                    break;
+                case AnimationName.Tornado:
+                    MaxFrame = 30;
+                    break;
+                case AnimationName.Toy:
+                    MaxFrame = 12;
+                    break;
+                case AnimationName.Writing:
+                    MaxFrame = 58;
+                    break;
                 default:
                     throw new Exception($"Animation name \"{pName}\" does not exist!");
             }
@@ -154,44 +253,10 @@ namespace FuckingClippy
         /// </summary>
         public static void PlayRandom()
         {
-            string[] a =
-            {
-                "Atomic",
-                "Bicycle",
-                "Box",
-                "Check",
-                "Chill",
-                "ExclamationPoint",
-                "FadeIn",
-                "FadeOut",
-                "FeelingDown",
-                "Headset",
-                "LookingBottomLeft",
-                "LookingBottomRight",
-                "LookingDown",
-                "LookingUpperLeft",
-                "LookingUpperRight",
-                "LookingLeftAndRight",
-                "Plane",
-                "PointingDown",
-                "PointingLeft",
-                "PointingRight",
-                "PointingUp",
-                "Poke",
-                "Reading",
-                "RollPaper",
-                "ScrachingHead",
-                "Shovel",
-                "Telescope",
-                "Tornado",
-                "Toy",
-                "Writing"
-            };
-
-            Play(a[new Random().Next(0, a.Length)]);
+            Play(AnimationList[new Random().Next(0, AnimationList.Count)]);
         }
 
-        internal static Image GetFrame(string pAnimation, int pFrame)
+        internal static Image GetFrame(AnimationName pAnimation, int pFrame)
         {
             return
                 Image.FromStream(
