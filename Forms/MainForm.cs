@@ -4,11 +4,10 @@ using System.Windows.Forms;
 
 /* Lazy todo list
 - Dialog.Prompt() should return string
-- Make MainForm sizeable (scale)
+- Make MainForm sizeable (fixed scale)
 - Dialog.SayStatic(string) + Dialog.Update(string)
 - Animation.Play(string[])
   - MaxFrames * Interval
-- idle animation 5 -> 2.5 minutes
 */
 
 namespace FuckingClippy
@@ -16,7 +15,7 @@ namespace FuckingClippy
     public partial class MainForm : TransparentForm
     {
         System.Timers.Timer tmrIdleSay =
-            new System.Timers.Timer(900000); // 15 minutes
+            new System.Timers.Timer(300000); // 5 minutes
         System.Timers.Timer tmrIdleAni =
             new System.Timers.Timer(120000); // 2 minutes
 
