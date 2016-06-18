@@ -17,6 +17,8 @@ Using the GNU General Public License, version 3 license (GPL-3.0) which you may 
 ### Notes
 While FuckingClippy is Mono compatible, it still needs heavy improvement.
 
+The source code is something I call not-so-organized, be wary.
+
 ---
 
 Copyright © Microsoft 1997-2003 for their Clippit Office Assistant, mostly known as Clippy.

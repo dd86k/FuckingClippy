@@ -14,7 +14,11 @@ namespace FuckingClippy
     public partial class MainForm : TransparentForm
     {
         System.Timers.Timer tmrIdleSay =
+#if DEBUG
+            new System.Timers.Timer(10000); // 10 seconds
+#else
             new System.Timers.Timer(600000); // 10 minutes
+#endif
         System.Timers.Timer tmrIdleAni =
             new System.Timers.Timer(120000); // 2 minutes
 
@@ -22,8 +26,8 @@ namespace FuckingClippy
         /// Main form where our assistant is.
         /// </summary>
         /// <remarks>
-        /// base() ensures that the constructor from <see cref="TransparentForm"/>
-        /// gets called (inheritance).
+        /// base() ensures that the constructor from
+        /// <see cref="TransparentForm"/> gets called.
         /// </remarks>
         public MainForm() : base()
         {
@@ -85,7 +89,9 @@ namespace FuckingClippy
 
         private void TmrIdleSay_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Character.SayRandom();
+            Character.DelegateRandomSay = new
+                Character.RandomSay(Character.SayRandomCall);
+            Character.DelegateRandomSay.Invoke();
         }
 
         private void TmrIdleAni_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -93,7 +99,7 @@ namespace FuckingClippy
             Animation.PlayRandom();
         }
 
-        #region Mouse events
+#region Mouse events
         bool FormDown;
         Point LastMouseLocation;
         Point LastFormLocation;
@@ -134,9 +140,9 @@ namespace FuckingClippy
             LastFormLocation = Location;
             IsPrompting = false;
         }
-        #endregion
+#endregion
 
-        #region Context menu events
+#region Context menu events
         private void csmiOptions_Click(object sender, EventArgs e)
         { // Settings -> Options tab
             new SettingsForm(SettingsForm.Tab.Options).ShowDialog();
@@ -162,6 +168,6 @@ namespace FuckingClippy
             a.Tick += (s, g) => { Close(); };
             a.Start();
         }
-        #endregion
+#endregion
     }
 }

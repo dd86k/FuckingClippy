@@ -145,10 +145,34 @@ namespace FuckingClippy
         #endregion
 
         #region Base
+        public delegate void RandomSay();
+        public static RandomSay DelegateRandomSay;
+        static bool said = false;
+
+        public static void SayRandomCall()
+        {
+            if (said)
+            {
+                if (CurrentBubbleForm.InvokeRequired)
+                    CurrentBubbleForm.Invoke(DelegateRandomSay);
+                else
+                CurrentBubbleForm.Close();
+                said = false;
+            }
+            else
+            {
+            SayRandom();
+                said = true;
+            }
+        }
+
         static BubbleForm GetBaseForm(Control[] pSubControls)
         {
             if (CurrentBubbleForm != null)
-                CurrentBubbleForm.Close();
+                if (CurrentBubbleForm.InvokeRequired)
+                    CurrentBubbleForm.Invoke(DelegateRandomSay);
+                else
+                    CurrentBubbleForm.Close();
 
             BubbleForm f = new BubbleForm();
             f.Font = DefaultFont;

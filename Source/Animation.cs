@@ -68,8 +68,6 @@ namespace FuckingClippy
             }
         }
     }
-    
-    //TODO: Enums instead (easy, medium, v0.3)
 
     public class Animation
     {

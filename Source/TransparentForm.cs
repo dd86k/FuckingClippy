@@ -13,8 +13,7 @@ namespace FuckingClippy
                 //TODO: Fix Mono transparency (hard, short-long, *)
                 Console.WriteLine("CLR: TransparentForm called: Mono");
                 SetStyle(ControlStyles.UserPaint |
-                    ControlStyles.SupportsTransparentBackColor |
-                    ControlStyles.AllPaintingInWmPaint, true);
+                    ControlStyles.SupportsTransparentBackColor, true);
                 BackColor = Color.FromArgb(0, 0, 0, 0);
             }
             else
