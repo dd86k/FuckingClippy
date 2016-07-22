@@ -19,6 +19,8 @@ While FuckingClippy is Mono compatible, it still needs heavy improvement.
 
 The source code is something I call not-so-organized, be wary.
 
+I don't usually swear.
+
 ---
 
 Copyright © Microsoft 1997-2003 for their Clippit Office Assistant, mostly known as Clippy.

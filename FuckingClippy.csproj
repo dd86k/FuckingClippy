@@ -44,12 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormBubble.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormBubble.Designer.cs">
-      <DependentUpon>FormBubble.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,9 +87,6 @@
     <Compile Include="Source\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormBubble.resx">
-      <DependentUpon>FormBubble.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
