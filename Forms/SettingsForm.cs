@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 
-//TODO: Settings form (medium, long, v0.4)
+//TODO: Settings form
 
 namespace FuckingClippy
 {

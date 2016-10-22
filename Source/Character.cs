@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using static System.Reflection.Assembly;
 
-//TODO: Add support for... (medium, medium, v0.3)
+//TODO: Add support for...
 // - Images
 // - Choices (radio buttons?)
 
@@ -149,30 +149,27 @@ namespace FuckingClippy
         public static RandomSay DelegateRandomSay;
         static bool said = false;
 
-        public static void SayRandomCall()
+        public static void CallSayRandom()
         {
             if (said)
             {
                 if (CurrentBubbleForm.InvokeRequired)
-                    CurrentBubbleForm.Invoke(DelegateRandomSay);
+                    CurrentBubbleForm?.Invoke(DelegateRandomSay);
                 else
                 CurrentBubbleForm.Close();
                 said = false;
             }
             else
             {
-            SayRandom();
+                SayRandom();
                 said = true;
             }
         }
 
-        static BubbleForm GetBaseForm(Control[] pSubControls)
+        static BubbleForm GetBaseForm(Control[] subControls)
         {
             if (CurrentBubbleForm != null)
-                if (CurrentBubbleForm.InvokeRequired)
-                    CurrentBubbleForm.Invoke(DelegateRandomSay);
-                else
-                    CurrentBubbleForm.Close();
+                CurrentBubbleForm.Close();
 
             BubbleForm f = new BubbleForm();
             f.Font = DefaultFont;
@@ -186,7 +183,7 @@ namespace FuckingClippy
 
             /* Bubble body */
             Panel p = new Panel();
-            p.Controls.AddRange(pSubControls);
+            p.Controls.AddRange(subControls);
             p.AutoSize = true;
             p.MaximumSize = new Size(200, 0);
             p.BackColor = BubbleColor;

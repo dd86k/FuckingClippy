@@ -12,8 +12,9 @@ namespace FuckingClippy
         static void Main()
         {
             Console.WriteLine(Utils.IsRunningOnMono ?
-                "CLR: Started on: Mono" : "CLR: Started on: .NET");
-            Application.EnableVisualStyles();
+                "CLR: Started on: Mono" :
+                "CLR: Started on: .NET CLR");
+            //Application.EnableVisualStyles();
             Application.Run(new MainForm());
         }
     }

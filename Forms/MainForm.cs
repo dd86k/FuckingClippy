@@ -15,7 +15,7 @@ namespace FuckingClippy
     {
         System.Timers.Timer tmrIdleSay =
 #if DEBUG
-            new System.Timers.Timer(10000); // 10 seconds
+            new System.Timers.Timer(5000); // 5 seconds
 #else
             new System.Timers.Timer(600000); // 10 minutes
 #endif
@@ -35,7 +35,7 @@ namespace FuckingClippy
 
             InitializeAnimation();
 
-            //TODO: Uncomment when translations are ready. (easy, long, v0.5)
+            //TODO: Uncomment when translations are ready.
             //InitiateCulture();
 
             Console.WriteLine("CLR: MainForm initiated");
@@ -51,7 +51,10 @@ namespace FuckingClippy
                 new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
                     CurrentScreen.WorkingArea.Height - (Height + 30));
 
-            TopMost = true; // Only hell now. :-)
+            Character.DelegateRandomSay = new
+                Character.RandomSay(Character.CallSayRandom);
+
+            TopLevel = true; // Only hell now. :-)
 #if DEBUG
             ToolStripItem[] DebugItems = new ToolStripItem[2];
             
@@ -89,9 +92,9 @@ namespace FuckingClippy
 
         private void TmrIdleSay_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            Character.DelegateRandomSay = new
-                Character.RandomSay(Character.SayRandomCall);
-            Character.DelegateRandomSay.Invoke();
+            Character.CallSayRandom();
+            //Character.DelegateRandomSay.Invoke();
+            //Character.SayRandom();
         }
 
         private void TmrIdleAni_Elapsed(object sender, System.Timers.ElapsedEventArgs e)

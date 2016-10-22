@@ -98,7 +98,6 @@
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             Name = "MainForm";
             Text = "Clippy";
-            ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             ((System.ComponentModel.ISupportInitialize)(picAssistant)).EndInit();
         }
