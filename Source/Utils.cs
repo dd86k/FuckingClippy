@@ -15,7 +15,7 @@ namespace FuckingClippy
         public static readonly string ProjectName =
             Project.GetName().Name;
 
-        public static Random R = new Random();
+        public static Random Random = new Random();
 
         public static readonly bool RunningMono =
             Type.GetType("Mono.Runtime") != null;
@@ -66,7 +66,7 @@ namespace FuckingClippy
         {
             return Image.FromStream(
             GetExecutingAssembly().GetManifestResourceStream(
-                $"{ProjectName}.Images.Bubble.BubbleTail.png"));
+                $"{ProjectName}.Images.{path}"));
         }
 
         public static bool EmbeddedItemExist(string path)
@@ -90,7 +90,8 @@ namespace FuckingClippy
 
             Regex r = new Regex(
                 $"{ProjectName}\\.{path.Replace(".", "\\.")}\\.*",
-                 RegexOptions.ECMAScript | RegexOptions.IgnoreCase);
+                RegexOptions.ECMAScript
+            );
 
             int n = 0;
 
@@ -104,7 +105,7 @@ namespace FuckingClippy
 
         public static void Log(string text)
         {
-            Console.WriteLine($"{RuntimeName}: {text}");
+            Console.WriteLine(text);
         }
     }
 }

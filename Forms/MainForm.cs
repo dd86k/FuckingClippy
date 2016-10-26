@@ -56,38 +56,40 @@ namespace FuckingClippy
             /*Character.DelegateRandomSay = new
                 Character.RandomSay(Character.CallSayRandom);*/
 
-            TopMost = true; // Only hell now. :-)
-#if DEBUG
-            ToolStripItem[] DebugItems = new ToolStripItem[2];
-            
-            DebugItems[0] = new ToolStripMenuItem();
-            DebugItems[0].Text = "[Debug] Prompt";
-            DebugItems[0].Click += (s, e) =>
-            {
-                Character.Prompt();
-            };
-
-            DebugItems[1] = new ToolStripMenuItem();
-            DebugItems[1].Text = "[Debug] Say (Random)";
-            DebugItems[1].Click += (s, e) =>
-            {
-                Character.SayRandom();
-            };
-            
-            cmsCharacter.Items.AddRange(DebugItems);
-#endif
-
-            cmsCharacter.ResumeLayout(false);
-            ResumeLayout(true);
-            
-            AnimationSystem.Play(Animation.FadeIn);
-
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
             tmrIdleAni.Tick += TmrIdleAni_Tick;
             tmrIdleSay.Tick += TmrIdleSay_Tick;
+
+            TopMost = true; // Only hell now. :-)
+#if DEBUG
+            {
+                ToolStripItem[] DebugItems = new ToolStripItem[2];
+
+                DebugItems[0] = new ToolStripMenuItem();
+                DebugItems[0].Text = "[Debug] Prompt";
+                DebugItems[0].Click += (s, e) =>
+                {
+                    Character.Prompt();
+                };
+
+                DebugItems[1] = new ToolStripMenuItem();
+                DebugItems[1].Text = "[Debug] Say (Random)";
+                DebugItems[1].Click += (s, e) =>
+                {
+                    Character.SayRandom();
+                };
+
+                cmsCharacter.Items.AddRange(DebugItems);
+            }
+#endif
+
+            cmsCharacter.ResumeLayout(false);
+            ResumeLayout(true);
+            
+            AnimationSystem.Play(Animation.FadeIn);
             tmrIdleAni.Start();
             tmrIdleSay.Start();
         }
@@ -105,10 +107,8 @@ namespace FuckingClippy
         }
 
 #region Mouse events
-        bool FormDown;
-        Point LastMouseLocation;
-        Point LastFormLocation;
-        bool IsPrompting;
+        bool FormDown, IsPrompting;
+        Point LastMouseLocation, LastFormLocation;
 
         void Assistant_MouseMove(object sender, MouseEventArgs e)
         {

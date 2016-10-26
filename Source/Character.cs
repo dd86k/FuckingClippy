@@ -22,7 +22,7 @@ namespace FuckingClippy
         static Color BubbleColor = Color.FromArgb(255, 255, 204);
         static Font DefaultFont = new Font("Segoe UI", 9);
         static Image BubbleTail =
-            Utils.LoadEmbeddedImage("Bubble.BubbleTail.png");
+            Utils.LoadEmbeddedImage("Bubble.Tail.png");
 
         #region Prompt
         /// <summary>
@@ -30,7 +30,7 @@ namespace FuckingClippy
         /// </summary>
         internal static void Prompt()
         {
-            Console.WriteLine($"CLR: Prompt");
+            Utils.Log($"Prompt");
 
             if (CurrentBubbleForm != null)
                 CurrentBubbleForm.SuspendLayout();
@@ -81,7 +81,7 @@ namespace FuckingClippy
         /// <param name="pText">Text.</param>
         internal static void Say(string text)
         {
-            Console.WriteLine($"CLR: Say({text}) called -- {DefaultFont.Name}");
+            Utils.Log($"Say - {text}");
 
             if (CurrentBubbleForm != null)
             {
@@ -124,7 +124,7 @@ namespace FuckingClippy
                 "Hey do you mind if I use more memory?",
             };
 
-            Say(s[Utils.R.Next(0, s.Length)]);
+            Say(s[Utils.Random.Next(0, s.Length)]);
         }
 
         static Control[] GetSay(string text)

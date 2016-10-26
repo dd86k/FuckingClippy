@@ -90,7 +90,7 @@ namespace FuckingClippy
         /// <summary>
         /// Default <see cref="AnimationTimer"/>'s interval.
         /// </summary>
-        internal const int DefaultInterval = 150;
+        public const int DefaultInterval = 150;
         /// <summary>
         /// Animation Timer.
         /// </summary>
@@ -169,7 +169,7 @@ namespace FuckingClippy
         /// </summary>
         public static void PlayRandom()
         {
-            Play((Animation)Utils.R.Next(0, NumberOfAnimations));
+            Play((Animation)Utils.Random.Next(0, NumberOfAnimations));
         }
     }
 }

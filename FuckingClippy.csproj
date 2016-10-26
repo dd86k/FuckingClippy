@@ -120,7 +120,7 @@
       <LastGenOutput>fr-FR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\Clippy\Idle.png" />
-    <EmbeddedResource Include="Images\Bubble\BubbleTail.png" />
+    <EmbeddedResource Include="Images\Bubble\Tail.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\0.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\10.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\11.png" />
