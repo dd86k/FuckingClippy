@@ -46,7 +46,7 @@ namespace FuckingClippy
                 string t = string.Empty;
 
                 using (StreamReader s = new StreamReader(
-                    Utils.ExecutingAssembly.GetManifestResourceStream(
+                    Utils.Project.GetManifestResourceStream(
                         "FuckingClippy.Texts.About.txt")))
                 {
                     t = s.ReadToEnd();

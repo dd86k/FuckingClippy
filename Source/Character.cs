@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static System.Reflection.Assembly;
 
 //TODO: Add support for...
 // - Images
@@ -19,11 +18,11 @@ namespace FuckingClippy
         internal static Form CharacterForm;
         // The current active bubble text.
         internal static Form CurrentBubbleForm;
+        // Defaults
         static Color BubbleColor = Color.FromArgb(255, 255, 204);
         static Font DefaultFont = new Font("Segoe UI", 9);
-        static Image BubbleTail = Image.FromStream(
-            GetExecutingAssembly().GetManifestResourceStream(
-                "FuckingClippy.Images.Bubble.BubbleTail.png"));
+        static Image BubbleTail =
+            Utils.LoadEmbeddedImage("Bubble.BubbleTail.png");
 
         #region Prompt
         /// <summary>
@@ -31,10 +30,11 @@ namespace FuckingClippy
         /// </summary>
         internal static void Prompt()
         {
-            Console.WriteLine($"CLR: Prompt() called -- {DefaultFont.Name}");
+            Console.WriteLine($"CLR: Prompt");
 
             if (CurrentBubbleForm != null)
                 CurrentBubbleForm.SuspendLayout();
+
             CurrentBubbleForm = GetBaseForm(GetPrompt());
             CurrentBubbleForm.ResumeLayout();
             
@@ -79,16 +79,17 @@ namespace FuckingClippy
         /// Say something to the user.
         /// </summary>
         /// <param name="pText">Text.</param>
-        internal static void Say(string pText)
+        internal static void Say(string text)
         {
-            Console.WriteLine($"CLR: Say({pText}) called -- {DefaultFont.Name}");
+            Console.WriteLine($"CLR: Say({text}) called -- {DefaultFont.Name}");
 
             if (CurrentBubbleForm != null)
             {
                 CurrentBubbleForm.Close();
                 CurrentBubbleForm = null;
             }
-            CurrentBubbleForm = GetBaseForm(GetSay(pText));
+
+            CurrentBubbleForm = GetBaseForm(GetSay(text));
             
             CurrentBubbleForm.Show();
             CurrentBubbleForm.Update();
@@ -106,13 +107,13 @@ namespace FuckingClippy
                 "Do you need help looking at that screen?",
                 "I know, I'm not as fun as GonzoBuddy, but at least I'm not spyware, right?",
                 "It would be a shame if something happened to these fil-- OOOPSS!",
-                "[MAXIMUM ARMOR]",
+                "［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
                 "Are you sure you want to click that?",
                 "0x4E4F4246\nDid I spook you?",
                 "Did you know that Intel's first microprocessor, the Intel 4004, was released in 1971, had 2,300 transistors measuring 10 microns?",
                 "I am not an AI, just a bunch of IL instructions.",
                 "Seems like you need help living your life there buddy.",
-                "The program '[3440] FuckingClippy.vshost.exe' has exited with code 0 (0x0).",
+                "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
                 "<3?",
                 "Did you know that I'm a vegan?",
                 "SUFFER();",
@@ -123,10 +124,10 @@ namespace FuckingClippy
                 "Hey do you mind if I use more memory?",
             };
 
-            Say(s[new Random().Next(0, s.Length)]);
+            Say(s[Utils.R.Next(0, s.Length)]);
         }
 
-        static Control[] GetSay(string pText)
+        static Control[] GetSay(string text)
         {
             List<Control> lst = new List<Control>();
 
@@ -136,7 +137,7 @@ namespace FuckingClippy
             l.AutoSize = true;
             l.MaximumSize = new Size(192, 0);
             l.Font = DefaultFont;
-            l.Text = pText;
+            l.Text = text;
 
             lst.Add(l);
 
@@ -145,11 +146,11 @@ namespace FuckingClippy
         #endregion
 
         #region Base
-        public delegate void RandomSay();
-        public static RandomSay DelegateRandomSay;
-        static bool said = false;
+        //public delegate void RandomSay();
+        //public static RandomSay DelegateRandomSay;
+        //static bool said = false;
 
-        public static void CallSayRandom()
+        /*public static void CallSayRandom()
         {
             if (said)
             {
@@ -164,7 +165,7 @@ namespace FuckingClippy
                 SayRandom();
                 said = true;
             }
-        }
+        }*/
 
         static BubbleForm GetBaseForm(Control[] subControls)
         {
@@ -172,14 +173,6 @@ namespace FuckingClippy
                 CurrentBubbleForm.Close();
 
             BubbleForm f = new BubbleForm();
-            f.Font = DefaultFont;
-            f.Deactivate += (s, e) =>
-            {
-                f.Close();
-            };
-            f.MaximumSize = new Size(9000, 9000);
-            f.AutoSize = true;
-            f.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 
             /* Bubble body */
             Panel p = new Panel();
@@ -226,6 +219,15 @@ namespace FuckingClippy
             AutoSize = true;
             MaximumSize = new Size(200, 0);
             AutoSizeMode = AutoSizeMode.GrowOnly;
+            
+            Font = DefaultFont;
+            Deactivate += (s, e) =>
+            {
+                Close();
+            };
+            MaximumSize = new Size(9000, 9000);
+            AutoSize = true;
+            AutoSizeMode = AutoSizeMode.GrowAndShrink;
         }
     }
 }

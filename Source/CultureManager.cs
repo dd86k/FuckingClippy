@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Resources;
 using static System.Threading.Thread;
 
@@ -17,31 +16,30 @@ namespace FuckingClippy
             ChangeCulture(CurrentThread.CurrentCulture);
         }
 
-        void ChangeCulture(CultureInfo pLanguage)
+        void ChangeCulture(CultureInfo ci)
         {
-            ChangeCulture(pLanguage.Name);
+            ChangeCulture(ci.Name);
         }
 
-        void ChangeCulture(string pLanguage)
+        void ChangeCulture(string language)
         {
-            Console.WriteLine($"CLR: ChangeCulture({pLanguage})");
+            Utils.Log($"ChangeCulture - {language}");
 
-            switch (pLanguage)
+            switch (language)
             {
-                case "en-EdgyMemer":
-
-                    break;
-
                 case "fr-FR":
                 case "fr-CA":
-                    RM = new ResourceManager("FuckingClippy.Culture.fr-FR",
-                             Utils.ExecutingAssembly);
+                    RM = new ResourceManager(
+                        $"{Utils.ProjectName}.Culture.fr-FR",
+                        Utils.Project
+                    );
                     break;
                     
-                // English
-                default:
-                    RM = new ResourceManager("FuckingClippy.Culture.en-US",
-                             Utils.ExecutingAssembly);
+                default: // English
+                    RM = new ResourceManager(
+                        $"{Utils.ProjectName}.Culture.en-US",
+                        Utils.Project
+                    );
                     break;
             }
         }

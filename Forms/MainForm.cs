@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+
 /* Lazy todo list
 - Dialog.Prompt() should return string
 - Make MainForm sizeable (fixed scale)
@@ -13,14 +14,8 @@ namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
     {
-        System.Timers.Timer tmrIdleSay =
-#if DEBUG
-            new System.Timers.Timer(5000); // 5 seconds
-#else
-            new System.Timers.Timer(600000); // 10 minutes
-#endif
-        System.Timers.Timer tmrIdleAni =
-            new System.Timers.Timer(120000); // 2 minutes
+        Timer tmrIdleSay = new Timer();
+        Timer tmrIdleAni = new Timer();
 
         /// <summary>
         /// Main form where our assistant is.
@@ -38,23 +33,30 @@ namespace FuckingClippy
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
 
-            Console.WriteLine("CLR: MainForm initiated");
+            Utils.Log("MainForm initiated");
 
             Character.CharacterForm = this;
             
             picAssistant.Dock = DockStyle.Fill;
 
+            tmrIdleAni.Interval = 120000;
+#if DEBUG
+            tmrIdleSay.Interval = 5000;
+#else
+            tmrIdleSay.Interval = 150000;
+#endif
+
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30px.
-            Screen CurrentScreen = Screen.FromControl(this);
+            Screen sc = Screen.FromControl(this);
             Location =
-                new Point(CurrentScreen.WorkingArea.Width - (Width + 30),
-                    CurrentScreen.WorkingArea.Height - (Height + 30));
+                new Point(sc.WorkingArea.Width - (Width + 30),
+                    sc.WorkingArea.Height - (Height + 30));
 
-            Character.DelegateRandomSay = new
-                Character.RandomSay(Character.CallSayRandom);
+            /*Character.DelegateRandomSay = new
+                Character.RandomSay(Character.CallSayRandom);*/
 
-            TopLevel = true; // Only hell now. :-)
+            TopMost = true; // Only hell now. :-)
 #if DEBUG
             ToolStripItem[] DebugItems = new ToolStripItem[2];
             
@@ -77,29 +79,29 @@ namespace FuckingClippy
 
             cmsCharacter.ResumeLayout(false);
             ResumeLayout(true);
-
-            Animation.Play(AnimationName.FadeIn);
+            
+            AnimationSystem.Play(Animation.FadeIn);
 
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
-            tmrIdleAni.Elapsed += TmrIdleAni_Elapsed;
-            tmrIdleSay.Elapsed += TmrIdleSay_Elapsed;
+            tmrIdleAni.Tick += TmrIdleAni_Tick;
+            tmrIdleSay.Tick += TmrIdleSay_Tick;
             tmrIdleAni.Start();
             tmrIdleSay.Start();
         }
 
-        private void TmrIdleSay_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void TmrIdleSay_Tick(object sender, EventArgs e)
         {
-            Character.CallSayRandom();
+            //Character.CallSayRandom();
             //Character.DelegateRandomSay.Invoke();
             //Character.SayRandom();
         }
 
-        private void TmrIdleAni_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        void TmrIdleAni_Tick(object sender, EventArgs e)
         {
-            Animation.PlayRandom();
+            AnimationSystem.PlayRandom();
         }
 
 #region Mouse events
@@ -108,7 +110,7 @@ namespace FuckingClippy
         Point LastFormLocation;
         bool IsPrompting;
 
-        private void Assistant_MouseMove(object sender, MouseEventArgs e)
+        void Assistant_MouseMove(object sender, MouseEventArgs e)
         {
             if (FormDown)
             {
@@ -120,10 +122,8 @@ namespace FuckingClippy
             }
         }
 
-        private void Assistant_MouseUp(object sender, MouseEventArgs e)
+        void Assistant_MouseUp(object sender, MouseEventArgs e)
         {
-            Form c = sender as Form;
-
             FormDown = false;
 
             if (e.Button == MouseButtons.Left)
@@ -136,7 +136,7 @@ namespace FuckingClippy
                 }
         }
 
-        private void Assistant_MouseDown(object sender, MouseEventArgs e)
+        void Assistant_MouseDown(object sender, MouseEventArgs e)
         {
             FormDown = true;
             LastMouseLocation = e.Location;
@@ -146,28 +146,28 @@ namespace FuckingClippy
 #endregion
 
 #region Context menu events
-        private void csmiOptions_Click(object sender, EventArgs e)
+        void csmiOptions_Click(object sender, EventArgs e)
         { // Settings -> Options tab
             new SettingsForm(SettingsForm.Tab.Options).ShowDialog();
         }
 
-        private void cmsiChooseAssistant_Click(object sender, EventArgs e)
+        void cmsiChooseAssistant_Click(object sender, EventArgs e)
         { // Settings -> Assistant tab
             new SettingsForm(SettingsForm.Tab.Assistant).ShowDialog();
         }
 
-        private void cmsiAnimate_Click(object sender, EventArgs e)
+        void cmsiAnimate_Click(object sender, EventArgs e)
         {
-            Animation.PlayRandom();
+            AnimationSystem.PlayRandom();
         }
 
-        private void cmsiHide_Click(object sender, EventArgs e)
+        void cmsiHide_Click(object sender, EventArgs e)
         {
-            Animation.Play(AnimationName.FadeOut);
+            AnimationSystem.Play(Animation.FadeOut);
 
             // The "I'm lazy" solution
             Timer a = new Timer();
-            a.Interval = Animation.MaxFrame * Animation.DefaultInterval;
+            a.Interval = AnimationSystem.MaxFrame * AnimationSystem.DefaultInterval;
             a.Tick += (s, g) => { Close(); };
             a.Start();
         }
