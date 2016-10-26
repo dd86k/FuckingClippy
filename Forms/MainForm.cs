@@ -94,6 +94,7 @@ namespace FuckingClippy
             tmrIdleSay.Start();
         }
 
+        #region Idle timers
         void TmrIdleSay_Tick(object sender, EventArgs e)
         {
             //Character.CallSayRandom();
@@ -105,8 +106,9 @@ namespace FuckingClippy
         {
             AnimationSystem.PlayRandom();
         }
+        #endregion
 
-#region Mouse events
+        #region Mouse events
         bool FormDown, IsPrompting;
         Point LastMouseLocation, LastFormLocation;
 
@@ -139,9 +141,9 @@ namespace FuckingClippy
         void Assistant_MouseDown(object sender, MouseEventArgs e)
         {
             FormDown = true;
+            IsPrompting = false;
             LastMouseLocation = e.Location;
             LastFormLocation = Location;
-            IsPrompting = false;
         }
 #endregion
 
@@ -165,9 +167,9 @@ namespace FuckingClippy
         {
             AnimationSystem.Play(Animation.FadeOut);
 
-            // The "I'm lazy" solution
+            // Dirty solution
             Timer a = new Timer();
-            a.Interval = AnimationSystem.MaxFrame * AnimationSystem.DefaultInterval;
+            a.Interval = 3 * AnimationSystem.DefaultInterval;
             a.Tick += (s, g) => { Close(); };
             a.Start();
         }
