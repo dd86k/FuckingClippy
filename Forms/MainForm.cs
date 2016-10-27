@@ -99,7 +99,7 @@ namespace FuckingClippy
         {
             //Character.CallSayRandom();
             //Character.DelegateRandomSay.Invoke();
-            //Character.SayRandom();
+            Character.SayRandom();
         }
 
         void TmrIdleAni_Tick(object sender, EventArgs e)

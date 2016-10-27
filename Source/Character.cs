@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -103,32 +102,27 @@ namespace FuckingClippy
             {
                 Control[] ca = new Control[2];
 
-                Label l = new Label();
-                l.AutoSize = true;
-                l.Text = "What would you like to do?";
-                l.Location = new Point(4, 8);
-                l.Font = DefaultFont;
+                ca[0] = new Label();
+                ca[0].AutoSize = true;
+                ca[0].Text = "What would you like to do?";
+                ca[0].Location = new Point(4, 8);
+                ca[0].Font = DefaultFont;
 
-                TextBox t = new TextBox();
-                t.Multiline = true;
-                t.Size = new Size(190, 36);
-                t.Font = DefaultFont;
-                t.Location = new Point(4, 30);
-                t.KeyDown += t_UserInput;
-
-                ca[0] = l;
-                ca[1] = t;
+                ca[1] = new TextBox();
+                (ca[1] as TextBox).Multiline = true;
+                ca[1].Size = new Size(190, 36);
+                ca[1].Font = DefaultFont;
+                ca[1].Location = new Point(4, 30);
+                ca[1].KeyDown += (s, e) =>
+                {
+                    if (e.KeyCode == Keys.Enter) // Includes Return
+                    {
+                        e.SuppressKeyPress = true;
+                        Utils.ProcessInput((s as TextBox).Text);
+                    }
+                };
 
                 return ca;
-            }
-
-            private static void t_UserInput(object s, KeyEventArgs e)
-            {
-                if (e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter)
-                {
-                    TextBox t = s as TextBox;
-                    Utils.ProcessInput(t.Text);
-                }
             }
             #endregion
 
@@ -189,15 +183,13 @@ namespace FuckingClippy
             {
                 Control[] ca = new Control[1];
 
-                Label l = new Label();
-                l.Location = new Point(4, 6);
-                //l.Size = new Size(192, 1000);
-                l.AutoSize = true;
-                l.MaximumSize = new Size(192, 0);
-                l.Font = DefaultFont;
-                l.Text = text;
-
-                ca[0] = l;
+                ca[0] = new Label();
+                ca[0].Location = new Point(4, 6);
+                //ca[0].Size = new Size(192, 1000);
+                ca[0].AutoSize = true;
+                ca[0].MaximumSize = new Size(192, 0);
+                ca[0].Font = DefaultFont;
+                ca[0].Text = text;
 
                 return ca;
             }
