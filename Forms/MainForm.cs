@@ -35,7 +35,7 @@ namespace FuckingClippy
 
             Utils.Log("MainForm initiated");
 
-            Character.CharacterForm = this;
+            Character.Initialize(this);
             
             picAssistant.Dock = DockStyle.Fill;
 
@@ -89,7 +89,7 @@ namespace FuckingClippy
             cmsCharacter.ResumeLayout(false);
             ResumeLayout(true);
             
-            AnimationSystem.Play(Animation.FadeIn);
+            Character.AnimationSystem.Play(Animation.FadeIn);
             tmrIdleAni.Start();
             tmrIdleSay.Start();
         }
@@ -104,7 +104,7 @@ namespace FuckingClippy
 
         void TmrIdleAni_Tick(object sender, EventArgs e)
         {
-            AnimationSystem.PlayRandom();
+            Character.AnimationSystem.PlayRandom();
         }
         #endregion
 
@@ -160,16 +160,16 @@ namespace FuckingClippy
 
         void cmsiAnimate_Click(object sender, EventArgs e)
         {
-            AnimationSystem.PlayRandom();
+            Character.AnimationSystem.PlayRandom();
         }
 
         void cmsiHide_Click(object sender, EventArgs e)
         {
-            AnimationSystem.Play(Animation.FadeOut);
+            Character.AnimationSystem.Play(Animation.FadeOut);
 
             // Dirty solution
             Timer a = new Timer();
-            a.Interval = 3 * AnimationSystem.DefaultInterval;
+            a.Interval = 3 * Character.AnimationSystem.DefaultInterval;
             a.Tick += (s, g) => { Close(); };
             a.Start();
         }
