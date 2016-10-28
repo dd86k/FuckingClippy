@@ -16,14 +16,7 @@ namespace FuckingClippy
     {
         Timer tmrIdleSay = new Timer();
         Timer tmrIdleAni = new Timer();
-
-        /// <summary>
-        /// Main form where our assistant is.
-        /// </summary>
-        /// <remarks>
-        /// base() ensures that the constructor from
-        /// <see cref="TransparentForm"/> gets called.
-        /// </remarks>
+        
         public MainForm() : base()
         {
             InitializeComponent();
@@ -50,9 +43,6 @@ namespace FuckingClippy
                     new Point(sc.WorkingArea.Width - (Width + 30),
                         sc.WorkingArea.Height - (Height + 30));
             }
-
-            /*Character.DelegateRandomSay = new
-                Character.RandomSay(Character.CallSayRandom);*/
 
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
