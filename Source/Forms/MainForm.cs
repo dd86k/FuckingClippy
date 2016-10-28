@@ -40,18 +40,16 @@ namespace FuckingClippy
             picAssistant.Dock = DockStyle.Fill;
 
             tmrIdleAni.Interval = 120000;
-#if DEBUG
-            tmrIdleSay.Interval = 5000;
-#else
-            tmrIdleSay.Interval = 150000;
-#endif
+            tmrIdleSay.Interval = 900000;
 
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30px.
-            Screen sc = Screen.FromControl(this);
-            Location =
-                new Point(sc.WorkingArea.Width - (Width + 30),
-                    sc.WorkingArea.Height - (Height + 30));
+            {
+                Screen sc = Screen.FromControl(this);
+                Location =
+                    new Point(sc.WorkingArea.Width - (Width + 30),
+                        sc.WorkingArea.Height - (Height + 30));
+            }
 
             /*Character.DelegateRandomSay = new
                 Character.RandomSay(Character.CallSayRandom);*/

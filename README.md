@@ -3,8 +3,7 @@
 
 ![Clippy](https://guitarxhero.github.com/imgs/fc1.png)
 
----
-FuckingClippy is a reincarnation of the long lost Office assistant.
+FuckingClippy is a reincarnation of the long lost Office assistant as a stand-alone application.
 
 A Wiki is available [here][wiki] and releases can be found [here][releases].
 

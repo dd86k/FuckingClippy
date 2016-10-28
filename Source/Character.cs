@@ -196,27 +196,6 @@ namespace FuckingClippy
             #endregion
 
             #region Base
-            //public delegate void RandomSay();
-            //public static RandomSay DelegateRandomSay;
-            //static bool said = false;
-
-            /*public static void CallSayRandom()
-            {
-                if (said)
-                {
-                    if (CurrentBubbleForm.InvokeRequired)
-                        CurrentBubbleForm?.Invoke(DelegateRandomSay);
-                    else
-                    CurrentBubbleForm.Close();
-                    said = false;
-                }
-                else
-                {
-                    SayRandom();
-                    said = true;
-                }
-            }*/
-
             static BubbleForm GetBaseForm(Control[] subControls)
             {
                 if (CurrentBubbleForm != null)
@@ -356,30 +335,6 @@ namespace FuckingClippy
             {
                 Play((Animation)Utils.Random.Next(0, NumberOfAnimations));
             }
-        }
-    }
-
-    class BubbleForm : TransparentForm
-    {
-        public BubbleForm() : base()
-        {
-            TopMost = true;
-            ShowInTaskbar = false;
-            FormBorderStyle = FormBorderStyle.None;
-            StartPosition = FormStartPosition.Manual;
-
-            AutoSize = true;
-            MaximumSize = new Size(200, 0);
-            AutoSizeMode = AutoSizeMode.GrowOnly;
-            
-            Font = DefaultFont;
-            MaximumSize = new Size(9000, 9000);
-            AutoSize = true;
-            AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            Deactivate += (s, e) =>
-            {
-                Close();
-            };
         }
     }
 }
