@@ -276,8 +276,7 @@ namespace FuckingClippy
             /// </summary>
             internal static int MaxFrame
             {
-                get;
-                private set;
+                get; private set;
             }
             /// <summary>
             /// Default idle image.
