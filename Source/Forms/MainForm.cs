@@ -122,11 +122,9 @@ namespace FuckingClippy
             }
         }
 
-        #region Idle timers
+#region Idle timers
         void TmrIdleSay_Tick(object sender, EventArgs e)
         {
-            //Character.CallSayRandom();
-            //Character.DelegateRandomSay.Invoke();
             Character.SayRandom();
         }
 
@@ -134,9 +132,9 @@ namespace FuckingClippy
         {
             Character.AnimationSystem.PlayRandom();
         }
-        #endregion
+#endregion
 
-        #region Mouse events
+#region Mouse events
         bool FormDown, IsPrompting;
         Point LastMouseLocation, LastFormLocation;
 
