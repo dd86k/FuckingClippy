@@ -21,14 +21,12 @@ namespace FuckingClippy
         {
             InitializeComponent();
 
-            InitializeAnimation();
-
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
 
             Utils.Log("MainForm initiated");
 
-            Character.Initialize(this);
+            Character.Initialize(this, picAssistant);
             
             picAssistant.Dock = DockStyle.Fill;
 
@@ -73,43 +71,12 @@ namespace FuckingClippy
                 cmsCharacter.Items.AddRange(DebugItems);
             }
 #endif
-
             cmsCharacter.ResumeLayout(false);
             ResumeLayout(true);
             
-            Character.AnimationSystem.Play(Animation.FadeIn);
+            Character.PlayAnimation(Animation.FadeIn);
             tmrIdleAni.Start();
             tmrIdleSay.Start();
-        }
-
-        void InitializeAnimation()
-        {
-            Character.AnimationSystem.AnimationTimer = new Timer();
-            Character.AnimationSystem.AnimationTimer.Interval =
-                Character.AnimationSystem.DefaultInterval;
-            Character.AnimationSystem.AnimationTimer.Tick += Animation_OnFrame;
-        }
-
-        /// <remarks>
-        /// Animation_OnFrame is within MainForm to access
-        /// picCharacter (PictureBox, private).
-        /// </remarks>
-        void Animation_OnFrame(object s, EventArgs e)
-        {
-            if (Character.AnimationSystem.CurrentFrame <
-                Character.AnimationSystem.MaxFrame)
-            {
-                picAssistant.Image = Character.AnimationSystem.GetNextFrame();
-
-                // Every 2 frames.
-                if (Character.AnimationSystem.CurrentFrame % 2 != 0)
-                    GC.Collect(2, GCCollectionMode.Optimized);
-            }
-            else
-            {
-                Character.AnimationSystem.Stop();
-                picAssistant.Image = Character.AnimationSystem.Idle;
-            }
         }
 
 #region Idle timers
@@ -120,7 +87,7 @@ namespace FuckingClippy
 
         void TmrIdleAni_Tick(object sender, EventArgs e)
         {
-            Character.AnimationSystem.PlayRandom();
+            Character.PlayRandomAnimation();
         }
 #endregion
 
@@ -176,16 +143,16 @@ namespace FuckingClippy
 
         void cmsiAnimate_Click(object sender, EventArgs e)
         {
-            Character.AnimationSystem.PlayRandom();
+            Character.PlayRandomAnimation();
         }
 
         void cmsiHide_Click(object sender, EventArgs e)
         {
-            Character.AnimationSystem.Play(Animation.FadeOut);
+            Character.PlayAnimation(Animation.FadeOut);
 
             // Dirty solution
             Timer a = new Timer();
-            a.Interval = 3 * Character.AnimationSystem.DefaultInterval;
+            a.Interval = 3 * 125; // temporary
             a.Tick += (s, g) => { Close(); };
             a.Start();
         }

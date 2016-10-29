@@ -34,27 +34,78 @@ namespace FuckingClippy
             {
                 case "run":
                     if (s.Length > 1)
-                    try
-                    {
-                        Start(userInput.Substring(4));
-                    }
-                    catch (Exception e)
-                    {
-                        Character.Say($"{e.GetType()}!");
-                    }
+                        try
+                        {
+                            Start(userInput.Substring(4));
+                        }
+                        catch (Exception e)
+                        {
+                            Character.Say($"{e.GetType()}!");
+                        }
+                    else
+                        Character.Say("I can't run, buddy.");
                     break;
 
                 case "say":
                     if (s.Length > 1)
                         Character.Say(userInput.Substring(4));
+                    else
+                        Character.Say("Say what?");
                     break;
 
                 case "search":
-                    Start($"https://www.google.com/search?q={Uri.EscapeDataString(userInput.Substring(7))}");
+                    if (s.Length > 1)
+                        Start(
+                            $"https://www.google.com/search?q={Uri.EscapeDataString(userInput.Substring(7))}"
+                        );
+                    else
+                        Character.Say("You forgot to include what to search.");
                     break;
 
-                default:
-                    Character.Say("What was that?");
+                    case "fuck":
+                        if (s.Length > 1)
+                            switch (s[1].ToLower())
+                            {
+                                case "me":
+                                    Character.Say("No thanks, I'll pass.");
+                                    break;
+                                case "you":
+                                    Character.Say("Hey buddy I can always shutdown your computer.");
+                                    break;
+                                default:
+                                    Character.Say("WHO");
+                                    break;
+                            }
+                        else
+                            Character.Say("WHO");
+                        break;
+
+                    case "help":
+                        if (s.Length > 1)
+                            switch (s[1].ToLower())
+                            {
+                                case "me":
+                                    Character.Say(@"Try the ""help"" command!");
+                                    break;
+                                case "you":
+                                    Character.Say("How kind! But no, I'm fine");
+                                    break;
+                                default:
+                                    Character.Say("WHO");
+                                    break;
+                            }
+                        else
+                            Character.Say(
+@"Here are some commands:
+
+run - Run an app from PATH.
+say - Make me say something.
+search - Search on Google.com."
+                            );
+                        break;
+
+                    default:
+                    Character.Say("Are you okay?");
                     break;
             }
             else
@@ -65,8 +116,10 @@ namespace FuckingClippy
         public static Image LoadEmbeddedImage(string path)
         {
             return Image.FromStream(
-            GetExecutingAssembly().GetManifestResourceStream(
-                $"{ProjectName}.Images.{path}"));
+                GetExecutingAssembly().GetManifestResourceStream(
+                    $"{ProjectName}.Images.{path}"
+                )
+            );
         }
 
         public static bool EmbeddedItemExist(string path)

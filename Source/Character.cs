@@ -47,11 +47,11 @@ namespace FuckingClippy
     /// </summary>
     static class Character
     {
-        public static void Initialize(Form form)
+        public static void Initialize(Form form, PictureBox pb)
         {
             DialogSystem.CharacterForm = form;
 
-            AnimationSystem.Initialize();
+            AnimationSystem.Initialize(pb);
         }
 
         public static void Prompt()
@@ -69,12 +69,22 @@ namespace FuckingClippy
             DialogSystem.SayRandom();
         }
 
-        private static class DialogSystem
+        public static void PlayAnimation(Animation a)
+        {
+            AnimationSystem.Play(a);
+        }
+
+        public static void PlayRandomAnimation()
+        {
+            AnimationSystem.PlayRandom();
+        }
+
+        static class DialogSystem
         {
             // A reference to the parent form that summons thee.
             internal static Form CharacterForm;
             // The current active bubble text.
-            internal static Form CurrentBubbleForm;
+            static Form CurrentBubbleForm;
             // Defaults
             static Color BubbleColor = Color.FromArgb(255, 255, 204);
             static Font DefaultFont = new Font("Segoe UI", 9);
@@ -151,29 +161,29 @@ namespace FuckingClippy
             {
                 string[] s =
                 {
-                "So, you come here often?",
-                "Would you like help with hugging yourself?",
-                "(this isFor ThE fAnS and G GaMerGirls)",
-                "Welcome. Welcome to City 17.",
-                "I can see you, but can you see me?",
-                "Do you need help looking at that screen?",
-                "I know, I'm not as fun as GonzoBuddy, but at least I'm not spyware, right?",
-                "It would be a shame if something happened to these fil-- OOOPSS!",
-                "［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
-                "Are you sure you want to click that?",
-                "0x4E4F4246\nDid I spook you?",
-                "Did you know that Intel's first microprocessor, the Intel 4004, was released in 1971, had 2,300 transistors measuring 10 microns?",
-                "I am not an AI, just a bunch of CIL instructions.",
-                "Seems like you need help living your life there buddy.",
-                "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
-                "<3?",
-                "Did you know that I'm a vegan?",
-                "SUFFER();",
-                "rawrrr x33",
-                "I still have transparency and form autosizing issues on Mono!",
-                "Deleting your files...",
-                "S-sorry, senpai..",
-                "Hey do you mind if I use more memory?",
+            "So, you come here often?",
+            "Would you like help with hugging yourself?",
+            "(this isFor ThE fAnS and G GaMerGirls)",
+            "Welcome. Welcome to City 17.",
+            "I can see you, but can you see me?",
+            "Do you need help looking at that screen?",
+            "I'm not as fun as BonziBuddy, but at least I'm not spyware, right?",
+            "It would be a shame if something happened to these fil-- OOOPSS!",
+            "［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
+            "Are you sure you want to click that?",
+            "0x4E4F4246\nDid I spook you?",
+            "I am not an AI, just a bunch of CIL instructions.",
+            "Seems like you need help living your life there buddy.",
+            "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
+            "<3?",
+            "Did you know that I'm a vegan?",
+            "SUFFER();",
+            "rawrrr x33",
+            "I still have transparency and form autosizing issues on Mono!",
+            "Deleting your files...",
+            "S-sorry, senpai..",
+            "Hey do you mind if I use more memory?",
+            "Bazinga!",
                 };
 
                 Say(s[Utils.Random.Next(0, s.Length)]);
@@ -235,15 +245,38 @@ namespace FuckingClippy
             #endregion
         }
         
-        public static class AnimationSystem
+        static class AnimationSystem
         {
-            public static void Initialize()
+            static PictureBox Frame;
+
+            public static void Initialize(PictureBox picbox)
             {
+                Frame = picbox;
+
                 Idle = Utils.LoadEmbeddedImage("Clippy.Idle.png");
 
-                AnimationTimer.Interval = DefaultInterval;
-
                 NumberOfAnimations = Enum.GetNames(typeof(Animation)).Length;
+
+                AnimationTimer = new Timer();
+                AnimationTimer.Interval = DefaultInterval;
+                AnimationTimer.Tick += (s, e) =>
+                {
+                    if (CurrentFrame < MaxFrame)
+                    {
+                        Frame.Image = GetNextFrame();
+
+                        // Every 5 frames.
+                        if (CurrentFrame % 5 == 0)
+                            GC.Collect(2);
+                    }
+                    else
+                    {
+                        Stop();
+                        Frame.Image = Idle;
+                    }
+                };
+
+                AnimationTimer.Interval = DefaultInterval;
             }
 
             public static void Stop()
@@ -291,8 +324,7 @@ namespace FuckingClippy
             static internal bool IsPlaying => AnimationTimer.Enabled;
 
             /// <summary>
-            /// Play an animation. If there is already an animation rolling, simply
-            /// ignore the request.
+            /// Play an animation. Ignores if one is already playing.
             /// </summary>
             /// <param name="name">Name of the animation.</param>
             public static void Play(Animation name)
