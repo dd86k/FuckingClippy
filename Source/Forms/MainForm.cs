@@ -33,8 +33,8 @@ namespace FuckingClippy
             
             picAssistant.Dock = DockStyle.Fill;
 
-            tmrIdleAni.Interval = 120000;
-            tmrIdleSay.Interval = 900000;
+            tmrIdleAni.Interval = 120000; // 2 minutes
+            tmrIdleSay.Interval = 300000; // 5 minutes
 
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30px.

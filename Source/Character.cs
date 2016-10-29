@@ -184,6 +184,7 @@ namespace FuckingClippy
             "S-sorry, senpai..",
             "Hey do you mind if I use more memory?",
             "Bazinga!",
+            "Hey it looks like you're writing a letter, need help to give a kiss?"
                 };
 
                 Say(s[Utils.Random.Next(0, s.Length)]);
