@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using static System.Diagnostics.Process;
 
 //TODO: Add support for...
 // - Images
@@ -79,6 +80,137 @@ namespace FuckingClippy
             AnimationSystem.PlayRandom();
         }
 
+        public static void ProcessInput(string userInput)
+        {
+            string[] s = userInput.Split(' ');
+
+            if (s.Length > 0)
+                switch (s[0].ToLower())
+                {
+                    /*
+                     * Main commands
+                     */
+
+                    case "run":
+                        if (s.Length > 1)
+                            try
+                            {
+                                Start(userInput.Substring(4));
+                            }
+                            catch (Exception e)
+                            {
+                                Say($"{e.GetType()}!");
+                            }
+                        else
+                            Say("I can't run, buddy.");
+                        break;
+
+                    case "say":
+                        if (s.Length > 1)
+                            Say(userInput.Substring(4));
+                        else
+                            Say("Say what?");
+                        break;
+
+                    case "search":
+                        if (s.Length > 1)
+                            Start(
+                                $"https://www.google.com/search?q={Uri.EscapeDataString(userInput.Substring(7))}"
+                            );
+                        else
+                            Say("You forgot to include what to search.");
+                        break;
+
+                    case "help":
+                        if (s.Length > 1)
+                            switch (s[1].ToLower())
+                            {
+                                case "me":
+                                    if (s.Length > 2)
+                                        switch (s[2].ToLower())
+                                        {
+                                            case "suicide":
+                                            case "die":
+                                                Say("Please seek professional help.");
+                                                break;
+
+                                            case "kill":
+                                                if (s.Length > 3)
+                                                    switch (s[3].ToLower())
+                                                    {
+                                                        case "myself":
+                                                            Say("Please seek professional help.");
+                                                            break;
+                                                        default:
+                                                            Say("I won't do your dirty job.");
+                                                            break;
+                                                    }
+                                                else
+                                                    Say("WHO?");
+                                                break;
+
+                                            default:
+                                                Say(@"Help you in what now?");
+                                                break;
+                                        }
+                                    else
+                                        Say(@"Try the ""help"" command!");
+                                    break;
+
+                                case "yourself":
+                                    Say("How kind! But no, I'm fine");
+                                    break;
+
+                                default:
+                                    Say("WHO");
+                                    break;
+                            }
+                        else
+                            Say(
+@"Here are some commands:
+
+run <App> - Run an app from PATH.
+say <Text> - Make me say something.
+search <Query> - Search on Google.com.
+random - I'll tell you something randomly."
+                            );
+                        break;
+
+                    /*
+                     * Non-serious, small talk.
+                     */
+
+                    case "screw":
+                    case "fuck":
+                        if (s.Length > 1)
+                            switch (s[1].ToLower())
+                            {
+                                case "me":
+                                    Say("No thanks, I'll pass.");
+                                    break;
+                                case "you":
+                                    Say("Hey buddy I can always shutdown your computer.");
+                                    break;
+                                default:
+                                    Say("WHO");
+                                    break;
+                            }
+                        else
+                            Say("WHO");
+                        break;
+
+                    case "die":
+                        Say("No thanks.");
+                        break;
+
+                    default:
+                        Say("Are you okay?");
+                        break;
+                }
+            else
+                Say("Hello?");
+        }
+
         static class DialogSystem
         {
             // A reference to the parent form that summons thee.
@@ -128,7 +260,7 @@ namespace FuckingClippy
                     if (e.KeyCode == Keys.Enter) // Includes Return
                     {
                         e.SuppressKeyPress = true;
-                        Utils.ProcessInput((s as TextBox).Text);
+                        Character.ProcessInput((s as TextBox).Text);
                     }
                 };
 
@@ -154,37 +286,36 @@ namespace FuckingClippy
                 CurrentBubbleForm = GetBaseForm(GetSay(text));
 
                 CurrentBubbleForm.Show();
-                CurrentBubbleForm.Update();
             }
 
             internal static void SayRandom()
             {
                 string[] s =
                 {
-            "So, you come here often?",
-            "Would you like help with hugging yourself?",
-            "(this isFor ThE fAnS and G GaMerGirls)",
-            "Welcome. Welcome to City 17.",
-            "I can see you, but can you see me?",
-            "Do you need help looking at that screen?",
-            "I'm not as fun as BonziBuddy, but at least I'm not spyware, right?",
-            "It would be a shame if something happened to these fil-- OOOPSS!",
-            "［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
-            "Are you sure you want to click that?",
-            "0x4E4F4246\nDid I spook you?",
-            "I am not an AI, just a bunch of CIL instructions.",
-            "Seems like you need help living your life there buddy.",
-            "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
-            "<3?",
-            "Did you know that I'm a vegan?",
-            "SUFFER();",
-            "rawrrr x33",
-            "I still have transparency and form autosizing issues on Mono!",
-            "Deleting your files...",
-            "S-sorry, senpai..",
-            "Hey do you mind if I use more memory?",
-            "Bazinga!",
-            "Hey it looks like you're writing a letter, need help to give a kiss?"
+"So, you come here often?",
+"Would you like help with hugging yourself?",
+"(this isFor ThE fAnS and G GaMerGirls)",
+"Welcome. Welcome to City 17.",
+"I can see you, but can you see me?",
+"Do you need help looking at that screen?",
+"I'm not as fun as BonziBuddy, but at least I'm not spyware, right?",
+"It would be a shame if something happened to these fil-- OOOPSS!",
+"［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
+"Are you sure you want to click that?",
+"0x4E4F4246\nDid I spook you?",
+"I am not an AI, just a bunch of CIL instructions.",
+"Seems like you need help living your life there buddy.",
+"The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
+"<3?",
+"Did you know that I'm a vegan?",
+"SUFFER();",
+"rawrrr x33",
+"I still have transparency and form autosizing issues on Mono!",
+"Deleting your files...",
+"S-sorry, senpai..",
+"Hey do you mind if I use more memory?",
+"Bazinga!",
+"Hey it looks like you're writing a letter, need help to give a kiss?"
                 };
 
                 Say(s[Utils.Random.Next(0, s.Length)]);
