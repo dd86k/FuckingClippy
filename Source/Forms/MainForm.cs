@@ -26,6 +26,9 @@ namespace FuckingClippy
 
             Utils.Log("MainForm initiated");
 
+            // Use main icon.
+            ShowIcon = false;
+
             Character.Initialize(this, picAssistant);
             
             picAssistant.Dock = DockStyle.Fill;
