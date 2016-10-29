@@ -82,6 +82,20 @@ namespace FuckingClippy
             tmrIdleSay.Start();
         }
 
+        /// <summary>
+        /// Hey
+        /// </summary>
+        public void Exit()
+        {
+            Character.PlayAnimation(Animation.FadeOut);
+
+            // Dirty solution
+            Timer a = new Timer();
+            a.Interval = 3 * 125; // temporary
+            a.Tick += (s, e) => { Close(); };
+            a.Start();
+        }
+
 #region Idle timers
         void TmrIdleSay_Tick(object sender, EventArgs e)
         {
@@ -134,6 +148,11 @@ namespace FuckingClippy
 #endregion
 
 #region Context menu events
+        void cmsiHide_Click(object sender, EventArgs e)
+        {
+            Exit();
+        }
+
         void csmiOptions_Click(object sender, EventArgs e)
         { // Settings -> Options tab
             new SettingsForm(SettingsForm.Tab.Options).ShowDialog();
@@ -147,17 +166,6 @@ namespace FuckingClippy
         void cmsiAnimate_Click(object sender, EventArgs e)
         {
             Character.PlayRandomAnimation();
-        }
-
-        void cmsiHide_Click(object sender, EventArgs e)
-        {
-            Character.PlayAnimation(Animation.FadeOut);
-
-            // Dirty solution
-            Timer a = new Timer();
-            a.Interval = 3 * 125; // temporary
-            a.Tick += (s, g) => { Close(); };
-            a.Start();
         }
 #endregion
     }

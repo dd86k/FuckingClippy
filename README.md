@@ -1,11 +1,11 @@
 # FuckingClippy
-### "*That motherfucker again.*"
+### "*That guy again!?*"
 
 ![Clippy](https://guitarxhero.github.com/imgs/fc1.png)
 
-FuckingClippy is a reincarnation of the long lost Office assistant as a stand-alone application.
+Your favorite assistant is back, without Office!
 
-A Wiki is available [here][wiki] and releases can be found [here][releases].
+There is a [Wiki][wiki] available and releases can be found [here][releases].
 
 Copyright © Microsoft 1997-2003 for their Clippit (Clippy) Office Assistant.
 

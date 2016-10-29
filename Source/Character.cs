@@ -48,9 +48,12 @@ namespace FuckingClippy
     /// </summary>
     static class Character
     {
-        public static void Initialize(Form form, PictureBox pb)
+        // A reference to the parent form that summons thee.
+        static MainForm CharacterForm;
+
+        public static void Initialize(MainForm form, PictureBox pb)
         {
-            DialogSystem.CharacterForm = form;
+            CharacterForm = form;
 
             AnimationSystem.Initialize(pb);
         }
@@ -82,96 +85,104 @@ namespace FuckingClippy
 
         public static void ProcessInput(string userInput)
         {
-            string[] s = userInput.Split(' ');
+            string[] u = userInput.Split(' ');
 
-            if (s.Length > 0)
-                switch (s[0].ToLower())
+            if (u.Length > 0 && userInput.Length > 0)
+                switch (u[0].ToLower())
                 {
                     /*
                      * Main commands
                      */
 
                     case "run":
-                        if (s.Length > 1)
+                        if (u.Length > 1)
                             try
                             {
                                 Start(userInput.Substring(4));
                             }
                             catch (Exception e)
                             {
-                                Say($"{e.GetType()}!");
+                                Say($"I couldn't run that, sorry.\n({e.GetType().Name})");
                             }
                         else
                             Say("I can't run, buddy.");
                         break;
 
                     case "say":
-                        if (s.Length > 1)
+                        if (u.Length > 1)
                             Say(userInput.Substring(4));
                         else
                             Say("Say what?");
                         break;
 
                     case "search":
-                        if (s.Length > 1)
+                        if (u.Length > 1)
                             Start(
-                                $"https://www.google.com/search?q={Uri.EscapeDataString(userInput.Substring(7))}"
+                        $"https://www.google.com/search?q={Uri.EscapeDataString(userInput.Substring(7))}"
                             );
                         else
-                            Say("You forgot to include what to search.");
+                            Say("Search for what again?");
                         break;
 
+                    case "random":
+                        SayRandom();
+                        break;
+
+                    /*
+                     * Help section
+                     */
+
                     case "help":
-                        if (s.Length > 1)
-                            switch (s[1].ToLower())
+                        if (u.Length > 1)
+                            switch (u[1].ToLower())
                             {
-                                case "me":
-                                    if (s.Length > 2)
-                                        switch (s[2].ToLower())
-                                        {
-                                            case "suicide":
-                                            case "die":
+                            case "me":
+                                if (u.Length > 2)
+                                    switch (u[2].ToLower())
+                                    {
+                                    case "suicide":
+                                    case "die":
+                                        Say("Please seek professional help.");
+                                        break;
+
+                                    case "kill":
+                                        if (u.Length > 3)
+                                            switch (u[3].ToLower())
+                                            {
+                                            case "myself":
                                                 Say("Please seek professional help.");
                                                 break;
-
-                                            case "kill":
-                                                if (s.Length > 3)
-                                                    switch (s[3].ToLower())
-                                                    {
-                                                        case "myself":
-                                                            Say("Please seek professional help.");
-                                                            break;
-                                                        default:
-                                                            Say("I won't do your dirty job.");
-                                                            break;
-                                                    }
-                                                else
-                                                    Say("WHO?");
-                                                break;
-
                                             default:
-                                                Say(@"Help you in what now?");
+                                                Say("I won't do your dirty job.");
                                                 break;
-                                        }
-                                    else
-                                        Say(@"Try the ""help"" command!");
-                                    break;
+                                            }
+                                        else
+                                            Say("WHO?");
+                                        break;
 
-                                case "yourself":
-                                    Say("How kind! But no, I'm fine");
-                                    break;
+                                    default:
+                                        Say("Can't help you with that yet.");
+                                        break;
+                                    }
+                                else
+                                    Say(@"Try the ""help"" command!");
+                                break;
 
-                                default:
-                                    Say("WHO");
-                                    break;
+                            case "yourself":
+                                Say("How kind! But no, I'm fine");
+                                break;
+
+                            default:
+                                Say("WHO");
+                                break;
                             }
                         else
                             Say(
 @"Here are some commands:
 
-run <App> - Run an app from PATH.
-say <Text> - Make me say something.
-search <Query> - Search on Google.com.
+run <t> - Run an app from PATH.
+say <t> - Make me say something.
+search <t> - Search on Google.com.
 random - I'll tell you something randomly."
                             );
                         break;
@@ -182,25 +193,33 @@ random - I'll tell you something randomly."
 
                     case "screw":
                     case "fuck":
-                        if (s.Length > 1)
-                            switch (s[1].ToLower())
+                        if (u.Length > 1)
+                            switch (u[1].ToLower())
                             {
-                                case "me":
-                                    Say("No thanks, I'll pass.");
-                                    break;
-                                case "you":
-                                    Say("Hey buddy I can always shutdown your computer.");
-                                    break;
-                                default:
-                                    Say("WHO");
-                                    break;
+                            case "me":
+                                Say("No thanks, I'll pass.");
+                                break;
+                            case "you":
+                                Say("Hey buddy I can always shutdown your computer.");
+                                break;
+                            default:
+                                Say("WHO?");
+                                break;
                             }
                         else
-                            Say("WHO");
+                            Say("WHO?");
                         break;
 
+                    case "exit":
+                    case "close":
                     case "die":
-                        Say("No thanks.");
+                        Say("Okay!");
+
+                        // Dirty solution
+                        Timer a = new Timer();
+                        a.Interval = 1000;
+                        a.Tick += (s, e) => { CharacterForm.Exit(); };
+                        a.Start();
                         break;
 
                     default:
@@ -208,13 +227,11 @@ random - I'll tell you something randomly."
                         break;
                 }
             else
-                Say("Hello?");
+                Say("Is anyone there?");
         }
 
         static class DialogSystem
         {
-            // A reference to the parent form that summons thee.
-            internal static Form CharacterForm;
             // The current active bubble text.
             static Form CurrentBubbleForm;
             // Defaults
@@ -260,7 +277,7 @@ random - I'll tell you something randomly."
                     if (e.KeyCode == Keys.Enter) // Includes Return
                     {
                         e.SuppressKeyPress = true;
-                        Character.ProcessInput((s as TextBox).Text);
+                        ProcessInput((s as TextBox).Text);
                     }
                 };
 
@@ -419,7 +436,7 @@ random - I'll tell you something randomly."
             /// <summary>
             /// Default <see cref="AnimationTimer"/>'s interval.
             /// </summary>
-            public const int DefaultInterval = 125;
+            public const int DefaultInterval = 100;
             /// <summary>
             /// Animation Timer.
             /// </summary>
@@ -472,7 +489,7 @@ random - I'll tell you something randomly."
                 string path = $"Images.Clippy.Animations.{name}";
 
                 if (!Utils.EmbeddedItemExist(path))
-                    throw new ArgumentException("Animation not found.");
+                    throw new ArgumentException("Animation not found embedded.");
 
                 MaxFrame = Utils.GetNumberOfEmbeddedItems(path);
 

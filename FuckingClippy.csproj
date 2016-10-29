@@ -51,11 +51,6 @@
     <Compile Include="Source\Forms\BubbleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Source\Settings.cs" />
     <Compile Include="Source\CultureManager.cs">
       <SubType>Form</SubType>
@@ -928,10 +923,6 @@
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\9.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Texts\About.txt" />
   </ItemGroup>
   <ItemGroup>
