@@ -230,6 +230,7 @@ random - I'll tell you something randomly."
                 Say("Is anyone there?");
         }
 
+        #region Dialog system
         static class DialogSystem
         {
             // The current active bubble text.
@@ -239,8 +240,7 @@ random - I'll tell you something randomly."
             static Font DefaultFont = new Font("Segoe UI", 9);
             static Image BubbleTail =
                 Utils.LoadEmbeddedImage("Bubble.Tail.png");
-
-            #region Prompt
+            
             /// <summary>
             /// Prompt the user for information.
             /// </summary>
@@ -283,9 +283,7 @@ random - I'll tell you something randomly."
 
                 return ca;
             }
-            #endregion
 
-            #region Say
             /// <summary>
             /// Say something to the user.
             /// </summary>
@@ -344,7 +342,6 @@ random - I'll tell you something randomly."
 
                 ca[0] = new Label();
                 ca[0].Location = new Point(4, 6);
-                //ca[0].Size = new Size(192, 1000);
                 ca[0].AutoSize = true;
                 ca[0].MaximumSize = new Size(192, 0);
                 ca[0].Font = DefaultFont;
@@ -352,9 +349,6 @@ random - I'll tell you something randomly."
 
                 return ca;
             }
-            #endregion
-
-            #region Base
             static BubbleForm GetBaseForm(Control[] subControls)
             {
                 if (CurrentBubbleForm != null)
@@ -369,7 +363,6 @@ random - I'll tell you something randomly."
                 p.MaximumSize = new Size(200, 0);
                 p.BackColor = BubbleColor;
                 p.BorderStyle = BorderStyle.FixedSingle;
-                p.Location = new Point(0, 0);
 
                 /* Bubble tail */
                 PictureBox pb = new PictureBox();
@@ -391,13 +384,12 @@ random - I'll tell you something randomly."
 
                 return f;
             }
-            #endregion
         }
-        
+        #endregion
+
+        #region Animation system
         static class AnimationSystem
         {
-            static PictureBox Frame;
-
             public static void Initialize(PictureBox picbox)
             {
                 Frame = picbox;
@@ -414,9 +406,9 @@ random - I'll tell you something randomly."
                     {
                         Frame.Image = GetNextFrame();
 
-                        // Every 5 frames.
+                        // Every 5 frames. Guarantees it calls it at least once.
                         if (CurrentFrame % 5 == 0)
-                            GC.Collect(2);
+                            GC.Collect(1);
                     }
                     else
                     {
@@ -424,53 +416,23 @@ random - I'll tell you something randomly."
                         Frame.Image = Idle;
                     }
                 };
-
-                AnimationTimer.Interval = DefaultInterval;
             }
 
-            public static void Stop()
-            {
-                AnimationTimer.Stop();
-            }
+            // PictureBox reference.
+            static PictureBox Frame;
+            
+            // Default AnimationTimer interval.
+            const int DefaultInterval = 100;
+            static Timer AnimationTimer;
+            static Animation CurrentAnimation;
+            static int CurrentFrame, MaxFrame, NumberOfAnimations;
 
             /// <summary>
-            /// Default <see cref="AnimationTimer"/>'s interval.
+            /// Default idle frame.
             /// </summary>
-            public const int DefaultInterval = 100;
-            /// <summary>
-            /// Animation Timer.
-            /// </summary>
-            internal static Timer AnimationTimer;
-            /// <summary>
-            /// Current animation.
-            /// </summary>
-            internal static Animation CurrentAnimation
-            {
-                get;
-                private set;
-            }
-            /// <summary>
-            /// Current animation name.
-            /// </summary>
-            internal static int CurrentFrame;
-            /// <summary>
-            /// Number of frames of the current animation.
-            /// </summary>
-            internal static int MaxFrame
-            {
-                get; private set;
-            }
-            /// <summary>
-            /// Default idle image.
-            /// </summary>
-            internal static Image Idle;
-
-            private static int NumberOfAnimations;
-
-            /// <summary>
-            /// Get if there is an animation playing.
-            /// </summary>
-            static internal bool IsPlaying => AnimationTimer.Enabled;
+            static Image Idle;
+            
+            static bool IsPlaying => AnimationTimer.Enabled;
 
             /// <summary>
             /// Play an animation. Ignores if one is already playing.
@@ -480,30 +442,38 @@ random - I'll tell you something randomly."
             {
                 if (IsPlaying) return;
 
-                Utils.Log($"Playing animation: {name}");
+                Utils.Log("Playing animation: " + name);
 
                 CurrentAnimation = name;
 
                 CurrentFrame = 0;
 
-                string path = $"Images.Clippy.Animations.{name}";
+                string path = "Images.Clippy.Animations." + name;
 
                 if (!Utils.EmbeddedItemExist(path))
-                    throw new ArgumentException("Animation not found embedded.");
+                    throw new ArgumentException("Embedded files for animation not found: " + name);
 
                 MaxFrame = Utils.GetNumberOfEmbeddedItems(path);
 
                 AnimationTimer.Start();
             }
 
-            public static Image GetFrame(int frame)
+            /// <summary>
+            /// Stop the current animation.
+            /// </summary>
+            static void Stop()
+            {
+                AnimationTimer.Stop();
+            }
+
+            static Image GetFrame(int frame)
             {
                 return Utils.LoadEmbeddedImage(
                     $"Clippy.Animations.{CurrentAnimation}.{frame}.png"
                 );
             }
 
-            public static Image GetNextFrame()
+            static Image GetNextFrame()
             {
                 return GetFrame(CurrentFrame++);
             }
@@ -516,5 +486,6 @@ random - I'll tell you something randomly."
                 Play((Animation)Utils.Random.Next(0, NumberOfAnimations));
             }
         }
+        #endregion
     }
 }

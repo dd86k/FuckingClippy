@@ -47,16 +47,14 @@ namespace FuckingClippy
 
         public static int GetNumberOfEmbeddedItems(string path)
         {
-            string[] s = Project.GetManifestResourceNames();
-
             Regex r = new Regex(
-                $"{ProjectName}\\.{path.Replace(".", "\\.")}\\.*",
-                RegexOptions.ECMAScript
+                $@"{ProjectName}\.{path.Replace(".", @"\.")}\.*",
+                RegexOptions.ECMAScript | RegexOptions.Compiled
             );
 
             int n = 0;
 
-            foreach (var i in s)
+            foreach (var i in Project.GetManifestResourceNames())
                 if (r.IsMatch(i))
                     ++n;
 
