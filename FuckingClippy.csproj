@@ -26,7 +26,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>RELEASE</DefineConstants>
@@ -921,9 +921,6 @@
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\7.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\8.png" />
     <EmbeddedResource Include="Images\Clippy\Animations\Writing\9.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Texts\About.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="main.ico" />

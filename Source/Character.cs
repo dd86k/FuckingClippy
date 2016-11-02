@@ -202,6 +202,17 @@ random - I'll tell you something randomly."
                             case "you":
                                 Say("Hey buddy I can always shutdown your computer.");
                                 break;
+                                case "off":
+                                {
+                                    Say("Okay!");
+
+                                    // Dirty solution
+                                    Timer a = new Timer();
+                                    a.Interval = 1000;
+                                    a.Tick += (s, e) => { CharacterForm.Exit(); };
+                                    a.Start();
+                                }
+                                break;
                             default:
                                 Say("WHO?");
                                 break;
@@ -213,13 +224,15 @@ random - I'll tell you something randomly."
                     case "exit":
                     case "close":
                     case "die":
-                        Say("Okay!");
+                        {
+                            Say("Okay!");
 
-                        // Dirty solution
-                        Timer a = new Timer();
-                        a.Interval = 1000;
-                        a.Tick += (s, e) => { CharacterForm.Exit(); };
-                        a.Start();
+                            // Dirty solution
+                            Timer a = new Timer();
+                            a.Interval = 1000;
+                            a.Tick += (s, e) => { CharacterForm.Exit(); };
+                            a.Start();
+                        }
                         break;
 
                     default:
@@ -408,7 +421,7 @@ random - I'll tell you something randomly."
 
                         // Every 5 frames. Guarantees it calls it at least once.
                         if (CurrentFrame % 5 == 0)
-                            GC.Collect(1);
+                            GC.Collect(1, GCCollectionMode.Forced, false);
                     }
                     else
                     {

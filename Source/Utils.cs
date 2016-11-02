@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using static System.Reflection.Assembly;
@@ -21,10 +22,16 @@ namespace FuckingClippy
         static string RuntimeName = RunningMono ? "Mono" : ".NET";
 
         #region Assembly related
+        public static Stream LoadEmbedded(string path)
+        {
+            return
+                Project.GetManifestResourceStream($"{ProjectName}.{path}");
+        }
+
         public static Image LoadEmbeddedImage(string path)
         {
             return Image.FromStream(
-                GetExecutingAssembly().GetManifestResourceStream(
+                Project.GetManifestResourceStream(
                     $"{ProjectName}.Images.{path}"
                 )
             );

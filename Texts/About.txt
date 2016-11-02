@@ -1,7 +1,0 @@
-﻿About FuckingClippy
-
-FuckingClippy v<T_VERSION>
-
-MIT License
-
-Website - https://github.com/guitarxhero/FuckingClippy
