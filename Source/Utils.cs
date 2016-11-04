@@ -15,6 +15,8 @@ namespace FuckingClippy
         public static readonly string ProjectName =
             Project.GetName().Name;
 
+        public static PlatformID OSType = Environment.OSVersion.Platform;
+
         public static Random Random = new Random();
 
         public static readonly bool RunningMono =

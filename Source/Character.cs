@@ -117,8 +117,29 @@ namespace FuckingClippy
                         if (u.Length > 1)
                             try
                             {
-                                //TODO: Add Linux support
-                                Start("cmd", "/c " + userInput.Substring(5));
+                                string ci = userInput.Substring(5);
+                                switch (Utils.OSType)
+                                {
+                                    case PlatformID.Win32NT:
+                                    // The "I doubt they're running that" club.
+                                    case PlatformID.Win32S:
+                                    case PlatformID.Win32Windows:
+                                    case PlatformID.WinCE:
+                                    case PlatformID.Xbox:
+                                        Start("cmd", "/c " + ci);
+                                        break;
+                                    case PlatformID.MacOSX:
+                                        // Will have to revisit this.
+                                        Start($"x-terminal-emulator -e '{ci}'");
+                                        break;
+                                    case PlatformID.Unix:
+                                        Start($"x-terminal-emulator -e '{ci}'");
+                                        break;
+                                    default:
+                                        Say($"Sorry, I don't support  {Utils.OSType}."
+                                        );
+                                        break;
+                                }
                             }
                             catch (Exception e)
                             {
