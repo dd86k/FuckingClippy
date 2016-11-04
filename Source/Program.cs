@@ -12,7 +12,7 @@ namespace FuckingClippy
         static void Main()
         {
             Utils.Log("Started");
-            //Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.Run(new MainForm());
         }
     }
