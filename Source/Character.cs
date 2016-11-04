@@ -473,6 +473,7 @@ random - I'll tell you something randomly."
                     {
                         StopAnimation();
                         PictureFrame.Image = Idle;
+                        GC.Collect();
                     }
                 };
             }
@@ -482,12 +483,7 @@ random - I'll tell you something randomly."
             static Timer AnimationTimer;
             static Animation CurrentAnimation;
             static int CurrentFrame, MaxFrame, NumberOfAnimations;
-
-            /// <summary>
-            /// Default idle frame.
-            /// </summary>
             static Image Idle;
-            
             static bool IsPlaying => AnimationTimer.Enabled;
 
             /// <summary>
