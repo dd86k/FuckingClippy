@@ -1,8 +1,8 @@
 # FuckingClippy
 ### "*That guy again!?*"
-Your favorite assistant is back, without Office!
+![Clippy](http://guitarxhero.github.io/imgs/fc2.png)
 
-![Clippy](https://guitarxhero.github.com/imgs/fc2.png)
+Your favorite assistant is back, without Office!
 
 [Wiki][wiki] • [Releases][releases]
 
