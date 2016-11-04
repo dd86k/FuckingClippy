@@ -112,6 +112,21 @@ namespace FuckingClippy
                             Say("I can't run, buddy.");
                         break;
 
+                    case "runc":
+                    case "runt":
+                        if (u.Length > 1)
+                            try
+                            {
+                                Start("cmd", "/c " + userInput.Substring(5));
+                            }
+                            catch (Exception e)
+                            {
+                                Say($"I couldn't run that, sorry.\n({e.GetType().Name})");
+                            }
+                        else
+                            Say("Nope, can't hack the NSA.");
+                        break;
+
                     case "say":
                         if (u.Length > 1)
                             Say(userInput.Substring(4));
@@ -326,30 +341,33 @@ random - I'll tell you something randomly."
             {
                 string[] s =
                 {
+// Tips
+"Did you know Steam mostly works with protocols, like steam://AddNonSteamGame?",
+"Start menu startup folder? shell:startup",
+// Jokes
 "So, you come here often?",
 "Would you like help with hugging yourself?",
 "(this isFor ThE fAnS and G GaMerGirls)",
-"Welcome. Welcome to City 17.",
+"Welcome.\nWelcome to City 17.",
 "I can see you, but can you see me?",
-"Do you need help looking at that screen?",
+"Do you need help looking at this screen?",
 "I'm not as fun as BonziBuddy, but at least I'm not spyware, right?",
-"It would be a shame if something happened to these fil-- OOOPSS!",
 "［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
 "Are you sure you want to click that?",
-"0x4E4F4246\nDid I spook you?",
+"０ｘ４Ｅ４Ｆ４２４６\nDid I spook you?",
 "I am not an AI, just a bunch of CIL instructions.",
 "Seems like you need help living your life there buddy.",
 "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
-"<3?",
-"Did you know that I'm a vegan?",
+"💚?",
+"Hi, I'm vegan.",
 "SUFFER();",
 "rawrrr x33",
-"I still have transparency and form autosizing issues on Mono!",
 "Deleting your files...",
 "S-sorry, senpai..",
 "Hey do you mind if I use more memory?",
 "Bazinga!",
-"Hey it looks like you're writing a letter, need help to give a kiss?"
+"Hey it looks like you're writing a letter.\nWould you like help?",
+"Trouble with Windows? Re-install it!"
                 };
 
                 Say(s[Utils.Random.Next(0, s.Length)]);
