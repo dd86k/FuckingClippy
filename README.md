@@ -5,7 +5,7 @@
 
 Your favorite assistant is back, without Office!
 
-There is a [Wiki][wiki] available and releases can be found [here][releases].
+[Wiki][wiki] • [Releases][releases].
 
 Copyright © Microsoft 1997-2003 for their Clippit (Clippy) Office Assistant.
 
