@@ -45,7 +45,7 @@ namespace FuckingClippy
 
             tmrIdleAni.Tick += TmrIdleAni_Tick;
             tmrIdleSay.Tick += TmrIdleSay_Tick;
-            tmrIdleAni.Interval = 120000; // 2 minutes
+            tmrIdleAni.Interval = 30000; // 30 seconds
             tmrIdleSay.Interval = 300000; // 5 minutes
 
             TopMost = true; // Only hell now. :-)
