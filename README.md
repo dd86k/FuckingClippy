@@ -1,7 +1,7 @@
 # FuckingClippy
 ### "*That guy again!?*"
 
-![Clippy](https://guitarxhero.github.com/imgs/fc1.png)
+![Clippy](https://guitarxhero.github.com/imgs/fc2.png)
 
 Your favorite assistant is back, without Office!
 
