@@ -117,6 +117,7 @@ namespace FuckingClippy
                         if (u.Length > 1)
                             try
                             {
+                                //TODO: Add Linux support
                                 Start("cmd", "/c " + userInput.Substring(5));
                             }
                             catch (Exception e)
