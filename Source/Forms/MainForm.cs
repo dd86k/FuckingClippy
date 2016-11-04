@@ -2,55 +2,51 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-/* Lazy todo list
-- Dialog.Prompt() should return string
-- Make MainForm sizeable (fixed scale)
-- Dialog.SayStatic(string) + Dialog.Update(string)
-- Animation.Play(string[])
-  - MaxFrames * Interval
-*/
+//TODO: #10 Change the naming scheme for controls
 
 namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
     {
-        Timer tmrIdleSay = new Timer();
-        Timer tmrIdleAni = new Timer();
+        Timer tmrIdleSay = new Timer(),
+              tmrIdleAni = new Timer();
         
         public MainForm() : base()
         {
+            Utils.Log("Initializing MainForm...");
+
             InitializeComponent();
+
+            Utils.Log("MainForm initiated");
+
+            SuspendLayout();
 
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
 
-            Utils.Log("MainForm initiated");
-
             // Use main icon.
             ShowIcon = false;
 
-            Character.Initialize(this, picAssistant);
+            Character.Initialize(this);
             
-            picAssistant.Dock = DockStyle.Fill;
-
-            tmrIdleAni.Interval = 120000; // 2 minutes
-            tmrIdleSay.Interval = 300000; // 5 minutes
-
             // Grab the current Screen info and locate the character
-            // at the bottom right with a margin of 30px.
+            // at the bottom right with a margin of 30 pixels.
             {
                 Screen sc = Screen.FromControl(this);
                 Location =
                     new Point(sc.WorkingArea.Width - (Width + 30),
                         sc.WorkingArea.Height - (Height + 30));
             }
-
+            
+            picAssistant.Dock = DockStyle.Fill;
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
             tmrIdleAni.Tick += TmrIdleAni_Tick;
             tmrIdleSay.Tick += TmrIdleSay_Tick;
+            tmrIdleAni.Interval = 120000; // 2 minutes
+            tmrIdleSay.Interval = 300000; // 5 minutes
 
             TopMost = true; // Only hell now. :-)
 #if DEBUG
@@ -59,17 +55,11 @@ namespace FuckingClippy
 
                 DebugItems[0] = new ToolStripMenuItem();
                 DebugItems[0].Text = "[Debug] Prompt";
-                DebugItems[0].Click += (s, e) =>
-                {
-                    Character.Prompt();
-                };
+                DebugItems[0].Click += (s, e) => Character.Prompt();
 
                 DebugItems[1] = new ToolStripMenuItem();
                 DebugItems[1].Text = "[Debug] Say (Random)";
-                DebugItems[1].Click += (s, e) =>
-                {
-                    Character.SayRandom();
-                };
+                DebugItems[1].Click += (s, e) => Character.SayRandom();
 
                 cmsCharacter.Items.AddRange(DebugItems);
             }
@@ -83,7 +73,7 @@ namespace FuckingClippy
         }
 
         /// <summary>
-        /// Hey
+        /// Exit main application while playing the FadeOut animation.
         /// </summary>
         public void Exit()
         {
@@ -155,12 +145,12 @@ namespace FuckingClippy
 
         void csmiOptions_Click(object sender, EventArgs e)
         { // Settings -> Options tab
-            new SettingsForm(SettingsForm.Tab.Options).ShowDialog();
+            new SettingsForm(Tab.Options).ShowDialog();
         }
 
         void cmsiChooseAssistant_Click(object sender, EventArgs e)
         { // Settings -> Assistant tab
-            new SettingsForm(SettingsForm.Tab.Assistant).ShowDialog();
+            new SettingsForm(Tab.Assistant).ShowDialog();
         }
 
         void cmsiAnimate_Click(object sender, EventArgs e)

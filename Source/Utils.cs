@@ -37,21 +37,6 @@ namespace FuckingClippy
             );
         }
 
-        public static bool EmbeddedItemExist(string path)
-        {
-            try
-            {
-                Project.GetManifestResourceInfo(
-                    ProjectName + "." + path
-                );
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public static int GetNumberOfEmbeddedItems(string path)
         {
             Regex r = new Regex(

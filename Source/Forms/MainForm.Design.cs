@@ -73,7 +73,7 @@
             // cmsiChooseAssistant
             // 
             cmsiChooseAssistant.Name = "cmsiChooseAssistant";
-            cmsiChooseAssistant.Text = "&Choose assistant...";
+            cmsiChooseAssistant.Text = "&Choose an assistant...";
             cmsiChooseAssistant.Click += new System.EventHandler(cmsiChooseAssistant_Click);
             // 
             // cmsiAnimate

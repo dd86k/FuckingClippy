@@ -5,7 +5,7 @@ using static System.Diagnostics.Process;
 
 //TODO: Add support for...
 // - Images
-// - Choices (radio buttons?)
+// - Choices (radio buttons)
 
 namespace FuckingClippy
 {
@@ -51,11 +51,15 @@ namespace FuckingClippy
         // A reference to the parent form that summons thee.
         static MainForm CharacterForm;
 
-        public static void Initialize(MainForm form, PictureBox pb)
+        // PictureBox reference.
+        static PictureBox PictureFrame;
+
+        public static void Initialize(MainForm form)
         {
             CharacterForm = form;
+            PictureFrame = form.Controls["picAssistant"] as PictureBox;
 
-            AnimationSystem.Initialize(pb);
+            AnimationSystem.Initialize();
         }
 
         public static void Prompt()
@@ -246,8 +250,10 @@ random - I'll tell you something randomly."
         #region Dialog system
         static class DialogSystem
         {
+            //TODO: #11 Re-use BubbleForm in Character.DialogSystem
+
             // The current active bubble text.
-            static Form CurrentBubbleForm;
+            static Form BubbleForm;
             // Defaults
             static Color BubbleColor = Color.FromArgb(255, 255, 204);
             static Font DefaultFont = new Font("Segoe UI", 9);
@@ -259,15 +265,15 @@ random - I'll tell you something randomly."
             /// </summary>
             internal static void Prompt()
             {
-                Utils.Log($"Prompt");
+                Utils.Log("Prompt");
 
-                if (CurrentBubbleForm != null)
-                    CurrentBubbleForm.SuspendLayout();
+                if (BubbleForm != null)
+                    BubbleForm.SuspendLayout();
 
-                CurrentBubbleForm = GetBaseForm(GetPrompt());
-                CurrentBubbleForm.ResumeLayout();
+                BubbleForm = GetBaseForm(GetPrompt());
+                BubbleForm.ResumeLayout();
 
-                CurrentBubbleForm.Show();
+                BubbleForm.Show();
             }
 
             static Control[] GetPrompt()
@@ -305,15 +311,15 @@ random - I'll tell you something randomly."
             {
                 Utils.Log($"Say - {text}");
 
-                if (CurrentBubbleForm != null)
+                if (BubbleForm != null)
                 {
-                    CurrentBubbleForm.Close();
-                    CurrentBubbleForm = null;
+                    BubbleForm.Close();
+                    BubbleForm = null;
                 }
 
-                CurrentBubbleForm = GetBaseForm(GetSay(text));
+                BubbleForm = GetBaseForm(GetSay(text));
 
-                CurrentBubbleForm.Show();
+                BubbleForm.Show();
             }
 
             internal static void SayRandom()
@@ -362,10 +368,11 @@ random - I'll tell you something randomly."
 
                 return ca;
             }
+
             static BubbleForm GetBaseForm(Control[] subControls)
             {
-                if (CurrentBubbleForm != null)
-                    CurrentBubbleForm.Close();
+                if (BubbleForm != null)
+                    BubbleForm.Close();
 
                 BubbleForm f = new BubbleForm();
 
@@ -383,13 +390,14 @@ random - I'll tell you something randomly."
                 pb.Image = BubbleTail;
 
                 p.ClientSizeChanged += (s, e) =>
-                {
+                { // Because the form autosizes.
                     pb.Location =
-                        new Point((int)(f.ClientSize.Width / 1.62), p.Height);
+                        new Point((int)(f.ClientSize.Width / 1.62), p.Height - 1);
                 };
 
-                f.Controls.Add(p);
+                // Important order.
                 f.Controls.Add(pb);
+                f.Controls.Add(p);
 
                 f.Location =
                     new Point(CharacterForm.Location.X - (f.Size.Width / 2),
@@ -403,10 +411,8 @@ random - I'll tell you something randomly."
         #region Animation system
         static class AnimationSystem
         {
-            public static void Initialize(PictureBox picbox)
+            public static void Initialize()
             {
-                Frame = picbox;
-
                 Idle = Utils.LoadEmbeddedImage("Clippy.Idle.png");
 
                 NumberOfAnimations = Enum.GetNames(typeof(Animation)).Length;
@@ -417,22 +423,19 @@ random - I'll tell you something randomly."
                 {
                     if (CurrentFrame < MaxFrame)
                     {
-                        Frame.Image = GetNextFrame();
-
-                        // Every 5 frames. Guarantees it calls it at least once.
+                        PictureFrame.Image = GetNextFrame();
+                        
+                        // Calls the GC every 5 frame.
                         if (CurrentFrame % 5 == 0)
                             GC.Collect(1, GCCollectionMode.Forced, false);
                     }
                     else
                     {
-                        Stop();
-                        Frame.Image = Idle;
+                        StopAnimation();
+                        PictureFrame.Image = Idle;
                     }
                 };
             }
-
-            // PictureBox reference.
-            static PictureBox Frame;
             
             // Default AnimationTimer interval.
             const int DefaultInterval = 100;
@@ -458,15 +461,12 @@ random - I'll tell you something randomly."
                 Utils.Log("Playing animation: " + name);
 
                 CurrentAnimation = name;
-
                 CurrentFrame = 0;
 
-                string path = "Images.Clippy.Animations." + name;
-
-                if (!Utils.EmbeddedItemExist(path))
-                    throw new ArgumentException("Embedded files for animation not found: " + name);
-
-                MaxFrame = Utils.GetNumberOfEmbeddedItems(path);
+                MaxFrame =
+                    Utils.GetNumberOfEmbeddedItems(
+                        "Images.Clippy.Animations." + name
+                    );
 
                 AnimationTimer.Start();
             }
@@ -474,7 +474,7 @@ random - I'll tell you something randomly."
             /// <summary>
             /// Stop the current animation.
             /// </summary>
-            static void Stop()
+            static void StopAnimation()
             {
                 AnimationTimer.Stop();
             }
