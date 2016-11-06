@@ -31,6 +31,13 @@
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.tabAssistant = new System.Windows.Forms.TabPage();
             this.tabOptions = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTipsReset = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.tabAbout = new System.Windows.Forms.TabPage();
             this.lblMicrosoftCopyrights = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -38,19 +45,13 @@
             this.linklblLicense = new System.Windows.Forms.LinkLabel();
             this.lblLicense = new System.Windows.Forms.Label();
             this.lblAbout = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnTipsReset = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.chkShowInTaskbar = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.tabOptions.SuspendLayout();
-            this.tabAbout.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -77,6 +78,7 @@
             // 
             // tabOptions
             // 
+            this.tabOptions.Controls.Add(this.chkShowInTaskbar);
             this.tabOptions.Controls.Add(this.groupBox1);
             this.tabOptions.Location = new System.Drawing.Point(4, 24);
             this.tabOptions.Name = "tabOptions";
@@ -85,6 +87,82 @@
             this.tabOptions.TabIndex = 1;
             this.tabOptions.Text = "Options";
             this.tabOptions.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnTipsReset);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.checkBox2);
+            this.groupBox1.Controls.Add(this.checkBox3);
+            this.groupBox1.Controls.Add(this.checkBox4);
+            this.groupBox1.Controls.Add(this.checkBox5);
+            this.groupBox1.Location = new System.Drawing.Point(6, 110);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(427, 155);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Show tips on";
+            // 
+            // btnTipsReset
+            // 
+            this.btnTipsReset.Location = new System.Drawing.Point(230, 72);
+            this.btnTipsReset.Name = "btnTipsReset";
+            this.btnTipsReset.Size = new System.Drawing.Size(118, 23);
+            this.btnTipsReset.TabIndex = 1;
+            this.btnTipsReset.Text = "&Reset tips";
+            this.btnTipsReset.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(25, 72);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(128, 19);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Keyboard shortcuts";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(230, 47);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(153, 19);
+            this.checkBox2.TabIndex = 0;
+            this.checkBox2.Text = "Show daily tip at startup";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(230, 22);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(159, 19);
+            this.checkBox3.TabIndex = 0;
+            this.checkBox3.Text = "Show only important tips";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(25, 47);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(163, 19);
+            this.checkBox4.TabIndex = 0;
+            this.checkBox4.Text = "Optimal use of the mouse";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(25, 22);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(185, 19);
+            this.checkBox5.TabIndex = 0;
+            this.checkBox5.Text = "Optimal usage of the software";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // tabAbout
             // 
@@ -159,82 +237,6 @@
             this.lblAbout.TabIndex = 1;
             this.lblAbout.Text = "lblAbout";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(25, 72);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(128, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Keyboard shortcuts";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(230, 47);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(153, 19);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "Show daily tip at startup";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(230, 22);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(159, 19);
-            this.checkBox3.TabIndex = 0;
-            this.checkBox3.Text = "Show only important tips";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(25, 47);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(163, 19);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "Optimal use of the mouse";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(25, 22);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(185, 19);
-            this.checkBox5.TabIndex = 0;
-            this.checkBox5.Text = "Optimal usage of the software";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnTipsReset);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Controls.Add(this.checkBox4);
-            this.groupBox1.Controls.Add(this.checkBox5);
-            this.groupBox1.Location = new System.Drawing.Point(6, 110);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(427, 155);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Show tips on";
-            // 
-            // btnTipsReset
-            // 
-            this.btnTipsReset.Location = new System.Drawing.Point(230, 72);
-            this.btnTipsReset.Name = "btnTipsReset";
-            this.btnTipsReset.Size = new System.Drawing.Size(118, 23);
-            this.btnTipsReset.TabIndex = 1;
-            this.btnTipsReset.Text = "&Reset tips";
-            this.btnTipsReset.UseVisualStyleBackColor = true;
-            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(368, 307);
@@ -255,6 +257,16 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
+            // chkShowInTaskbar
+            // 
+            this.chkShowInTaskbar.AutoSize = true;
+            this.chkShowInTaskbar.Location = new System.Drawing.Point(31, 17);
+            this.chkShowInTaskbar.Name = "chkShowInTaskbar";
+            this.chkShowInTaskbar.Size = new System.Drawing.Size(111, 19);
+            this.chkShowInTaskbar.TabIndex = 2;
+            this.chkShowInTaskbar.Text = "Show in Taskbar";
+            this.chkShowInTaskbar.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -264,16 +276,19 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.MainTabControl);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Office assistant";
             this.MainTabControl.ResumeLayout(false);
             this.tabOptions.ResumeLayout(false);
-            this.tabAbout.ResumeLayout(false);
-            this.tabAbout.PerformLayout();
+            this.tabOptions.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabAbout.ResumeLayout(false);
+            this.tabAbout.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -299,5 +314,6 @@
         private System.Windows.Forms.Button btnTipsReset;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.CheckBox chkShowInTaskbar;
     }
 }
