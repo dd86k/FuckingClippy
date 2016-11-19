@@ -206,7 +206,7 @@ namespace FuckingClippy
                                         break;
                                     }
                                 else
-                                    Say(@"Try the ""help"" command!");
+                                    Say(@"Help you in what? Have you tried the ""help"" command?");
                                 break;
 
                             case "yourself":
