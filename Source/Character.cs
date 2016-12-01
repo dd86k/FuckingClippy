@@ -394,7 +394,7 @@ random - I'll tell you something randomly."
 
                 Say(s[Utils.Random.Next(0, s.Length)]);
             }
-
+            
             static Control[] GetSay(string text)
             {
                 Control[] ca = new Control[1];

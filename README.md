@@ -8,6 +8,6 @@ Your favorite assistant is back, without Office!
 
 Copyright © Microsoft 1997-2003 for their Clippit (Clippy) Office Assistant.
 
-[wiki]: https://github.com/guitarxhero/FuckingClippy/wiki
-[releases]: https://github.com/guitarxhero/FuckingClippy/releases
+[wiki]: https://github.com/dd86k/FuckingClippy/wiki
+[releases]: https://github.com/dd86k/FuckingClippy/releases
 [license]: LICENSE
