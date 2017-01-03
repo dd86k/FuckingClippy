@@ -17,7 +17,7 @@ namespace FuckingClippy
 
         public static PlatformID OSType = Environment.OSVersion.Platform;
 
-        public static Random Random = new Random();
+        public static Random R = new Random();
 
         public static readonly bool RunningMono =
             Type.GetType("Mono.Runtime") != null;

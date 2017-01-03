@@ -380,7 +380,7 @@ random - I'll tell you something randomly."
 "I am not an AI, just a bunch of CIL instructions.",
 "Seems like you need help living your life there buddy.",
 "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
-"💚?",
+"<3?",
 "Hi, I'm vegan.",
 "SUFFER();",
 "rawrrr x33",
@@ -392,7 +392,7 @@ random - I'll tell you something randomly."
 "Trouble with Windows? Re-install it!"
                 };
 
-                Say(s[Utils.Random.Next(0, s.Length)]);
+                Say(s[Utils.R.Next(0, s.Length)]);
             }
             
             static Control[] GetSay(string text)
@@ -532,7 +532,7 @@ random - I'll tell you something randomly."
             /// </summary>
             public static void PlayRandom()
             {
-                Play((Animation)Utils.Random.Next(0, NumberOfAnimations));
+                Play((Animation)Utils.R.Next(0, NumberOfAnimations));
             }
         }
         #endregion

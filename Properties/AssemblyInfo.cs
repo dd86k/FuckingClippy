@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("guitarxhero")]
 [assembly: AssemblyProduct("FuckingClippy")]
-[assembly: AssemblyCopyright("Copyright (c) 2015 guitarxhero")]
+[assembly: AssemblyCopyright("Copyright (c) 2015 dd86k")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.4.0.1")]
-[assembly: AssemblyFileVersion("0.4.0.1")]
+[assembly: AssemblyVersion("0.4.0.2")]
+[assembly: AssemblyFileVersion("0.4.0.2")]
 [assembly: NeutralResourcesLanguage("en")]
 

@@ -31,6 +31,7 @@
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.tabAssistant = new System.Windows.Forms.TabPage();
             this.tabOptions = new System.Windows.Forms.TabPage();
+            this.chkShowInTaskbar = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnTipsReset = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -47,7 +48,6 @@
             this.lblAbout = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.chkShowInTaskbar = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.tabOptions.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -87,6 +87,16 @@
             this.tabOptions.TabIndex = 1;
             this.tabOptions.Text = "Options";
             this.tabOptions.UseVisualStyleBackColor = true;
+            // 
+            // chkShowInTaskbar
+            // 
+            this.chkShowInTaskbar.AutoSize = true;
+            this.chkShowInTaskbar.Location = new System.Drawing.Point(31, 17);
+            this.chkShowInTaskbar.Name = "chkShowInTaskbar";
+            this.chkShowInTaskbar.Size = new System.Drawing.Size(111, 19);
+            this.chkShowInTaskbar.TabIndex = 2;
+            this.chkShowInTaskbar.Text = "Show in Taskbar";
+            this.chkShowInTaskbar.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -195,10 +205,10 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(87, 87);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(328, 21);
+            this.linkLabel1.Size = new System.Drawing.Size(292, 21);
             this.linkLabel1.TabIndex = 5;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://github.com/guitarxhero/FuckingClippy";
+            this.linkLabel1.Text = "https://github.com/dd86k/FuckingClippy";
             // 
             // lblWebsite
             // 
@@ -256,16 +266,6 @@
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // chkShowInTaskbar
-            // 
-            this.chkShowInTaskbar.AutoSize = true;
-            this.chkShowInTaskbar.Location = new System.Drawing.Point(31, 17);
-            this.chkShowInTaskbar.Name = "chkShowInTaskbar";
-            this.chkShowInTaskbar.Size = new System.Drawing.Size(111, 19);
-            this.chkShowInTaskbar.TabIndex = 2;
-            this.chkShowInTaskbar.Text = "Show in Taskbar";
-            this.chkShowInTaskbar.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
