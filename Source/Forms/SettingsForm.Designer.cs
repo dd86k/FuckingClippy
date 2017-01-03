@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
             this.MainTabControl = new System.Windows.Forms.TabControl();
-            this.tabAssistant = new System.Windows.Forms.TabPage();
-            this.tabOptions = new System.Windows.Forms.TabPage();
+            this.AssistantTab = new System.Windows.Forms.TabPage();
+            this.OptionsTab = new System.Windows.Forms.TabPage();
             this.chkShowInTaskbar = new System.Windows.Forms.CheckBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnTipsReset = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.tabAbout = new System.Windows.Forms.TabPage();
-            this.lblMicrosoftCopyrights = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.lblWebsite = new System.Windows.Forms.Label();
-            this.linklblLicense = new System.Windows.Forms.LinkLabel();
-            this.lblLicense = new System.Windows.Forms.Label();
-            this.lblAbout = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnOk = new System.Windows.Forms.Button();
+            this.TipsGroup = new System.Windows.Forms.GroupBox();
+            this.ResetTipsButton = new System.Windows.Forms.Button();
+            this.KeyboardShortcutsCheck = new System.Windows.Forms.CheckBox();
+            this.DailyTipCheck = new System.Windows.Forms.CheckBox();
+            this.ImportantTipsCheck = new System.Windows.Forms.CheckBox();
+            this.MouseUsageCheck = new System.Windows.Forms.CheckBox();
+            this.SoftwareUsageCheck = new System.Windows.Forms.CheckBox();
+            this.AboutTab = new System.Windows.Forms.TabPage();
+            this.CopyrightsLabel = new System.Windows.Forms.Label();
+            this.WebsiteLink = new System.Windows.Forms.LinkLabel();
+            this.WebsiteLabel = new System.Windows.Forms.Label();
+            this.LicenseLink = new System.Windows.Forms.LinkLabel();
+            this.LicenseLabel = new System.Windows.Forms.Label();
+            this.AboutLabel = new System.Windows.Forms.Label();
+            this.QuitButton = new System.Windows.Forms.Button();
+            this.OkButton = new System.Windows.Forms.Button();
             this.MainTabControl.SuspendLayout();
-            this.tabOptions.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabAbout.SuspendLayout();
+            this.OptionsTab.SuspendLayout();
+            this.TipsGroup.SuspendLayout();
+            this.AboutTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
             // 
-            this.MainTabControl.Controls.Add(this.tabAssistant);
-            this.MainTabControl.Controls.Add(this.tabOptions);
-            this.MainTabControl.Controls.Add(this.tabAbout);
+            this.MainTabControl.Controls.Add(this.AssistantTab);
+            this.MainTabControl.Controls.Add(this.OptionsTab);
+            this.MainTabControl.Controls.Add(this.AboutTab);
             this.MainTabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.MainTabControl.Location = new System.Drawing.Point(0, 0);
             this.MainTabControl.Name = "MainTabControl";
@@ -66,27 +66,27 @@
             this.MainTabControl.Size = new System.Drawing.Size(447, 301);
             this.MainTabControl.TabIndex = 0;
             // 
-            // tabAssistant
+            // AssistantTab
             // 
-            this.tabAssistant.Location = new System.Drawing.Point(4, 24);
-            this.tabAssistant.Name = "tabAssistant";
-            this.tabAssistant.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAssistant.Size = new System.Drawing.Size(439, 273);
-            this.tabAssistant.TabIndex = 0;
-            this.tabAssistant.Text = "Appearance";
-            this.tabAssistant.UseVisualStyleBackColor = true;
+            this.AssistantTab.Location = new System.Drawing.Point(4, 24);
+            this.AssistantTab.Name = "AssistantTab";
+            this.AssistantTab.Padding = new System.Windows.Forms.Padding(3);
+            this.AssistantTab.Size = new System.Drawing.Size(439, 273);
+            this.AssistantTab.TabIndex = 0;
+            this.AssistantTab.Text = "Appearance";
+            this.AssistantTab.UseVisualStyleBackColor = true;
             // 
-            // tabOptions
+            // OptionsTab
             // 
-            this.tabOptions.Controls.Add(this.chkShowInTaskbar);
-            this.tabOptions.Controls.Add(this.groupBox1);
-            this.tabOptions.Location = new System.Drawing.Point(4, 24);
-            this.tabOptions.Name = "tabOptions";
-            this.tabOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabOptions.Size = new System.Drawing.Size(439, 273);
-            this.tabOptions.TabIndex = 1;
-            this.tabOptions.Text = "Options";
-            this.tabOptions.UseVisualStyleBackColor = true;
+            this.OptionsTab.Controls.Add(this.chkShowInTaskbar);
+            this.OptionsTab.Controls.Add(this.TipsGroup);
+            this.OptionsTab.Location = new System.Drawing.Point(4, 24);
+            this.OptionsTab.Name = "OptionsTab";
+            this.OptionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.OptionsTab.Size = new System.Drawing.Size(439, 273);
+            this.OptionsTab.TabIndex = 1;
+            this.OptionsTab.Text = "Options";
+            this.OptionsTab.UseVisualStyleBackColor = true;
             // 
             // chkShowInTaskbar
             // 
@@ -98,182 +98,182 @@
             this.chkShowInTaskbar.Text = "Show in Taskbar";
             this.chkShowInTaskbar.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // TipsGroup
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.TipsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnTipsReset);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.checkBox2);
-            this.groupBox1.Controls.Add(this.checkBox3);
-            this.groupBox1.Controls.Add(this.checkBox4);
-            this.groupBox1.Controls.Add(this.checkBox5);
-            this.groupBox1.Location = new System.Drawing.Point(6, 110);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(427, 155);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Show tips on";
+            this.TipsGroup.Controls.Add(this.ResetTipsButton);
+            this.TipsGroup.Controls.Add(this.KeyboardShortcutsCheck);
+            this.TipsGroup.Controls.Add(this.DailyTipCheck);
+            this.TipsGroup.Controls.Add(this.ImportantTipsCheck);
+            this.TipsGroup.Controls.Add(this.MouseUsageCheck);
+            this.TipsGroup.Controls.Add(this.SoftwareUsageCheck);
+            this.TipsGroup.Location = new System.Drawing.Point(6, 110);
+            this.TipsGroup.Name = "TipsGroup";
+            this.TipsGroup.Size = new System.Drawing.Size(427, 155);
+            this.TipsGroup.TabIndex = 1;
+            this.TipsGroup.TabStop = false;
+            this.TipsGroup.Text = "Show tips on";
             // 
-            // btnTipsReset
+            // ResetTipsButton
             // 
-            this.btnTipsReset.Location = new System.Drawing.Point(230, 72);
-            this.btnTipsReset.Name = "btnTipsReset";
-            this.btnTipsReset.Size = new System.Drawing.Size(118, 23);
-            this.btnTipsReset.TabIndex = 1;
-            this.btnTipsReset.Text = "&Reset tips";
-            this.btnTipsReset.UseVisualStyleBackColor = true;
+            this.ResetTipsButton.Location = new System.Drawing.Point(230, 72);
+            this.ResetTipsButton.Name = "ResetTipsButton";
+            this.ResetTipsButton.Size = new System.Drawing.Size(118, 23);
+            this.ResetTipsButton.TabIndex = 1;
+            this.ResetTipsButton.Text = "&Reset tips";
+            this.ResetTipsButton.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // KeyboardShortcutsCheck
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(25, 72);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(128, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Keyboard shortcuts";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.KeyboardShortcutsCheck.AutoSize = true;
+            this.KeyboardShortcutsCheck.Location = new System.Drawing.Point(25, 72);
+            this.KeyboardShortcutsCheck.Name = "KeyboardShortcutsCheck";
+            this.KeyboardShortcutsCheck.Size = new System.Drawing.Size(128, 19);
+            this.KeyboardShortcutsCheck.TabIndex = 0;
+            this.KeyboardShortcutsCheck.Text = "Keyboard shortcuts";
+            this.KeyboardShortcutsCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // DailyTipCheck
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(230, 47);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(153, 19);
-            this.checkBox2.TabIndex = 0;
-            this.checkBox2.Text = "Show daily tip at startup";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.DailyTipCheck.AutoSize = true;
+            this.DailyTipCheck.Location = new System.Drawing.Point(230, 47);
+            this.DailyTipCheck.Name = "DailyTipCheck";
+            this.DailyTipCheck.Size = new System.Drawing.Size(153, 19);
+            this.DailyTipCheck.TabIndex = 0;
+            this.DailyTipCheck.Text = "Show daily tip at startup";
+            this.DailyTipCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // ImportantTipsCheck
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(230, 22);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(159, 19);
-            this.checkBox3.TabIndex = 0;
-            this.checkBox3.Text = "Show only important tips";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.ImportantTipsCheck.AutoSize = true;
+            this.ImportantTipsCheck.Location = new System.Drawing.Point(230, 22);
+            this.ImportantTipsCheck.Name = "ImportantTipsCheck";
+            this.ImportantTipsCheck.Size = new System.Drawing.Size(159, 19);
+            this.ImportantTipsCheck.TabIndex = 0;
+            this.ImportantTipsCheck.Text = "Show only important tips";
+            this.ImportantTipsCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // MouseUsageCheck
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(25, 47);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(163, 19);
-            this.checkBox4.TabIndex = 0;
-            this.checkBox4.Text = "Optimal use of the mouse";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.MouseUsageCheck.AutoSize = true;
+            this.MouseUsageCheck.Location = new System.Drawing.Point(25, 47);
+            this.MouseUsageCheck.Name = "MouseUsageCheck";
+            this.MouseUsageCheck.Size = new System.Drawing.Size(163, 19);
+            this.MouseUsageCheck.TabIndex = 0;
+            this.MouseUsageCheck.Text = "Optimal use of the mouse";
+            this.MouseUsageCheck.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // SoftwareUsageCheck
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(25, 22);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(185, 19);
-            this.checkBox5.TabIndex = 0;
-            this.checkBox5.Text = "Optimal usage of the software";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.SoftwareUsageCheck.AutoSize = true;
+            this.SoftwareUsageCheck.Location = new System.Drawing.Point(25, 22);
+            this.SoftwareUsageCheck.Name = "SoftwareUsageCheck";
+            this.SoftwareUsageCheck.Size = new System.Drawing.Size(185, 19);
+            this.SoftwareUsageCheck.TabIndex = 0;
+            this.SoftwareUsageCheck.Text = "Optimal usage of the software";
+            this.SoftwareUsageCheck.UseVisualStyleBackColor = true;
             // 
-            // tabAbout
+            // AboutTab
             // 
-            this.tabAbout.Controls.Add(this.lblMicrosoftCopyrights);
-            this.tabAbout.Controls.Add(this.linkLabel1);
-            this.tabAbout.Controls.Add(this.lblWebsite);
-            this.tabAbout.Controls.Add(this.linklblLicense);
-            this.tabAbout.Controls.Add(this.lblLicense);
-            this.tabAbout.Controls.Add(this.lblAbout);
-            this.tabAbout.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabAbout.Location = new System.Drawing.Point(4, 24);
-            this.tabAbout.Name = "tabAbout";
-            this.tabAbout.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAbout.Size = new System.Drawing.Size(439, 273);
-            this.tabAbout.TabIndex = 3;
-            this.tabAbout.Text = "About";
-            this.tabAbout.UseVisualStyleBackColor = true;
+            this.AboutTab.Controls.Add(this.CopyrightsLabel);
+            this.AboutTab.Controls.Add(this.WebsiteLink);
+            this.AboutTab.Controls.Add(this.WebsiteLabel);
+            this.AboutTab.Controls.Add(this.LicenseLink);
+            this.AboutTab.Controls.Add(this.LicenseLabel);
+            this.AboutTab.Controls.Add(this.AboutLabel);
+            this.AboutTab.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AboutTab.Location = new System.Drawing.Point(4, 24);
+            this.AboutTab.Name = "AboutTab";
+            this.AboutTab.Padding = new System.Windows.Forms.Padding(3);
+            this.AboutTab.Size = new System.Drawing.Size(439, 273);
+            this.AboutTab.TabIndex = 3;
+            this.AboutTab.Text = "About";
+            this.AboutTab.UseVisualStyleBackColor = true;
             // 
-            // lblMicrosoftCopyrights
+            // CopyrightsLabel
             // 
-            this.lblMicrosoftCopyrights.AutoSize = true;
-            this.lblMicrosoftCopyrights.Location = new System.Drawing.Point(8, 130);
-            this.lblMicrosoftCopyrights.Name = "lblMicrosoftCopyrights";
-            this.lblMicrosoftCopyrights.Size = new System.Drawing.Size(287, 42);
-            this.lblMicrosoftCopyrights.TabIndex = 6;
-            this.lblMicrosoftCopyrights.Text = "Copyright © Microsoft 1997-2003\r\nfor their Clippit (Clippy) Office Assistant.";
+            this.CopyrightsLabel.AutoSize = true;
+            this.CopyrightsLabel.Location = new System.Drawing.Point(8, 130);
+            this.CopyrightsLabel.Name = "CopyrightsLabel";
+            this.CopyrightsLabel.Size = new System.Drawing.Size(287, 42);
+            this.CopyrightsLabel.TabIndex = 6;
+            this.CopyrightsLabel.Text = "Copyright © Microsoft 1997-2003\r\nfor their Clippit (Clippy) Office Assistant.";
             // 
-            // linkLabel1
+            // WebsiteLink
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(87, 87);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(292, 21);
-            this.linkLabel1.TabIndex = 5;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://github.com/dd86k/FuckingClippy";
+            this.WebsiteLink.AutoSize = true;
+            this.WebsiteLink.Location = new System.Drawing.Point(87, 87);
+            this.WebsiteLink.Name = "WebsiteLink";
+            this.WebsiteLink.Size = new System.Drawing.Size(292, 21);
+            this.WebsiteLink.TabIndex = 5;
+            this.WebsiteLink.TabStop = true;
+            this.WebsiteLink.Text = "https://github.com/dd86k/FuckingClippy";
             // 
-            // lblWebsite
+            // WebsiteLabel
             // 
-            this.lblWebsite.AutoSize = true;
-            this.lblWebsite.Location = new System.Drawing.Point(6, 87);
-            this.lblWebsite.Name = "lblWebsite";
-            this.lblWebsite.Size = new System.Drawing.Size(65, 21);
-            this.lblWebsite.TabIndex = 4;
-            this.lblWebsite.Text = "Website";
+            this.WebsiteLabel.AutoSize = true;
+            this.WebsiteLabel.Location = new System.Drawing.Point(6, 87);
+            this.WebsiteLabel.Name = "WebsiteLabel";
+            this.WebsiteLabel.Size = new System.Drawing.Size(65, 21);
+            this.WebsiteLabel.TabIndex = 4;
+            this.WebsiteLabel.Text = "Website";
             // 
-            // linklblLicense
+            // LicenseLink
             // 
-            this.linklblLicense.AutoSize = true;
-            this.linklblLicense.Location = new System.Drawing.Point(87, 47);
-            this.linklblLicense.Name = "linklblLicense";
-            this.linklblLicense.Size = new System.Drawing.Size(260, 21);
-            this.linklblLicense.TabIndex = 3;
-            this.linklblLicense.TabStop = true;
-            this.linklblLicense.Text = "https://opensource.org/licenses/MIT";
+            this.LicenseLink.AutoSize = true;
+            this.LicenseLink.Location = new System.Drawing.Point(87, 47);
+            this.LicenseLink.Name = "LicenseLink";
+            this.LicenseLink.Size = new System.Drawing.Size(260, 21);
+            this.LicenseLink.TabIndex = 3;
+            this.LicenseLink.TabStop = true;
+            this.LicenseLink.Text = "https://opensource.org/licenses/MIT";
             // 
-            // lblLicense
+            // LicenseLabel
             // 
-            this.lblLicense.AutoSize = true;
-            this.lblLicense.Location = new System.Drawing.Point(6, 47);
-            this.lblLicense.Name = "lblLicense";
-            this.lblLicense.Size = new System.Drawing.Size(61, 21);
-            this.lblLicense.TabIndex = 2;
-            this.lblLicense.Text = "License";
+            this.LicenseLabel.AutoSize = true;
+            this.LicenseLabel.Location = new System.Drawing.Point(6, 47);
+            this.LicenseLabel.Name = "LicenseLabel";
+            this.LicenseLabel.Size = new System.Drawing.Size(61, 21);
+            this.LicenseLabel.TabIndex = 2;
+            this.LicenseLabel.Text = "License";
             // 
-            // lblAbout
+            // AboutLabel
             // 
-            this.lblAbout.AutoSize = true;
-            this.lblAbout.Location = new System.Drawing.Point(6, 7);
-            this.lblAbout.Name = "lblAbout";
-            this.lblAbout.Size = new System.Drawing.Size(69, 21);
-            this.lblAbout.TabIndex = 1;
-            this.lblAbout.Text = "lblAbout";
+            this.AboutLabel.AutoSize = true;
+            this.AboutLabel.Location = new System.Drawing.Point(6, 7);
+            this.AboutLabel.Name = "AboutLabel";
+            this.AboutLabel.Size = new System.Drawing.Size(69, 21);
+            this.AboutLabel.TabIndex = 1;
+            this.AboutLabel.Text = "lblAbout";
             // 
-            // btnCancel
+            // QuitButton
             // 
-            this.btnCancel.Location = new System.Drawing.Point(368, 307);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.QuitButton.Location = new System.Drawing.Point(368, 307);
+            this.QuitButton.Name = "QuitButton";
+            this.QuitButton.Size = new System.Drawing.Size(75, 23);
+            this.QuitButton.TabIndex = 1;
+            this.QuitButton.Text = "Cancel";
+            this.QuitButton.UseVisualStyleBackColor = true;
+            this.QuitButton.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnOk
+            // OkButton
             // 
-            this.btnOk.Location = new System.Drawing.Point(287, 307);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 2;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            this.OkButton.Location = new System.Drawing.Point(287, 307);
+            this.OkButton.Name = "OkButton";
+            this.OkButton.Size = new System.Drawing.Size(75, 23);
+            this.OkButton.TabIndex = 2;
+            this.OkButton.Text = "OK";
+            this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 337);
-            this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.MainTabControl);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -283,12 +283,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Office assistant";
             this.MainTabControl.ResumeLayout(false);
-            this.tabOptions.ResumeLayout(false);
-            this.tabOptions.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabAbout.ResumeLayout(false);
-            this.tabAbout.PerformLayout();
+            this.OptionsTab.ResumeLayout(false);
+            this.OptionsTab.PerformLayout();
+            this.TipsGroup.ResumeLayout(false);
+            this.TipsGroup.PerformLayout();
+            this.AboutTab.ResumeLayout(false);
+            this.AboutTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -296,24 +296,24 @@
         #endregion
 
         private System.Windows.Forms.TabControl MainTabControl;
-        private System.Windows.Forms.TabPage tabAssistant;
-        private System.Windows.Forms.TabPage tabOptions;
-        private System.Windows.Forms.TabPage tabAbout;
-        private System.Windows.Forms.Label lblAbout;
-        private System.Windows.Forms.Label lblLicense;
-        private System.Windows.Forms.LinkLabel linklblLicense;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label lblWebsite;
-        private System.Windows.Forms.Label lblMicrosoftCopyrights;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.Button btnTipsReset;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnOk;
+        private System.Windows.Forms.TabPage AssistantTab;
+        private System.Windows.Forms.TabPage OptionsTab;
+        private System.Windows.Forms.TabPage AboutTab;
+        private System.Windows.Forms.Label AboutLabel;
+        private System.Windows.Forms.Label LicenseLabel;
+        private System.Windows.Forms.LinkLabel LicenseLink;
+        private System.Windows.Forms.LinkLabel WebsiteLink;
+        private System.Windows.Forms.Label WebsiteLabel;
+        private System.Windows.Forms.Label CopyrightsLabel;
+        private System.Windows.Forms.GroupBox TipsGroup;
+        private System.Windows.Forms.CheckBox KeyboardShortcutsCheck;
+        private System.Windows.Forms.CheckBox DailyTipCheck;
+        private System.Windows.Forms.CheckBox ImportantTipsCheck;
+        private System.Windows.Forms.CheckBox MouseUsageCheck;
+        private System.Windows.Forms.CheckBox SoftwareUsageCheck;
+        private System.Windows.Forms.Button ResetTipsButton;
+        private System.Windows.Forms.Button QuitButton;
+        private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.CheckBox chkShowInTaskbar;
     }
 }

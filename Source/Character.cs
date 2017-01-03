@@ -229,29 +229,26 @@ random - I'll tell you something randomly."
                         break;
 
                     /*
-                     * Non-serious, small talk.
+                     * Small talk.
                      */
 
                     case "screw":
                     case "fuck":
+                    case "frick":
                         if (u.Length > 1)
                             switch (u[1].ToLower())
                             {
                             case "me":
                                 Say("No thanks, I'll pass.");
                                 break;
+                            case "u":
                             case "you":
                                 Say("Hey buddy I can always shutdown your computer.");
                                 break;
                                 case "off":
                                 {
                                     Say("Okay!");
-
-                                    // Dirty solution
-                                    Timer a = new Timer();
-                                    a.Interval = 1000;
-                                    a.Tick += (s, e) => { CharacterForm.Exit(); };
-                                    a.Start();
+                                    AnimatedExit();
                                 }
                                 break;
                             default:
@@ -262,26 +259,30 @@ random - I'll tell you something randomly."
                             Say("WHO?");
                         break;
 
+                    case "quit":
                     case "exit":
                     case "close":
                     case "die":
                         {
                             Say("Okay!");
-
-                            // Dirty solution
-                            Timer a = new Timer();
-                            a.Interval = 1000;
-                            a.Tick += (s, e) => { CharacterForm.Exit(); };
-                            a.Start();
+                            AnimatedExit();
                         }
                         break;
 
                     default:
-                        Say("Are you okay?");
+                        Say("What was that about?");
                         break;
                 }
             else
                 Say("Is anyone there?");
+        }
+
+        static void AnimatedExit()
+        {
+            Timer a = new Timer();
+            a.Interval = 1000;
+            a.Tick += (s, e) => { CharacterForm.Exit(); };
+            a.Start();
         }
 
         #region Dialog system
@@ -467,7 +468,7 @@ random - I'll tell you something randomly."
                         
                         // Calls the GC every 5 frame.
                         if (CurrentFrame % 5 == 0)
-                            GC.Collect(1, GCCollectionMode.Forced, false);
+                            GC.Collect(1, GCCollectionMode.Optimized, false);
                     }
                     else
                     {

@@ -8,8 +8,8 @@ namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
     {
-        Timer tmrIdleSay = new Timer(),
-              tmrIdleAni = new Timer();
+        Timer IdleTalkTimer = new Timer(),
+              IdleAnimationTimer = new Timer();
         
         public MainForm() : base()
         {
@@ -24,7 +24,7 @@ namespace FuckingClippy
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
 
-            // Use main icon.
+            // Use main icon. (Windows)
             ShowIcon = false;
 
             Character.Initialize(this);
@@ -32,10 +32,11 @@ namespace FuckingClippy
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30 pixels.
             {
-                Screen sc = Screen.FromControl(this);
-                Location =
-                    new Point(sc.WorkingArea.Width - (Width + 30),
-                        sc.WorkingArea.Height - (Height + 30));
+                Screen sc = Screen.PrimaryScreen; // Screen.FromControl(this)
+                Location = new Point(
+                        sc.WorkingArea.Width - (Width + 30),
+                        sc.WorkingArea.Height - (Height + 30)
+                    );
             }
             
             picAssistant.Dock = DockStyle.Fill;
@@ -43,10 +44,10 @@ namespace FuckingClippy
             picAssistant.MouseUp += Assistant_MouseUp;
             picAssistant.MouseMove += Assistant_MouseMove;
 
-            tmrIdleAni.Tick += TmrIdleAni_Tick;
-            tmrIdleSay.Tick += TmrIdleSay_Tick;
-            tmrIdleAni.Interval = 30000; // 30 seconds
-            tmrIdleSay.Interval = 300000; // 5 minutes
+            IdleAnimationTimer.Tick += TmrIdleAni_Tick;
+            IdleTalkTimer.Tick += TmrIdleSay_Tick;
+            IdleAnimationTimer.Interval = 30000; // 30 seconds
+            IdleTalkTimer.Interval = 270000; // 4.5 minutes
 
             TopMost = true; // Only hell now. :-)
 #if DEBUG
@@ -68,8 +69,8 @@ namespace FuckingClippy
             ResumeLayout(true);
             
             Character.PlayAnimation(Animation.FadeIn);
-            tmrIdleAni.Start();
-            tmrIdleSay.Start();
+            IdleAnimationTimer.Start();
+            IdleTalkTimer.Start();
         }
 
         /// <summary>

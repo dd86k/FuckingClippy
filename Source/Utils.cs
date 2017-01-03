@@ -16,14 +16,15 @@ namespace FuckingClippy
             Project.GetName().Name;
 
         public static PlatformID OSType = Environment.OSVersion.Platform;
-
         public static Random R = new Random();
 
+        #region Runtime
         public static readonly bool RunningMono =
             Type.GetType("Mono.Runtime") != null;
         static string RuntimeName = RunningMono ? "Mono" : ".NET";
+        #endregion
 
-        #region Assembly related
+        #region Assembly
         public static Stream LoadEmbedded(string path)
         {
             return

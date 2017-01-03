@@ -16,14 +16,14 @@ namespace FuckingClippy
             switch (tab)
             {
                 default:
-                    MainTabControl.SelectedTab = tabAssistant;
+                    MainTabControl.SelectedTab = AssistantTab;
                     break;
                 case Tab.Options:
-                    MainTabControl.SelectedTab = tabOptions;
+                    MainTabControl.SelectedTab = OptionsTab;
                     break;
             }
 
-            lblAbout.Text = $"{Utils.ProjectName} v{Utils.Version}";
+            AboutLabel.Text = $"{Utils.ProjectName} v{Utils.Version}";
         }
 
         void btnOk_Click(object sender, System.EventArgs e)
