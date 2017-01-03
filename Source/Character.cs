@@ -12,7 +12,8 @@ namespace FuckingClippy
     public enum Animation : byte
     {
         Atomic,
-        Bicycle,
+        BicycleOut,
+        BicycleIn,
         Box,
         Check,
         Chill,
@@ -27,6 +28,7 @@ namespace FuckingClippy
         LookingUpperLeft,
         LookingUpperRight,
         LookingLeftAndRight,
+        LookingUp,
         Plane,
         PointingDown,
         PointingLeft,
