@@ -470,7 +470,7 @@ random - I'll tell you something randomly."
                         
                         // Calls the GC every 5 frame.
                         if (CurrentFrame % 5 == 0)
-                            GC.Collect(1, GCCollectionMode.Optimized, false);
+                            GC.Collect(1, GCCollectionMode.Forced, false);
                     }
                     else
                     {
