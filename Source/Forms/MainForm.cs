@@ -70,9 +70,11 @@ namespace FuckingClippy
             IdleAnimationTimer.Start();
             IdleTalkTimer.Start();
 
-#if OFFICE // Should be a dynamic setting with CLI switch instead.
-            // And started manually by the user probably?
-            OfficeHelper.Initialize();
+#if OFFICE && DEBUG
+            // Also should be a dynamic setting with CLI switch.
+            // And started manually by the user probably? Or scan for process?
+            WordHelper.Initialize();
+            WordHelper.Test();
 #endif
         }
 
