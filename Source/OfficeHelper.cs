@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop;
+using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Word;
 
 using WordApp = Microsoft.Office.Interop.Word.Application;
 using ExcelApp = Microsoft.Office.Interop.Excel.Application;
@@ -14,8 +17,8 @@ namespace FuckingClippy
 {
     static class OfficeHelper
     {
-        static WordApp WordApp;
-        static ExcelApp ExcelApp;
+        static WordApp WordInstance;
+        static ExcelApp ExcelInstance;
 
         /// <summary>
         /// Initiates the excel and word apps.
@@ -25,8 +28,18 @@ namespace FuckingClippy
         /// </remarks>
         public static void Initialize()
         {
-            WordApp = new WordApp();
-            ExcelApp = new ExcelApp();
+            WordInstance = new WordApp();
+            ExcelInstance = new ExcelApp();
+
+            ExcelInstance.ActivateMicrosoftApp(XlMSApplication.xlMicrosoftWord);
+
+            Thread.Sleep(3000);
+
+            WordInstance.Windows[0].ActivePane
+                .Application.ActiveDocument.Paragraphs.Add("penis");
+#if DEBUG
+            //Character.Say("Column: " +                 ExcelInstance.ActiveCell.Column);
+#endif
         }
     }
 }

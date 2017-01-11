@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-//TODO: #10 Change the naming scheme for controls
-
 namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
@@ -28,7 +26,7 @@ namespace FuckingClippy
             ShowIcon = false;
 
             Character.Initialize(this);
-            
+
             // Grab the current Screen info and locate the character
             // at the bottom right with a margin of 30 pixels.
             {
@@ -71,6 +69,11 @@ namespace FuckingClippy
             Character.PlayAnimation(Animation.FadeIn);
             IdleAnimationTimer.Start();
             IdleTalkTimer.Start();
+
+#if OFFICE // Should be a dynamic setting with CLI switch instead.
+            // And started manually by the user probably?
+            OfficeHelper.Initialize();
+#endif
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace FuckingClippy
         {
             Character.PlayAnimation(Animation.FadeOut);
 
-            // Dirty solution
+            // Dirty/temporary solution
             Timer a = new Timer();
             a.Interval = 3 * 125; // temporary
             a.Tick += (s, e) => { Close(); };

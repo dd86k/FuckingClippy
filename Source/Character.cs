@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using static System.Diagnostics.Process;
 
+//TODO: Reduce GC calls
+
 //TODO: Add support for...
 // - Images
 // - Choices (radio buttons)
@@ -131,15 +133,11 @@ namespace FuckingClippy
                                         Start("cmd", "/c " + ci);
                                         break;
                                     case PlatformID.MacOSX:
-                                        // Will have to revisit this.
-                                        Start($"x-terminal-emulator -e '{ci}'");
-                                        break;
                                     case PlatformID.Unix:
                                         Start($"x-terminal-emulator -e '{ci}'");
                                         break;
                                     default:
-                                        Say($"Sorry, I don't support  {Utils.OSType}."
-                                        );
+                                        Say($"Sorry, I don't support {Utils.OSType}.");
                                         break;
                                 }
                             }
@@ -148,14 +146,17 @@ namespace FuckingClippy
                                 Say($"I couldn't run that, sorry.\n({e.GetType().Name})");
                             }
                         else
-                            Say("Nope, can't hack the NSA.");
+                        {
+                            Say("Interesting...");
+                            PlayAnimation(Animation.Writing);
+                        }
                         break;
 
                     case "say":
                         if (u.Length > 1)
                             Say(userInput.Substring(4));
                         else
-                            Say("Say what?");
+                            Say("What do you want me to say?");
                         break;
 
                     case "search":
@@ -164,7 +165,7 @@ namespace FuckingClippy
                         $"https://www.google.com/search?q={Uri.EscapeDataString(userInput.Substring(7))}"
                             );
                         else
-                            Say("Search for what again?");
+                            Say("Tell me what to search for!");
                         break;
 
                     case "random":
@@ -234,6 +235,13 @@ random - I'll tell you something randomly."
                      * Small talk.
                      */
 
+                    case "hey":
+                    case "hello":
+                    case "hi":
+                    case "greetings":
+                        Say("Hello!");
+                        break;
+
                     case "screw":
                     case "fuck":
                     case "frick":
@@ -245,13 +253,11 @@ random - I'll tell you something randomly."
                                 break;
                             case "u":
                             case "you":
-                                Say("Hey buddy I can always shutdown your computer.");
+                                Say("Hey now buddy, I can always shutdown your computer you know.");
                                 break;
-                                case "off":
-                                {
-                                    Say("Okay!");
-                                    AnimatedExit();
-                                }
+                            case "off":
+                                Say("Okay!");
+                                DelayExit();
                                 break;
                             default:
                                 Say("WHO?");
@@ -261,14 +267,49 @@ random - I'll tell you something randomly."
                             Say("WHO?");
                         break;
 
+                    case "do":
+                        if (u.Length > 1)
+                        {
+                            switch (u[1].ToLower())
+                            {
+                                case "my":
+                                    if (u.Length > 2)
+                                    {
+                                        switch (u[2].ToLower())
+                                        {
+                                            case "hw":
+                                            case "homework":
+                                            case "homeworks":
+                                                Say("No, I won't do your homework. Do it yourself.");
+                                                break;
+
+                                            case "work":
+                                            case "chores":
+                                                Say("Sure! Just pay me 25,000$USD/Hour.");
+                                                break;
+
+                                            default: // Or maybe just make everything fall here?
+                                                Say($@"No, I won't do your ""{u[2]}"".");
+                                                break;
+                                        }
+                                    }
+                                    break;
+
+                                // me .. a .. /favou?r/ .. (No)
+
+                                default:
+                                    Say("Do what now?");
+                                    break;
+                            }
+                        }
+                        break;
+
                     case "quit":
                     case "exit":
                     case "close":
                     case "die":
-                        {
-                            Say("Okay!");
-                            AnimatedExit();
-                        }
+                        Say("Okay!");
+                        DelayExit();
                         break;
 
                     default:
@@ -276,10 +317,10 @@ random - I'll tell you something randomly."
                         break;
                 }
             else
-                Say("Is anyone there?");
+                Say("Not even a hello?");
         }
 
-        static void AnimatedExit()
+        private static void DelayExit()
         {
             Timer a = new Timer();
             a.Interval = 1000;
@@ -355,6 +396,7 @@ random - I'll tell you something randomly."
                 {
                     BubbleForm.Close();
                     BubbleForm = null;
+                    GC.Collect();
                 }
 
                 BubbleForm = GetBaseForm(GetSay(text));
@@ -365,13 +407,14 @@ random - I'll tell you something randomly."
             internal static void SayRandom()
             {
                 string[] s =
-                {
+                { // Split these into different arrays?
 // Tips
-"Did you know Steam mostly works with protocols, like steam://AddNonSteamGame?",
+"Did you know Steam™ mostly works with protocols, like steam://AddNonSteamGame?",
 "Start menu startup folder? shell:startup",
+"Remember to do backups!",
+@"Typing ""cmd"" or ""powershell"" in File Explorer will start a prompt at the directory.",
 // Jokes
-"So, you come here often?",
-"Would you like help with hugging yourself?",
+"So... You come here often?",
 "(this isFor ThE fAnS and G GaMerGirls)",
 "Welcome.\nWelcome to City 17.",
 "I can see you, but can you see me?",
@@ -380,8 +423,7 @@ random - I'll tell you something randomly."
 "［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
 "Are you sure you want to click that?",
 "０ｘ４Ｅ４Ｆ４２４６\nDid I spook you?",
-"I am not an AI, just a bunch of CIL instructions.",
-"Seems like you need help living your life there buddy.",
+"Seems like you're writing a letter...",
 "The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
 "<3?",
 "Hi, I'm vegan.",
@@ -389,10 +431,12 @@ random - I'll tell you something randomly."
 "rawrrr x33",
 "Deleting your files...",
 "S-sorry, senpai..",
-"Hey do you mind if I use more memory?",
-"Bazinga!",
+"Hey, mind if I use more memory?",
+"Bazinga!", "Maboiza!",
 "Hey it looks like you're writing a letter.\nWould you like help?",
-"Trouble with Windows? Re-install it!"
+"Trouble with Windows? Re-install it!",
+"hey..\n\n\nit me",
+":)", ":^)", ";-)"
                 };
 
                 Say(s[Utils.R.Next(0, s.Length)]);
