@@ -69,12 +69,12 @@ namespace FuckingClippy
             Character.PlayAnimation(Animation.FadeIn);
             IdleAnimationTimer.Start();
             IdleTalkTimer.Start();
-
+            
 #if OFFICE && DEBUG
             // Also should be a dynamic setting with CLI switch.
             // And started manually by the user probably? Or scan for process?
-            WordHelper.Initialize();
-            WordHelper.Test();
+            ExcelHelper.Initialize();
+            ExcelHelper.Test();
 #endif
         }
 

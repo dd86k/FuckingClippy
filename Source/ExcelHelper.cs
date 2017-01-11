@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Excel;
 
 using ExcelApp = Microsoft.Office.Interop.Excel.Application;
@@ -17,10 +20,20 @@ namespace FuckingClippy
         public static void Initialize()
         {
             ExcelInstance = new ExcelApp();
+        }
 
-            ExcelInstance.ActivateMicrosoftApp(XlMSApplication.xlMicrosoftWord);
+        public static void Test()
+        {
+            //ExcelInstance.ActivateMicrosoftApp(XlMSApplication.xlMicrosoftWord);
 
-            //Character.Say("Column: " +                 ExcelInstance.ActiveCell.Column);
+            ExcelInstance.Application.SheetChange += ExcelInstance_SheetChange;
+
+            //Character.Say("Column: "+ExcelInstance.Assistant.);
+        }
+
+        private static void ExcelInstance_SheetChange(object Sh, Range Target)
+        {
+            Character.Say("Change!");
         }
     }
 }
