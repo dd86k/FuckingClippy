@@ -122,7 +122,7 @@ namespace FuckingClippy
                             try
                             {
                                 string ci = userInput.Substring(5);
-                                switch (Utils.OSType)
+                                switch (Environment.OSVersion.Platform)
                                 {
                                     case PlatformID.Win32NT:
                                     // The "I doubt they're running that" club.
@@ -137,7 +137,7 @@ namespace FuckingClippy
                                         Start($"x-terminal-emulator -e '{ci}'");
                                         break;
                                     default:
-                                        Say($"Sorry, I don't support {Utils.OSType}.");
+                                        Say($"Sorry, I don't support {Environment.OSVersion.Platform}.");
                                         break;
                                 }
                             }
@@ -504,8 +504,7 @@ random - I'll tell you something randomly."
 
                 NumberOfAnimations = Enum.GetNames(typeof(Animation)).Length;
 
-                AnimationTimer = new Timer();
-                AnimationTimer.Interval = DefaultInterval;
+                AnimationTimer = new Timer() { Interval = TimerInterval };
                 AnimationTimer.Tick += (s, e) =>
                 {
                     if (CurrentFrame < MaxFrame)
@@ -526,7 +525,7 @@ random - I'll tell you something randomly."
             }
             
             // Default AnimationTimer interval.
-            const int DefaultInterval = 100;
+            const int TimerInterval = 100;
             static Timer AnimationTimer;
             static Animation CurrentAnimation;
             static int CurrentFrame, MaxFrame, NumberOfAnimations;
@@ -536,20 +535,54 @@ random - I'll tell you something randomly."
             /// <summary>
             /// Play an animation. Ignores if one is already playing.
             /// </summary>
-            /// <param name="name">Name of the animation.</param>
-            public static void Play(Animation name)
+            /// <param name="anim">Name of the animation.</param>
+            public static void Play(Animation anim)
             {
                 if (IsPlaying) return;
 
-                Utils.Log("Playing animation: " + name);
+                Utils.Log("Playing animation: " + anim);
 
-                CurrentAnimation = name;
+                CurrentAnimation = anim;
                 CurrentFrame = 0;
 
-                MaxFrame =
-                    Utils.GetNumberOfEmbeddedItems(
-                        "Images.Clippy.Animations." + name
-                    );
+                switch (anim)
+                {
+                    case Animation.Atomic: MaxFrame = 35; break;
+                    case Animation.BicycleOut: MaxFrame = 32; break;
+                    case Animation.BicycleIn: MaxFrame = 28; break;
+                    case Animation.Box: MaxFrame = 39; break;
+                    case Animation.Check: MaxFrame = 19; break;
+                    case Animation.Chill: MaxFrame = 85; break;
+                    case Animation.ExclamationPoint: MaxFrame = 10;  break;
+                    case Animation.FadeIn: MaxFrame = 3; break;
+                    case Animation.FadeOut: MaxFrame = 3; break;
+                    case Animation.FeelingDown: MaxFrame = 46; break;
+                    case Animation.Headset: MaxFrame = 32; break;
+                    case Animation.LookingBottomLeft: MaxFrame = 5; break;
+                    case Animation.LookingBottomRight: MaxFrame = 12; break;
+                    case Animation.LookingDown: MaxFrame = 5; break;
+                    case Animation.LookingUpperLeft: MaxFrame = 5;  break;
+                    case Animation.LookingUpperRight: MaxFrame = 10; break;
+                    case Animation.LookingLeftAndRight: MaxFrame = 18; break;
+                    case Animation.LookingUp: MaxFrame = 5; break;
+                    case Animation.Plane: MaxFrame = 57; break;
+                    case Animation.PointingDown: MaxFrame = 13; break;
+                    case Animation.PointingLeft: MaxFrame = 9; break;
+                    case Animation.PointingRight: MaxFrame = 11; break;
+                    case Animation.PointingUp: MaxFrame = 10; break;
+                    case Animation.Poke: MaxFrame = 15; break; break;
+                    case Animation.Reading: MaxFrame = 53; break;
+                    case Animation.RollPaper: MaxFrame = 49; break;
+                    case Animation.ScrachingHead: MaxFrame = 17; break;
+                    case Animation.Shovel: MaxFrame = 37; break;
+                    case Animation.Telescope: MaxFrame = 55; break;
+                    case Animation.Tornado: MaxFrame = 31; break;
+                    case Animation.Toy: MaxFrame = 13; break;
+                    case Animation.Writing: MaxFrame = 59; break;
+                    default:
+                        Utils.Log("Animation aborted");
+                        return;
+                }
 
                 AnimationTimer.Start();
             }

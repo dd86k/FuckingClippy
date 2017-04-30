@@ -23,7 +23,7 @@ namespace FuckingClippy
                     break;
             }
 
-            AboutLabel.Text = $"{Utils.ProjectName} v{Utils.Version}";
+            AboutLabel.Text = $"{Utils.ProjectName} v{Utils.Project.GetName().Version}";
         }
 
         void btnOk_Click(object sender, System.EventArgs e)

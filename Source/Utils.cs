@@ -9,26 +9,18 @@ namespace FuckingClippy
 {
     static class Utils
     {
-        public static readonly Assembly Project = GetEntryAssembly();
-        public static readonly string Version =
-            Project.GetName().Version.ToString();
-        public static readonly string ProjectName =
-            Project.GetName().Name;
-
-        public static PlatformID OSType = Environment.OSVersion.Platform;
         public static Random R = new Random();
 
         #region Runtime
-        public static readonly bool RunningMono =
-            Type.GetType("Mono.Runtime") != null;
-        static string RuntimeName = RunningMono ? "Mono" : ".NET";
+        public static readonly Assembly Project = GetExecutingAssembly();
+        public static readonly string ProjectName = Project.GetName().Name;
+        public static readonly bool RunningMono = Type.GetType("Mono.Runtime") != null;
         #endregion
 
         #region Assembly
         public static Stream LoadEmbedded(string path)
         {
-            return
-                Project.GetManifestResourceStream($"{ProjectName}.{path}");
+            return Project.GetManifestResourceStream($"{ProjectName}.{path}");
         }
 
         public static Image LoadEmbeddedImage(string path)
@@ -38,22 +30,6 @@ namespace FuckingClippy
                     $"{ProjectName}.Images.{path}"
                 )
             );
-        }
-
-        public static int GetNumberOfEmbeddedItems(string path)
-        {
-            Regex r = new Regex(
-                $@"{ProjectName}\.{path.Replace(".", @"\.")}\.*",
-                RegexOptions.ECMAScript | RegexOptions.Compiled
-            );
-
-            int n = 0;
-
-            foreach (var i in Project.GetManifestResourceNames())
-                if (r.IsMatch(i))
-                    ++n;
-
-            return n;
         }
         #endregion
 

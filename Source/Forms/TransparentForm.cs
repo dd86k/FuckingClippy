@@ -13,7 +13,9 @@ namespace FuckingClippy
             {
                 //TODO: #3 Fix Mono transparency
                 SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-                BackColor = Color.Transparent;
+                //BackColor = Color.Transparent;
+                BackColor = Color.Purple;
+                TransparencyKey = Color.Purple;
             }
             else
             {
