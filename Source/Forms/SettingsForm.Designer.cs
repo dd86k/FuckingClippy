@@ -97,6 +97,7 @@
             this.chkShowInTaskbar.TabIndex = 2;
             this.chkShowInTaskbar.Text = "Show in Taskbar";
             this.chkShowInTaskbar.UseVisualStyleBackColor = true;
+            this.chkShowInTaskbar.Visible = false;
             // 
             // TipsGroup
             // 
@@ -114,6 +115,7 @@
             this.TipsGroup.TabIndex = 1;
             this.TipsGroup.TabStop = false;
             this.TipsGroup.Text = "Show tips on";
+            this.TipsGroup.Visible = false;
             // 
             // ResetTipsButton
             // 
