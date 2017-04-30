@@ -43,11 +43,11 @@
             cmsCharacter.AccessibleName = "Main context menu";
             cmsCharacter.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuItem;
             cmsCharacter.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            cmsiHide,
-            toolStripSeparator1,
-            csmiOptions,
-            cmsiChooseAssistant,
-            cmsiAnimate});
+                cmsiHide,
+                toolStripSeparator1,
+                csmiOptions,
+                cmsiChooseAssistant,
+                cmsiAnimate});
             cmsCharacter.Name = "cmsCharacter";
             cmsCharacter.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             cmsCharacter.ShowImageMargin = false;
@@ -57,7 +57,7 @@
             // 
             cmsiHide.Name = "cmsiHide";
             cmsiHide.Text = "&Hide";
-            cmsiHide.Click += new System.EventHandler(cmsiHide_Click);
+            cmsiHide.Click += new System.EventHandler(CmsiHide_Click);
             // 
             // toolStripSeparator1
             // 
@@ -68,19 +68,19 @@
             // 
             csmiOptions.Name = "csmiOptions";
             csmiOptions.Text = "&Options...";
-            csmiOptions.Click += new System.EventHandler(csmiOptions_Click);
+            csmiOptions.Click += new System.EventHandler(CsmiOptions_Click);
             // 
             // cmsiChooseAssistant
             // 
             cmsiChooseAssistant.Name = "cmsiChooseAssistant";
             cmsiChooseAssistant.Text = "&Choose an assistant...";
-            cmsiChooseAssistant.Click += new System.EventHandler(cmsiChooseAssistant_Click);
+            cmsiChooseAssistant.Click += new System.EventHandler(CmsiChooseAssistant_Click);
             // 
             // cmsiAnimate
             // 
             cmsiAnimate.Name = "cmsiAnimate";
             cmsiAnimate.Text = "&Animate!";
-            cmsiAnimate.Click += new System.EventHandler(cmsiAnimate_Click);
+            cmsiAnimate.Click += new System.EventHandler(CmsiAnimate_Click);
             // 
             // picAssistant
             // 

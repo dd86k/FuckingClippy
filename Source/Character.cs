@@ -295,7 +295,9 @@ random - I'll tell you something randomly."
                                     }
                                     break;
 
-                                // me .. a .. /favou?r/ .. (No)
+                                case "me":
+                                    Say("No thanks");
+                                    break;
 
                                 default:
                                     Say("Do what now?");
@@ -322,8 +324,7 @@ random - I'll tell you something randomly."
 
         private static void DelayExit()
         {
-            Timer a = new Timer();
-            a.Interval = 1000;
+            Timer a = new Timer() { Interval = 1000 };
             a.Tick += (s, e) => { CharacterForm.Exit(); };
             a.Start();
         }
@@ -336,10 +337,9 @@ random - I'll tell you something randomly."
             // The current active bubble text.
             static Form BubbleForm;
             // Defaults
-            static Color BubbleColor = Color.FromArgb(255, 255, 204);
-            static Font DefaultFont = new Font("Segoe UI", 9);
-            static Image BubbleTail =
-                Utils.LoadEmbeddedImage("Bubble.Tail.png");
+            static readonly Color BubbleColor = Color.FromArgb(255, 255, 204);
+            static readonly Font DefaultFont = new Font("Segoe UI", 9);
+            static readonly Image BubbleTail = Utils.LoadEmbeddedImage("Bubble.Tail.png");
             
             /// <summary>
             /// Prompt the user for information.
@@ -361,17 +361,20 @@ random - I'll tell you something randomly."
             {
                 Control[] ca = new Control[2];
 
-                ca[0] = new Label();
-                ca[0].AutoSize = true;
-                ca[0].Text = "What would you like to do?";
-                ca[0].Location = new Point(4, 8);
-                ca[0].Font = DefaultFont;
-
-                ca[1] = new TextBox();
-                (ca[1] as TextBox).Multiline = true;
-                ca[1].Size = new Size(190, 36);
-                ca[1].Font = DefaultFont;
-                ca[1].Location = new Point(4, 30);
+                ca[0] = new Label()
+                {
+                    AutoSize = true,
+                    Text = "What would you like to do?",
+                    Location = new Point(4, 8),
+                    Font = DefaultFont
+                };
+                ca[1] = new TextBox()
+                {
+                    Size = new Size(190, 36),
+                    Font = DefaultFont,
+                    Location = new Point(4, 30),
+                    Multiline = true
+                };
                 ca[1].KeyDown += (s, e) =>
                 {
                     if (e.KeyCode == Keys.Enter) // Includes Return
@@ -446,13 +449,14 @@ random - I'll tell you something randomly."
             {
                 Control[] ca = new Control[1];
 
-                ca[0] = new Label();
-                ca[0].Location = new Point(4, 6);
-                ca[0].AutoSize = true;
-                ca[0].MaximumSize = new Size(192, 0);
-                ca[0].Font = DefaultFont;
-                ca[0].Text = text;
-
+                ca[0] = new Label()
+                {
+                    Location = new Point(4, 6),
+                    AutoSize = true,
+                    MaximumSize = new Size(192, 0),
+                    Font = DefaultFont,
+                    Text = text
+                };
                 return ca;
             }
 
@@ -532,6 +536,8 @@ random - I'll tell you something randomly."
             static Image Idle;
             static bool IsPlaying => AnimationTimer.Enabled;
 
+            //TODO: An animation list maybe?
+
             /// <summary>
             /// Play an animation. Ignores if one is already playing.
             /// </summary>
@@ -570,7 +576,7 @@ random - I'll tell you something randomly."
                     case Animation.PointingLeft: MaxFrame = 9; break;
                     case Animation.PointingRight: MaxFrame = 11; break;
                     case Animation.PointingUp: MaxFrame = 10; break;
-                    case Animation.Poke: MaxFrame = 15; break; break;
+                    case Animation.Poke: MaxFrame = 15; break;
                     case Animation.Reading: MaxFrame = 53; break;
                     case Animation.RollPaper: MaxFrame = 49; break;
                     case Animation.ScrachingHead: MaxFrame = 17; break;

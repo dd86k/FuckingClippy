@@ -15,24 +15,20 @@ namespace FuckingClippy
 
             switch (tab)
             {
-                default:
-                    MainTabControl.SelectedTab = AssistantTab;
-                    break;
-                case Tab.Options:
-                    MainTabControl.SelectedTab = OptionsTab;
-                    break;
+                default: MainTabControl.SelectedTab = AssistantTab; break;
+                case Tab.Options: MainTabControl.SelectedTab = OptionsTab; break;
             }
 
             AboutLabel.Text = $"{Utils.ProjectName} v{Utils.Project.GetName().Version}";
         }
 
-        void btnOk_Click(object sender, System.EventArgs e)
+        void BtnOk_Click(object sender, System.EventArgs e)
         {
             //SettingsHandler...
             Close();
         }
 
-        void btnCancel_Click(object sender, System.EventArgs e)
+        void BtnCancel_Click(object sender, System.EventArgs e)
         {
             Close();
         }

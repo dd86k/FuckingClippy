@@ -255,7 +255,7 @@
             this.QuitButton.TabIndex = 1;
             this.QuitButton.Text = "Cancel";
             this.QuitButton.UseVisualStyleBackColor = true;
-            this.QuitButton.Click += new System.EventHandler(this.btnCancel_Click);
+            this.QuitButton.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // OkButton
             // 
@@ -265,7 +265,7 @@
             this.OkButton.TabIndex = 2;
             this.OkButton.Text = "OK";
             this.OkButton.UseVisualStyleBackColor = true;
-            this.OkButton.Click += new System.EventHandler(this.btnOk_Click);
+            this.OkButton.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // SettingsForm
             // 

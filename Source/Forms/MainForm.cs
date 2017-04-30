@@ -6,9 +6,9 @@ namespace FuckingClippy
 {
     public partial class MainForm : TransparentForm
     {
-        Timer IdleTalkTimer = new Timer(),
-              IdleAnimationTimer = new Timer();
-        
+        Timer IdleTalkTimer = new Timer();
+        Timer IdleAnimationTimer = new Timer();
+
         public MainForm() : base()
         {
             Utils.Log("Initializing MainForm...");
@@ -36,7 +36,7 @@ namespace FuckingClippy
                         sc.WorkingArea.Height - (Height + 30)
                     );
             }
-            
+
             picAssistant.Dock = DockStyle.Fill;
             picAssistant.MouseDown += Assistant_MouseDown;
             picAssistant.MouseUp += Assistant_MouseUp;
@@ -49,31 +49,36 @@ namespace FuckingClippy
 
             TopMost = true; // Only hell now. :-)
 #if DEBUG
+            ToolStripItem[] DebugItems = new ToolStripItem[2];
+
+            DebugItems[0] = new ToolStripMenuItem()
             {
-                ToolStripItem[] DebugItems = new ToolStripItem[2];
+                Text = "[Debug] Prompt"
+            };
+            DebugItems[0].Click += (s, e) => Character.Prompt();
 
-                DebugItems[0] = new ToolStripMenuItem();
-                DebugItems[0].Text = "[Debug] Prompt";
-                DebugItems[0].Click += (s, e) => Character.Prompt();
+            DebugItems[1] = new ToolStripMenuItem()
+            {
+                Text = "[Debug] Say (Random)"
+            };
+            DebugItems[1].Click += (s, e) => Character.SayRandom();
 
-                DebugItems[1] = new ToolStripMenuItem();
-                DebugItems[1].Text = "[Debug] Say (Random)";
-                DebugItems[1].Click += (s, e) => Character.SayRandom();
-
-                cmsCharacter.Items.AddRange(DebugItems);
-            }
+            cmsCharacter.Items.AddRange(DebugItems);
 #endif
             cmsCharacter.ResumeLayout(false);
             ResumeLayout(true);
-            
+
             Character.PlayAnimation(Animation.FadeIn);
             IdleAnimationTimer.Start();
             IdleTalkTimer.Start();
-            
-#if OFFICE && DEBUG
+
+            GC.Collect();
+
+#if OFFICE
+            ExcelHelper.Initialize();
+#elif OFFICE && DEBUG
             // Also should be a dynamic setting with CLI switch.
             // And started manually by the user probably? Or scan for process?
-            ExcelHelper.Initialize();
             ExcelHelper.Test();
 #endif
         }
@@ -86,8 +91,10 @@ namespace FuckingClippy
             Character.PlayAnimation(Animation.FadeOut);
 
             // Dirty/temporary solution
-            Timer a = new Timer();
-            a.Interval = 3 * 125; // temporary
+            Timer a = new Timer()
+            {
+                Interval = 3 * 125 // Temporary
+            };
             a.Tick += (s, e) => { Close(); };
             a.Start();
         }
@@ -144,22 +151,22 @@ namespace FuckingClippy
 #endregion
 
 #region Context menu events
-        void cmsiHide_Click(object sender, EventArgs e)
+        void CmsiHide_Click(object sender, EventArgs e)
         {
             Exit();
         }
 
-        void csmiOptions_Click(object sender, EventArgs e)
+        void CsmiOptions_Click(object sender, EventArgs e)
         { // Settings -> Options tab
             new SettingsForm(Tab.Options).ShowDialog();
         }
 
-        void cmsiChooseAssistant_Click(object sender, EventArgs e)
+        void CmsiChooseAssistant_Click(object sender, EventArgs e)
         { // Settings -> Assistant tab
             new SettingsForm(Tab.Assistant).ShowDialog();
         }
 
-        void cmsiAnimate_Click(object sender, EventArgs e)
+        void CmsiAnimate_Click(object sender, EventArgs e)
         {
             Character.PlayRandomAnimation();
         }
