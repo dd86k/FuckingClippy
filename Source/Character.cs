@@ -439,7 +439,8 @@ random - I'll tell you something randomly."
 "Hey it looks like you're writing a letter.\nWould you like help?",
 "Trouble with Windows? Re-install it!",
 "hey..\n\n\nit me",
-":)", ":^)", ";-)"
+":)", ":^)", ";-)",
+"I use vim."
                 };
 
                 Say(s[Utils.R.Next(0, s.Length)]);
