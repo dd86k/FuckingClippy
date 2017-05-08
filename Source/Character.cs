@@ -306,6 +306,10 @@ random - I'll tell you something randomly."
                         }
                         break;
 
+                    case "version":
+                        Say($"You're using version {Utils.Project.GetName().Version}");
+                        break;
+
                     case "quit":
                     case "exit":
                     case "close":
