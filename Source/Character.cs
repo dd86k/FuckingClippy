@@ -116,8 +116,7 @@ namespace FuckingClippy
                             Say("I can't run, buddy.");
                         break;
 
-                    case "runc":
-                    case "runt":
+                    case "runc": case "runt":
                         if (u.Length > 1)
                             try
                             {
@@ -235,25 +234,19 @@ random - I'll tell you something randomly."
                      * Small talk.
                      */
 
-                    case "hey":
-                    case "hello":
-                    case "hi":
-                    case "greetings":
+                    case "hey": case "hello": case "hi": case "greetings":
                         Say("Hello!");
                         break;
 
-                    case "screw":
-                    case "fuck":
-                    case "frick":
+                    case "screw": case "fuck": case "frick":
                         if (u.Length > 1)
                             switch (u[1].ToLower())
                             {
                             case "me":
                                 Say("No thanks, I'll pass.");
                                 break;
-                            case "u":
-                            case "you":
-                                Say("Hey now buddy, I can always shutdown your computer you know.");
+                            case "u": case "you":
+                                Say("Hey now buddy, I can always shutdown your computer, you know?");
                                 break;
                             case "off":
                                 Say("Okay!");
@@ -277,14 +270,11 @@ random - I'll tell you something randomly."
                                     {
                                         switch (u[2].ToLower())
                                         {
-                                            case "hw":
-                                            case "homework":
-                                            case "homeworks":
+                                            case "hw": case "homework": case "homeworks":
                                                 Say("No, I won't do your homework. Do it yourself.");
                                                 break;
 
-                                            case "work":
-                                            case "chores":
+                                            case "work": case "chores":
                                                 Say("Sure! Just pay me 25,000$USD/Hour.");
                                                 break;
 
@@ -310,10 +300,7 @@ random - I'll tell you something randomly."
                         Say($"You're using version {Utils.Project.GetName().Version}");
                         break;
 
-                    case "quit":
-                    case "exit":
-                    case "close":
-                    case "die":
+                    case "quit": case "exit": case "close": case "die":
                         Say("Okay!");
                         DelayExit();
                         break;
