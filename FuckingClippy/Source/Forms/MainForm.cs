@@ -21,9 +21,8 @@ namespace FuckingClippy
 
             //TODO: Uncomment when translations are ready.
             //InitiateCulture();
-
-            // Use main icon. (Windows)
-            ShowIcon = false;
+            
+            ShowIcon = false; // Use main icon. (Windows)
 
             Character.Initialize(this);
 

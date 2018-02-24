@@ -2,13 +2,15 @@
 using System.Drawing;
 using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using static System.Reflection.Assembly;
 
 namespace FuckingClippy
 {
     static class Utils
     {
+        /// <summary>
+        /// Random number generator, best results are static classes used for a little while.
+        /// </summary>
         public static Random R = new Random();
 
         #region Runtime

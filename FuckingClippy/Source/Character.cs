@@ -390,7 +390,7 @@ random - I'll tell you something randomly."
                 {
                     BubbleForm.Close();
                     BubbleForm = null;
-                    GC.Collect();
+                    GC.Collect(3, GCCollectionMode.Forced, false, true);
                 }
 
                 BubbleForm = GetBaseForm(GetSay(text));
@@ -400,38 +400,35 @@ random - I'll tell you something randomly."
 
             internal static void SayRandom()
             {
-                string[] s =
-                { // Split these into different arrays?
+                string[] s = { // Split these into different arrays? for each os?
 // Tips
 "Did you know Steam™ mostly works with protocols, like steam://AddNonSteamGame?",
-"Start menu startup folder? shell:startup",
-"Remember to do backups!",
+"Want to get to the Start menu startup folder? shell:startup",
+"Remember to do your backups!",
 @"Typing ""cmd"" or ""powershell"" in File Explorer will start a prompt at the directory.",
 // Jokes
 "So... You come here often?",
 "(this isFor ThE fAnS and G GaMerGirls)",
 "Welcome.\nWelcome to City 17.",
 "I can see you, but can you see me?",
-"Do you need help looking at this screen?",
+"Do you need help looking at the screen?",
 "I'm not as fun as BonziBuddy, but at least I'm not spyware, right?",
-"［ ＭＡＸＩＭＵＭ ＡＲＭＯＲ ］",
+"ＭＡＸＩＭＵＭ ＡＲＭＯＲ",
 "Are you sure you want to click that?",
-"０ｘ４Ｅ４Ｆ４２４６\nDid I spook you?",
-"Seems like you're writing a letter...",
-"The program '[3440] FuckingClippy.exe' has exited with code 0 (0x0).",
+"Seems like you're shitting out a letter...",
+"The program '[3440] FuckingClippy.exe' has exited with code -1 (0xFFFFFFFFFFFFFFFF).",
 "<3?",
-"Hi, I'm vegan.",
-"SUFFER();",
-"rawrrr x33",
-"Deleting your files...",
-"S-sorry, senpai..",
-"Hey, mind if I use more memory?",
-"Bazinga!", "Maboiza!",
-"Hey it looks like you're writing a letter.\nWould you like help?",
+"Hi, I'm a vegan.",
+"_suffer();",
+"Deleting your files... I mean, sending your files to the NSA...",
+"Hey, mind if I use more memory?\nMade ya think!",
+"Bazinga!",
 "Trouble with Windows? Re-install it!",
 "hey..\n\n\nit me",
-":)", ":^)", ";-)",
-"I use vim."
+":-)",
+"ed, vi, vim, nvim, what's next? nved?",
+"Number 15, Burger Foot lettuce",
+"Virtual Hugs included"
                 };
 
                 Say(s[Utils.R.Next(0, s.Length)]);

@@ -85,8 +85,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\ExcelHelper.cs" />
-    <Compile Include="Source\WordHelper.cs" />
     <Compile Include="Source\Forms\BubbleForm.cs">
       <SubType>Form</SubType>
     </Compile>
