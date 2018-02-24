@@ -5,6 +5,7 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
+.vs
 bin
 obj
 FuckingCLippy.csproj.user
