@@ -390,7 +390,7 @@ random - I'll tell you something randomly."
                 {
                     BubbleForm.Close();
                     BubbleForm = null;
-                    GC.Collect(3, GCCollectionMode.Forced, false, true);
+                    GC.Collect(3, GCCollectionMode.Forced);
                 }
 
                 BubbleForm = GetBaseForm(GetSay(text));
@@ -506,7 +506,7 @@ random - I'll tell you something randomly."
                         
                         // Calls the GC every 5 frame.
                         if (CurrentFrame % 5 == 0)
-                            GC.Collect(1, GCCollectionMode.Forced, false);
+                            GC.Collect(1, GCCollectionMode.Forced);
                     }
                     else
                     {
