@@ -3,14 +3,13 @@ using System.Drawing;
 using System.Windows.Forms;
 using static System.Diagnostics.Process;
 
-//TODO: Reduce GC calls
-
 //TODO: Add support for...
 // - Images
 // - Choices (radio buttons)
 
 namespace FuckingClippy
 {
+    #region Animations
     public enum Animation : byte
     {
         Atomic,
@@ -46,7 +45,9 @@ namespace FuckingClippy
         Toy,
         Writing
     }
+    #endregion
 
+    #region Character
     /// <summary>
     /// The assistant.
     /// </summary>
@@ -319,88 +320,96 @@ random - I'll tell you something randomly."
             a.Tick += (s, e) => { CharacterForm.Exit(); };
             a.Start();
         }
+        #endregion
 
-        #region Dialog system
-        static class DialogSystem
+    #region Dialog system
+    static class DialogSystem
+    {
+        //TODO: #11 Re-use BubbleForm in Character.DialogSystem
+
+        // The current active bubble text.
+        static Form BubbleForm;
+        // Defaults
+        static readonly Color BubbleColor = Color.FromArgb(255, 255, 204);
+        static readonly Font DefaultFont = new Font("Segoe UI", 9);
+        static readonly Image BubbleTail = Utils.LoadEmbeddedImage("Bubble.Tail.png");
+
+        private static Control[] _prompt;
+
+        public static void Init()
         {
-            //TODO: #11 Re-use BubbleForm in Character.DialogSystem
-
-            // The current active bubble text.
-            static Form BubbleForm;
-            // Defaults
-            static readonly Color BubbleColor = Color.FromArgb(255, 255, 204);
-            static readonly Font DefaultFont = new Font("Segoe UI", 9);
-            static readonly Image BubbleTail = Utils.LoadEmbeddedImage("Bubble.Tail.png");
+            _prompt = GetPrompt();
+        }
             
-            /// <summary>
-            /// Prompt the user for information.
-            /// </summary>
-            internal static void Prompt()
+        /// <summary>
+        /// Prompt the user for information.
+        /// </summary>
+        public static void Prompt()
+        {
+            Utils.Log("Prompt");
+
+            if (BubbleForm != null)
+                BubbleForm.SuspendLayout();
+
+            BubbleForm = GetBaseForm(GetPrompt());
+            BubbleForm.ResumeLayout();
+
+            BubbleForm.Show();
+        }
+
+        static Control[] GetPrompt()
+        {
+            Control[] ca = new Control[2];
+
+            ca[0] = new Label()
             {
-                Utils.Log("Prompt");
-
-                if (BubbleForm != null)
-                    BubbleForm.SuspendLayout();
-
-                BubbleForm = GetBaseForm(GetPrompt());
-                BubbleForm.ResumeLayout();
-
-                BubbleForm.Show();
-            }
-
-            static Control[] GetPrompt()
+                AutoSize = true,
+                Text = "What would you like to do?",
+                Location = new Point(4, 8),
+                Font = DefaultFont
+            };
+            ca[1] = new TextBox()
             {
-                Control[] ca = new Control[2];
-
-                ca[0] = new Label()
-                {
-                    AutoSize = true,
-                    Text = "What would you like to do?",
-                    Location = new Point(4, 8),
-                    Font = DefaultFont
-                };
-                ca[1] = new TextBox()
-                {
-                    Size = new Size(190, 36),
-                    Font = DefaultFont,
-                    Location = new Point(4, 30),
-                    Multiline = true
-                };
-                ca[1].KeyDown += (s, e) =>
-                {
-                    if (e.KeyCode == Keys.Enter) // Includes Return
-                    {
-                        e.SuppressKeyPress = true;
-                        ProcessInput((s as TextBox).Text);
-                    }
-                };
-
-                return ca;
-            }
-
-            /// <summary>
-            /// Say something to the user.
-            /// </summary>
-            /// <param name="text">Text.</param>
-            internal static void Say(string text)
+                Size = new Size(190, 36),
+                Font = DefaultFont,
+                Location = new Point(4, 30),
+                Multiline = true
+            };
+            ca[1].KeyDown += (s, e) =>
             {
-                Utils.Log($"Say - {text}");
-
-                if (BubbleForm != null)
+                if (e.KeyCode == Keys.Enter) // Includes Return
                 {
-                    BubbleForm.Close();
-                    BubbleForm = null;
-                    GC.Collect(3, GCCollectionMode.Forced);
+                    e.SuppressKeyPress = true;
+                    ProcessInput((s as TextBox).Text);
                 }
+            };
 
-                BubbleForm = GetBaseForm(GetSay(text));
+            return ca;
+        }
 
-                BubbleForm.Show();
+        /// <summary>
+        /// Say something to the user.
+        /// </summary>
+        /// <param name="text">Text.</param>
+        internal static void Say(string text)
+        {
+            Utils.Log($"Say::{text}");
+
+            if (BubbleForm != null)
+            {
+                BubbleForm.Close();
+                BubbleForm = null;
+                GC.Collect(3, GCCollectionMode.Forced);
             }
 
-            internal static void SayRandom()
-            {
-                string[] s = { // Split these into different arrays? for each os?
+            BubbleForm = GetBaseForm(GetSay(text));
+
+            BubbleForm.Show();
+        }
+
+        internal static void SayRandom()
+        {
+            string[] s = { // Split these into different arrays? for each os?
 // Tips
 "Did you know Steam™ mostly works with protocols, like steam://AddNonSteamGame?",
 "Want to get to the Start menu startup folder? shell:startup",
@@ -426,190 +435,188 @@ random - I'll tell you something randomly."
 "Trouble with Windows? Re-install it!",
 "hey..\n\n\nit me",
 ":-)",
-"ed, vi, vim, nvim, what's next? nved?",
+"ed, vi, vim, nvim, what's next? smvimod?",
 "Number 15, Burger Foot lettuce",
 "Virtual Hugs included"
-                };
+            };
 
-                Say(s[Utils.R.Next(0, s.Length)]);
-            }
-            
-            static Control[] GetSay(string text)
-            {
-                Control[] ca = new Control[1];
-
-                ca[0] = new Label()
-                {
-                    Location = new Point(4, 6),
-                    AutoSize = true,
-                    MaximumSize = new Size(192, 0),
-                    Font = DefaultFont,
-                    Text = text
-                };
-                return ca;
-            }
-
-            static BubbleForm GetBaseForm(Control[] subControls)
-            {
-                if (BubbleForm != null)
-                    BubbleForm.Close();
-
-                BubbleForm f = new BubbleForm();
-
-                /* Bubble body */
-                Panel p = new Panel();
-                p.Controls.AddRange(subControls);
-                p.AutoSize = true;
-                p.MaximumSize = new Size(200, 0);
-                p.BackColor = BubbleColor;
-                p.BorderStyle = BorderStyle.FixedSingle;
-
-                /* Bubble tail */
-                PictureBox pb = new PictureBox();
-                pb.Size = new Size(BubbleTail.Width, BubbleTail.Height);
-                pb.Image = BubbleTail;
-
-                p.ClientSizeChanged += (s, e) =>
-                { // Because the form autosizes.
-                    pb.Location =
-                        new Point((int)(f.ClientSize.Width / 1.62), p.Height - 1);
-                };
-
-                // Important order.
-                f.Controls.Add(pb);
-                f.Controls.Add(p);
-
-                f.Location =
-                    new Point(CharacterForm.Location.X - (f.Size.Width / 2),
-                    CharacterForm.Location.Y - (f.Size.Height));
-
-                return f;
-            }
+            Say(s[Utils.R.Next(0, s.Length)]);
         }
-        #endregion
-
-        #region Animation system
-        static class AnimationSystem
+            
+        static Control[] GetSay(string text)
         {
-            public static void Initialize()
+            Control[] ca = new Control[1];
+
+            ca[0] = new Label()
             {
-                Idle = Utils.LoadEmbeddedImage("Clippy.Idle.png");
-
-                NumberOfAnimations = Enum.GetNames(typeof(Animation)).Length;
-
-                AnimationTimer = new Timer() { Interval = TimerInterval };
-                AnimationTimer.Tick += (s, e) =>
-                {
-                    if (CurrentFrame < MaxFrame)
-                    {
-                        PictureFrame.Image = GetNextFrame();
-                        
-                        // Calls the GC every 5 frame.
-                        if (CurrentFrame % 5 == 0)
-                            GC.Collect(1, GCCollectionMode.Forced);
-                    }
-                    else
-                    {
-                        StopAnimation();
-                        PictureFrame.Image = Idle;
-                        GC.Collect();
-                    }
-                };
-            }
-            
-            // Default AnimationTimer interval.
-            const int TimerInterval = 100;
-            static Timer AnimationTimer;
-            static Animation CurrentAnimation;
-            static int CurrentFrame, MaxFrame, NumberOfAnimations;
-            static Image Idle;
-            static bool IsPlaying => AnimationTimer.Enabled;
-
-            //TODO: An animation list maybe?
-
-            /// <summary>
-            /// Play an animation. Ignores if one is already playing.
-            /// </summary>
-            /// <param name="anim">Name of the animation.</param>
-            public static void Play(Animation anim)
-            {
-                if (IsPlaying) return;
-
-                Utils.Log("Playing animation: " + anim);
-
-                CurrentAnimation = anim;
-                CurrentFrame = 0;
-
-                switch (anim)
-                {
-                    case Animation.Atomic: MaxFrame = 35; break;
-                    case Animation.BicycleOut: MaxFrame = 32; break;
-                    case Animation.BicycleIn: MaxFrame = 28; break;
-                    case Animation.Box: MaxFrame = 39; break;
-                    case Animation.Check: MaxFrame = 19; break;
-                    case Animation.Chill: MaxFrame = 85; break;
-                    case Animation.ExclamationPoint: MaxFrame = 10;  break;
-                    case Animation.FadeIn: MaxFrame = 3; break;
-                    case Animation.FadeOut: MaxFrame = 3; break;
-                    case Animation.FeelingDown: MaxFrame = 46; break;
-                    case Animation.Headset: MaxFrame = 32; break;
-                    case Animation.LookingBottomLeft: MaxFrame = 5; break;
-                    case Animation.LookingBottomRight: MaxFrame = 12; break;
-                    case Animation.LookingDown: MaxFrame = 5; break;
-                    case Animation.LookingUpperLeft: MaxFrame = 5;  break;
-                    case Animation.LookingUpperRight: MaxFrame = 10; break;
-                    case Animation.LookingLeftAndRight: MaxFrame = 18; break;
-                    case Animation.LookingUp: MaxFrame = 5; break;
-                    case Animation.Plane: MaxFrame = 57; break;
-                    case Animation.PointingDown: MaxFrame = 13; break;
-                    case Animation.PointingLeft: MaxFrame = 9; break;
-                    case Animation.PointingRight: MaxFrame = 11; break;
-                    case Animation.PointingUp: MaxFrame = 10; break;
-                    case Animation.Poke: MaxFrame = 15; break;
-                    case Animation.Reading: MaxFrame = 53; break;
-                    case Animation.RollPaper: MaxFrame = 49; break;
-                    case Animation.ScrachingHead: MaxFrame = 17; break;
-                    case Animation.Shovel: MaxFrame = 37; break;
-                    case Animation.Telescope: MaxFrame = 55; break;
-                    case Animation.Tornado: MaxFrame = 31; break;
-                    case Animation.Toy: MaxFrame = 13; break;
-                    case Animation.Writing: MaxFrame = 59; break;
-                    default:
-                        Utils.Log("Animation aborted");
-                        return;
-                }
-
-                AnimationTimer.Start();
-            }
-
-            /// <summary>
-            /// Stop the current animation.
-            /// </summary>
-            static void StopAnimation()
-            {
-                AnimationTimer.Stop();
-            }
-
-            static Image GetFrame(int frame)
-            {
-                return Utils.LoadEmbeddedImage(
-                    $"Clippy.Animations.{CurrentAnimation}.{frame}.png"
-                );
-            }
-
-            static Image GetNextFrame()
-            {
-                return GetFrame(CurrentFrame++);
-            }
-
-            /// <summary>
-            /// Play a random animation.
-            /// </summary>
-            public static void PlayRandom()
-            {
-                Play((Animation)Utils.R.Next(0, NumberOfAnimations));
-            }
+                Location = new Point(4, 6),
+                AutoSize = true,
+                MaximumSize = new Size(192, 0),
+                Font = DefaultFont,
+                Text = text
+            };
+            return ca;
         }
-        #endregion
+
+        private static BubbleForm GetBaseForm(Control[] subControls)
+        {
+            if (BubbleForm != null)
+                BubbleForm.Close();
+
+            BubbleForm f = new BubbleForm();
+
+            /* Bubble body */
+            Panel p = new Panel();
+            p.Controls.AddRange(subControls);
+            p.AutoSize = true;
+            p.MaximumSize = new Size(200, 0);
+            p.BackColor = BubbleColor;
+            p.BorderStyle = BorderStyle.FixedSingle;
+
+            /* Bubble tail */
+            PictureBox pb = new PictureBox();
+            pb.Size = new Size(BubbleTail.Width, BubbleTail.Height);
+            pb.Image = BubbleTail;
+
+            p.ClientSizeChanged += (s, e) =>
+            { // Because the form autosizes.
+                pb.Location =
+                    new Point((int)(f.ClientSize.Width / 1.62), p.Height - 1);
+            };
+
+            // Important order.
+            f.Controls.Add(pb);
+            f.Controls.Add(p);
+
+            f.Location =
+                new Point(CharacterForm.Location.X - (f.Size.Width / 2),
+                CharacterForm.Location.Y - (f.Size.Height));
+
+            return f;
+        }
     }
+    #endregion
+
+    #region Animation system
+    static class AnimationSystem
+    {
+        public static void Initialize()
+        {
+            Idle = Utils.LoadEmbeddedImage("Clippy.Idle.png");
+
+            NumberOfAnimations = Enum.GetNames(typeof(Animation)).Length;
+
+            AnimationTimer = new Timer() { Interval = TimerInterval };
+            AnimationTimer.Tick += (s, e) =>
+            {
+                if (CurrentFrame < MaxFrame)
+                {
+                    PictureFrame.Image = GetNextFrame();
+                        
+                    // Calls the GC every 10 frame in an optimized fashion
+                    if (CurrentFrame % 10 == 0)
+                        GC.Collect(1, GCCollectionMode.Optimized);
+                }
+                else
+                {
+                    StopAnimation();
+                    PictureFrame.Image = Idle;
+                    GC.Collect(3, GCCollectionMode.Forced);
+                }
+            };
+        }
+            
+        // Default AnimationTimer interval.
+        const int TimerInterval = 100;
+        static Timer AnimationTimer;
+        static Animation CurrentAnimation;
+        static int CurrentFrame, MaxFrame, NumberOfAnimations;
+        static Image Idle;
+        static bool IsPlaying => AnimationTimer.Enabled;
+
+        /// <summary>
+        /// Play an animation. Ignores if one is already playing.
+        /// </summary>
+        /// <param name="anim">Name of the animation.</param>
+        public static void Play(Animation anim)
+        {
+            if (IsPlaying) return;
+
+            Utils.Log("Playing animation: " + anim);
+
+            CurrentAnimation = anim;
+            CurrentFrame = 0;
+
+            switch (anim)
+            {
+                case Animation.Atomic: MaxFrame = 35; break;
+                case Animation.BicycleOut: MaxFrame = 32; break;
+                case Animation.BicycleIn: MaxFrame = 28; break;
+                case Animation.Box: MaxFrame = 39; break;
+                case Animation.Check: MaxFrame = 19; break;
+                case Animation.Chill: MaxFrame = 85; break;
+                case Animation.ExclamationPoint: MaxFrame = 10;  break;
+                case Animation.FadeIn: MaxFrame = 3; break;
+                case Animation.FadeOut: MaxFrame = 3; break;
+                case Animation.FeelingDown: MaxFrame = 46; break;
+                case Animation.Headset: MaxFrame = 32; break;
+                case Animation.LookingBottomLeft: MaxFrame = 5; break;
+                case Animation.LookingBottomRight: MaxFrame = 12; break;
+                case Animation.LookingDown: MaxFrame = 5; break;
+                case Animation.LookingUpperLeft: MaxFrame = 5;  break;
+                case Animation.LookingUpperRight: MaxFrame = 10; break;
+                case Animation.LookingLeftAndRight: MaxFrame = 18; break;
+                case Animation.LookingUp: MaxFrame = 5; break;
+                case Animation.Plane: MaxFrame = 57; break;
+                case Animation.PointingDown: MaxFrame = 13; break;
+                case Animation.PointingLeft: MaxFrame = 9; break;
+                case Animation.PointingRight: MaxFrame = 11; break;
+                case Animation.PointingUp: MaxFrame = 10; break;
+                case Animation.Poke: MaxFrame = 15; break;
+                case Animation.Reading: MaxFrame = 53; break;
+                case Animation.RollPaper: MaxFrame = 49; break;
+                case Animation.ScrachingHead: MaxFrame = 17; break;
+                case Animation.Shovel: MaxFrame = 37; break;
+                case Animation.Telescope: MaxFrame = 55; break;
+                case Animation.Tornado: MaxFrame = 31; break;
+                case Animation.Toy: MaxFrame = 13; break;
+                case Animation.Writing: MaxFrame = 59; break;
+                default:
+                    Utils.Log("Animation aborted");
+                    return;
+            }
+
+            AnimationTimer.Start();
+        }
+
+        /// <summary>
+        /// Stop the current animation.
+        /// </summary>
+        static void StopAnimation()
+        {
+            AnimationTimer.Stop();
+        }
+
+        static Image GetFrame(int frame)
+        {
+            return Utils.LoadEmbeddedImage(
+                $"Clippy.Animations.{CurrentAnimation}.{frame}.png"
+            );
+        }
+
+        static Image GetNextFrame()
+        {
+            return GetFrame(CurrentFrame++);
+        }
+
+        /// <summary>
+        /// Play a random animation.
+        /// </summary>
+        public static void PlayRandom()
+        {
+            Play((Animation)Utils.R.Next(0, NumberOfAnimations));
+        }
+    }
+}
+#endregion
 }

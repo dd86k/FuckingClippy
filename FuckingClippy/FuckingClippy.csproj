@@ -85,6 +85,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\DialogSystem.cs" />
     <Compile Include="Source\Forms\BubbleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -962,9 +963,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Images\Clippy\Animations\Shovel\1.png" />
     <Content Include="main.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

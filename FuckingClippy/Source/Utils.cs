@@ -9,7 +9,7 @@ namespace FuckingClippy
     static class Utils
     {
         /// <summary>
-        /// Random number generator, best results are static classes used for a little while.
+        /// Random number generator, best results are static classes.
         /// </summary>
         public static Random R = new Random();
 
