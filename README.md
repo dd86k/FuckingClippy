@@ -8,8 +8,6 @@ FuckingClippy is a stand-alone program that revives an old friend, the infamous 
 
 Simply download and run! FuckingClippy will pop on your desktop and will be ready to answer your demands.
 
-![Clippy prompt](https://dd86k.github.io/imgs/fc3.png)
-
 [Wiki][wiki] • [Releases][releases]
 
 Copyright © Microsoft 1997-2003 for their Clippit (Clippy) Office Assistant.
